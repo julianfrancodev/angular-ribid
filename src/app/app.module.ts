@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {routing, appRoutingProviders} from './app.routing';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +13,8 @@ import { BlogpostComponent } from './components/blogpost/blogpost.component';
 import { BlogmainComponent } from './components/blogmain/blogmain.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { HomeComponent } from './components/home/home.component';
+import { ErrorComponent } from './components/error/error.component';
 
 @NgModule({
   declarations: [
@@ -22,14 +25,19 @@ import { environment } from '../environments/environment';
     MainComponent,
     BlogpostComponent,
     BlogmainComponent,
+    HomeComponent,
+    ErrorComponent,
   ],
   imports: [
+    routing,
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [
+    appRoutingProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
