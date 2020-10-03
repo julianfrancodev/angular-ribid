@@ -1,19 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {User} from '../../models/user';
+import {UserService} from '../../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  providers:[UserService]
 })
 export class HeaderComponent implements OnInit {
 
   closeResult = '';
+  public user: User;
+  public status: string;
 
 
-  constructor(private modalService: NgbModal) { }
+
+  constructor(private modalService: NgbModal, private _userService: UserService,private toastr: ToastrService) {
+    this.user = new User(1, '','','ROLE_USER','','','','');
+   }
 
   ngOnInit(): void {
+    console.log(this._userService.test());
+  }
+
+  showSuccess() {
+    this.toastr.success('Ya puedes ingresar a tu cuenta', 'Correcto');
+  }
+
+  showError(){
+    this.toastr.error('No pudimos crear tu cuenta', 'Error');
   }
 
   open(content: any) {
@@ -37,5 +55,26 @@ export class HeaderComponent implements OnInit {
   openSingup(singup: any) {
     this.modalService.open(singup, { centered: true });
   }
+
+  onSubmitRegister(form: any){
+    
+    this._userService.register(this.user).subscribe(
+      response => {
+        if(response.status == "success"){
+          this.status = response.status;
+          this.showSuccess();
+          form.reset();
+        }else{
+          this.status = 'error';          
+        }
+      },
+      error =>{
+        console.log(<any>error);
+        this.showError();
+        this.status = 'error';
+      }
+    );
+  }
+
 
 }

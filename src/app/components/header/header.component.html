@@ -44,7 +44,7 @@
       <div class="myform form">
         <div class="logo mb-3">
           <div class="col-md-12 text-center">
-            <h1 class="blog-header-logo text-dark">Inciar sesion</h1>
+            <h1 class="blog-header-logo text-dark">Iniciar Sesion</h1>
           </div>
         </div>
         <form action="" method="post" name="login">
@@ -59,7 +59,7 @@
               placeholder="Ingresar Contraseña">
           </div>
           <div class="form-group">
-            <p class="text-center">Al registrarse, acepta nuestros <a href="#">Terminos de uso.</a></p>
+            <p class="text-center">Al ingresar, acepta nuestros <a href="#">Terminos de uso.</a></p>
           </div>
           <div class="col-md-12 text-center ">
             <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Iniciar</button>
@@ -88,28 +88,36 @@
             <h1 class="blog-header-logo text-dark">Registrarme</h1>
           </div>
         </div>
-        <form action="" method="post" name="login">
+        <form name="login" #registerForm='ngForm' (ngSubmit)='onSubmitRegister(registerForm)'>
           <div class="form-group">
-            <label for="exampleInputEmail1">Nombre</label>
+            <label for="name">Nombre</label>
             <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp"
-              placeholder="Nombre">
+              placeholder="Nombre" #name="ngModel" [(ngModel)]="user.name" required pattern="[a-zA-Z]+">
+              <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">El nombre no es valido</small>
           </div>
+
           <div class="form-group">
-            <label for="exampleInputEmail1">Correo Electronico</label>
+            <label for="email">Correo Electronico</label>
             <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp"
-              placeholder="Correo Electronico">
+              placeholder="Correo Electronico" #email="ngModel" [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+              <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">El correo es invalido</small>
           </div>
+
           <div class="form-group">
-            <label for="exampleInputEmail1">Contraseña</label>
+            <label for="password">Contraseña</label>
             <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp"
-              placeholder="Ingresar Contraseña">
+              placeholder="Ingresar Contraseña" #password="ngModel" [(ngModel)]="user.password" required >
+              <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">La Contraseña es invalida</small>
           </div>
+
           <div class="form-group">
             <p class="text-center">Al registrarse, acepta nuestros <a href="#">Terminos de uso.</a></p>
           </div>
+
           <div class="col-md-12 text-center ">
-            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Registrame</button>
+            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm" [disabled]="registerForm.invalid">Registrame</button>
           </div>
+
           <div class="col-md-12 ">
             <div class="login-or">
               <hr class="hr-or">
@@ -117,7 +125,8 @@
             </div>
           </div>
           <div class="form-group">
-            <p class="text-center">Ya tienes una cuenta? <a href="#" (click)="$event.preventDefault();modal.dismiss('Cross click'); open(content);" id="signup">Inicia aqui</a></p>
+            <p class="text-center">Ya tienes una cuenta? <a href="#" (click)="$event.preventDefault();modal.dismiss('Cross click'); open(content);" 
+              id="signup">Inicia aqui</a></p>
           </div>
         </form>
       </div>
