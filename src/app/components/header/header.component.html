@@ -1,7 +1,21 @@
 <header class="blog-header py-3">
   <div class="row flex-nowrap justify-content-between align-items-center">
-    <div class="col-4 pt-1">
-      <button class="btn btn-sm btn-outline-secondary" (click)="open(content)" href="#">Ingresar</button>
+    <div class="col-4 pt-1" >
+      <button *ngIf="!identity" class="btn btn-sm btn-outline-secondary" (click)="open(content)" href="#">Ingresar</button>
+     
+      <div ngbDropdown *ngIf="identity && identity.name">
+        <img id="dropdownBasic1" ngbDropdownToggle src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="35" height="35" className="border border-secondary rounded-circle" />
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <a ngbDropdownItem> {{identity.name}} </a>
+          <div class="dropdown-divider"></div>
+          <a ngbDropdownItem> Crear </a>
+          <div class="dropdown-divider"></div>
+          <a ngbDropdownItem> Ajustes </a>
+          <div class="dropdown-divider"></div>
+          <a ngbDropdownItem (click)="$event.preventDefault(); logout();" > Salir </a>
+        </div>
+      </div>
+
     </div>
     <div class="col-4 text-center">
       <a class="blog-header-logo text-dark" [routerLink]="['/']">Ribid</a>
@@ -47,22 +61,24 @@
             <h1 class="blog-header-logo text-dark">Iniciar Sesion</h1>
           </div>
         </div>
-        <form action="" method="post" name="login">
+        <form  name="signin" #signinForm='ngForm' (ngSubmit)='onSubmitSignin(signinForm)'>
           <div class="form-group">
-            <label for="exampleInputEmail1">Correo Electronico</label>
-            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp"
-              placeholder="Correo Electronico">
+            <label for="emails">Correo Electronico</label>
+            <input type="email" name="emails" class="form-control" id="emails" aria-describedby="emailHelp"
+            placeholder="Correo Electronico" #emails="ngModel" [(ngModel)]="userSiginin.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <small *ngIf="!emails.valid && emails.touched" class="invalid-feedback d-block">El correo es invalido</small>
           </div>
           <div class="form-group">
-            <label for="exampleInputEmail1">Contraseña</label>
-            <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp"
-              placeholder="Ingresar Contraseña">
+            <label for="passwords">Contraseña</label>
+            <input type="password" name="passwords" id="passwords" class="form-control" aria-describedby="emailHelp"
+            placeholder="Ingresar Contraseña" #passwords="ngModel" [(ngModel)]="userSiginin.password" required >
+            <small *ngIf="!passwords.valid && passwords.touched" class="invalid-feedback d-block">La Contraseña es invalida</small>
           </div>
           <div class="form-group">
             <p class="text-center">Al ingresar, acepta nuestros <a href="#">Terminos de uso.</a></p>
           </div>
           <div class="col-md-12 text-center ">
-            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm">Iniciar</button>
+            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm" [disabled]="signinForm.invalid">Iniciar</button>
           </div>
           <div class="col-md-12 ">
             <div class="login-or">
@@ -88,7 +104,7 @@
             <h1 class="blog-header-logo text-dark">Registrarme</h1>
           </div>
         </div>
-        <form name="login" #registerForm='ngForm' (ngSubmit)='onSubmitRegister(registerForm)'>
+        <form name="register" #registerForm='ngForm' (ngSubmit)='onSubmitRegister(registerForm)'>
           <div class="form-group">
             <label for="name">Nombre</label>
             <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp"

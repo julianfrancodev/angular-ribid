@@ -15,15 +15,22 @@ export class HeaderComponent implements OnInit {
   closeResult = '';
   public user: User;
   public status: string;
+  public userSiginin: User;
+  public token: string;
+  public identity: any;
 
 
 
-  constructor(private modalService: NgbModal, private _userService: UserService,private toastr: ToastrService) {
+  constructor(private modalService: NgbModal, 
+    private _userService: UserService,
+    private toastr: ToastrService,
+    ) {
     this.user = new User(1, '','','ROLE_USER','','','','');
+    this.userSiginin = new User(1, '','','ROLE_USER','','','','');
+    this.identity = this._userService.getIdentity();
    }
 
   ngOnInit(): void {
-    console.log(this._userService.test());
   }
 
   showSuccess() {
@@ -32,6 +39,14 @@ export class HeaderComponent implements OnInit {
 
   showError(){
     this.toastr.error('No pudimos crear tu cuenta', 'Error');
+  }
+
+  showSuccessSignin(){
+    this.toastr.success('Bienvenido');
+  }
+
+  showErrorSignin(){
+    this.toastr.error('Credenciales Invalidas');
   }
 
   open(content: any) {
@@ -63,6 +78,7 @@ export class HeaderComponent implements OnInit {
         if(response.status == "success"){
           this.status = response.status;
           this.showSuccess();
+          this.modalService.dismissAll('Reason');
           form.reset();
         }else{
           this.status = 'error';          
@@ -72,9 +88,60 @@ export class HeaderComponent implements OnInit {
         console.log(<any>error);
         this.showError();
         this.status = 'error';
+
       }
     );
   }
+
+  onSubmitSignin(form: any){
+    this._userService.signin(this.userSiginin).subscribe(
+      response => {
+        console.log(response);
+        if(response.status != 404){
+          this.status = 'success';
+          this.token = response;
+          this.showSuccessSignin();
+          this.modalService.dismissAll('Reason');
+          //User identified
+
+          this._userService.signin(this.userSiginin, true).subscribe(
+            response => {
+            
+                this.identity = response;
+                console.log(this.token);
+                console.log(this.identity);
+                localStorage.setItem('token',this.token);
+                localStorage.setItem('indentity', JSON.stringify(this.identity));
+                form.reset();
+
+            },
+            error =>{
+              this.status = 'error';
+              console.log(error);
+              this.showErrorSignin();
+            }
+          )
+
+        }else{
+          this.showErrorSignin();
+        }
+      },
+      error =>{
+        this.status = 'error';
+        console.log(error);
+        this.showErrorSignin();
+
+      }
+    )
+  }
+
+  logout(){
+        localStorage.removeItem('indentity');
+        localStorage.removeItem('token');
+        this.identity = null;
+        this.token = null;
+  }
+
 
 
 }
