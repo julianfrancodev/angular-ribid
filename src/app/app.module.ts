@@ -39,7 +39,7 @@ import { ErrorComponent } from './components/error/error.component';
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot({
       timeOut: 5000,
-      positionClass: 'toast-top-center',
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
       progressBar: true,
       progressAnimation: 'increasing'
