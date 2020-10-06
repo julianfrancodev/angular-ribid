@@ -4,17 +4,19 @@
       <button class="btn btn-sm btn-outline-secondary" (click)="open(content)" href="#">Ingresar</button>
     </div>
 
-    <div class="col-4 pt-1" *ngIf="identity && identity.name" >     
+    <div class="col-4 pt-1" *ngIf="identity && identity.name">
       <div ngbDropdown>
-        <img id="dropdownBasic1" ngbDropdownToggle src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="30" height="30" class="border border-secondary rounded-circle" />
+        <img id="dropdownBasic1" ngbDropdownToggle
+          src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="30"
+          height="30" class="border border-secondary rounded-circle" />
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <a ngbDropdownItem  href="#" (click)="$event.preventDefault();"> {{identity.name}} </a>
+          <a ngbDropdownItem href="#" (click)="$event.preventDefault();"> {{identity.name}} </a>
           <div class="dropdown-divider"></div>
-          <a ngbDropdownItem  href="#" (click)="$event.preventDefault();"> Crear </a>
+          <a ngbDropdownItem href="#" (click)="$event.preventDefault();"> Crear </a>
           <div class="dropdown-divider"></div>
-          <a ngbDropdownItem  href="#" (click)="$event.preventDefault();"> Ajustes </a>
+          <a ngbDropdownItem href="#" (click)="$event.preventDefault();"> Ajustes </a>
           <div class="dropdown-divider"></div>
-          <a ngbDropdownItem href="#" (click)="$event.preventDefault(); logout();" > Salir </a>
+          <a ngbDropdownItem href="#" (click)="$event.preventDefault(); logout();"> Salir </a>
         </div>
       </div>
     </div>
@@ -63,24 +65,41 @@
             <h1 class="blog-header-logo text-dark">Iniciar Sesion</h1>
           </div>
         </div>
-        <form  name="signin" #signinForm='ngForm' (ngSubmit)='onSubmitSignin(signinForm)'>
+        <form name="signin" #signinForm='ngForm' (ngSubmit)='onSubmitSignin(signinForm)'>
+
+
           <div class="form-group">
-            <label for="emails">Correo Electronico</label>
-            <input type="email" name="emails" class="form-control" id="emails" aria-describedby="emailHelp"
-            placeholder="Correo Electronico" #emails="ngModel" [(ngModel)]="userSiginin.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-            <small *ngIf="!emails.valid && emails.touched" class="invalid-feedback d-block">El correo es invalido</small>
+            <div class="page">
+              <label class="field field_v3">
+                <input class="field__input" type="email" name="emails" id="emails" placeholder="Correo Electronico"
+                #emails="ngModel" [(ngModel)]="userSiginin.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                <span class="field__label-wrap">
+                  <span class="field__label">Correo</span>
+                </span>
+              </label>
+              <small *ngIf="!emails.valid && emails.touched" class="invalid-feedback d-block">El correo es
+                invalido</small>
+            </div>
           </div>
           <div class="form-group">
-            <label for="passwords">Contraseña</label>
-            <input type="password" name="passwords" id="passwords" class="form-control" aria-describedby="emailHelp"
-            placeholder="Ingresar Contraseña" #passwords="ngModel" [(ngModel)]="userSiginin.password" required >
-            <small *ngIf="!passwords.valid && passwords.touched" class="invalid-feedback d-block">La Contraseña es invalida</small>
+            <div class="page">
+              <label class="field field_v3">
+                <input class="field__input" type="password" id="passwords" name="passwords"
+                  placeholder="Ingresar Contraseña" #passwords="ngModel" [(ngModel)]="userSiginin.password" required>
+                <span class="field__label-wrap">
+                  <span class="field__label">Contraseña</span>
+                </span>
+              </label>
+              <small *ngIf="!passwords.valid && passwords.touched" class="invalid-feedback d-block">La Contraseña es
+                invalida</small>
+            </div>
           </div>
           <div class="form-group">
             <p class="text-center">Al ingresar, acepta nuestros <a href="#">Terminos de uso.</a></p>
           </div>
           <div class="col-md-12 text-center ">
-            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm" [disabled]="signinForm.invalid">Iniciar</button>
+            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm"
+              [disabled]="signinForm.invalid">Iniciar</button>
           </div>
           <div class="col-md-12 ">
             <div class="login-or">
@@ -89,7 +108,9 @@
             </div>
           </div>
           <div class="form-group">
-            <p class="text-center">No tienes una cuenta? <a href="#" (click)="$event.preventDefault();modal.dismiss('Cross click'); openSingup(singup)" id="signup">Registrate Aqui</a></p>
+            <p class="text-center">No tienes una cuenta? <a href="#"
+                (click)="$event.preventDefault();modal.dismiss('Cross click'); openSingup(singup)"
+                id="signup">Registrate Aqui</a></p>
           </div>
         </form>
       </div>
@@ -108,32 +129,54 @@
         </div>
         <form name="register" #registerForm='ngForm' (ngSubmit)='onSubmitRegister(registerForm)'>
           <div class="form-group">
-            <label for="name">Nombre</label>
-            <input type="text" name="name" class="form-control" id="name" aria-describedby="emailHelp"
-              placeholder="Nombre" #name="ngModel" [(ngModel)]="user.name" required pattern="[a-zA-Z]+">
+            <div class="page">
+              <label class="field field_v3">
+                <input class="field__input" type="text" name="name" placeholder="Fred" #name="ngModel"
+                  [(ngModel)]="user.name" required pattern="[a-z A-Z]+">
+                <span class="field__label-wrap">
+                  <span class="field__label">Nombre</span>
+                </span>
+              </label>
               <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">El nombre no es valido</small>
+            </div>
           </div>
 
           <div class="form-group">
-            <label for="email">Correo Electronico</label>
-            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp"
-              placeholder="Correo Electronico" #email="ngModel" [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-              <small *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">El correo es invalido</small>
+            <div class="page">
+              <label class="field field_v3">
+                <input class="field__input" type="email" name="email" placeholder="Correo Electronico"
+                  #email="ngModel" [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                <span class="field__label-wrap">
+                  <span class="field__label">Correo</span>
+                </span>
+              </label>
+              <span *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">El correo es invalido</span>
+            </div>
           </div>
 
+
           <div class="form-group">
-            <label for="password">Contraseña</label>
-            <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp"
-              placeholder="Ingresar Contraseña" #password="ngModel" [(ngModel)]="user.password" required >
-              <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">La Contraseña es invalida</small>
+            <div class="page">
+              <label class="field field_v3">
+                <input class="field__input" type="password" id="password" name="password"
+                  placeholder="Ingresar Contraseña" #password="ngModel" [(ngModel)]="user.password" required required>
+                <span class="field__label-wrap">
+                  <span class="field__label">Contraseña</span>
+                </span>
+              </label>
+              <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">La Contraseña es
+                invalida</small>
+            </div>
           </div>
+
 
           <div class="form-group">
             <p class="text-center">Al registrarse, acepta nuestros <a href="#">Terminos de uso.</a></p>
           </div>
 
           <div class="col-md-12 text-center ">
-            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm" [disabled]="registerForm.invalid">Registrame</button>
+            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm"
+              [disabled]="registerForm.invalid">Registrame</button>
           </div>
 
           <div class="col-md-12 ">
@@ -143,8 +186,9 @@
             </div>
           </div>
           <div class="form-group">
-            <p class="text-center">Ya tienes una cuenta? <a href="#" (click)="$event.preventDefault();modal.dismiss('Cross click'); open(content);" 
-              id="signup">Inicia aqui</a></p>
+            <p class="text-center">Ya tienes una cuenta? <a href="#"
+                (click)="$event.preventDefault();modal.dismiss('Cross click'); open(content);" id="signup">Inicia
+                aqui</a></p>
           </div>
         </form>
       </div>
