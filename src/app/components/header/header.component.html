@@ -14,7 +14,7 @@
           <div class="dropdown-divider"></div>
           <a ngbDropdownItem href="#" (click)="$event.preventDefault();"> Crear </a>
           <div class="dropdown-divider"></div>
-          <a ngbDropdownItem href="#" (click)="$event.preventDefault();"> Ajustes </a>
+          <a ngbDropdownItem href="#" [routerLink]="['/edit']" (click)="$event.preventDefault();"> Ajustes </a>
           <div class="dropdown-divider"></div>
           <a ngbDropdownItem href="#" (click)="$event.preventDefault(); logout();"> Salir </a>
         </div>
@@ -38,23 +38,7 @@
   </div>
 </header>
 
-<div class="nav-scroller py-1 mb-2">
-  <nav class="nav d-flex justify-content-between">
-    <a class="p-2 text-muted" href="#">Mundo</a>
-    <a class="p-2 text-muted" href="#">CO</a>
-    <a class="p-2 text-muted" href="#">Tecnologia</a>
-    <a class="p-2 text-muted" href="#">Diseño</a>
-    <a class="p-2 text-muted" href="#">Cultura</a>
-    <a class="p-2 text-muted" href="#">Negocios</a>
-    <a class="p-2 text-muted" href="#">Politica</a>
-    <a class="p-2 text-muted" href="#">Opinion</a>
-    <a class="p-2 text-muted" href="#">Ciencia</a>
-    <a class="p-2 text-muted" href="#">Salud</a>
-    <a class="p-2 text-muted" href="#">Religion</a>
-    <a class="p-2 text-muted" href="#">Viajes</a>
-  </nav>
-</div>
-
+<app-categories></app-categories>
 
 <ng-template #content let-modal>
   <div class="modal-body">
@@ -72,7 +56,8 @@
             <div class="page">
               <label class="field field_v3">
                 <input class="field__input" type="email" name="emails" id="emails" placeholder="Correo Electronico"
-                #emails="ngModel" [(ngModel)]="userSiginin.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                  #emails="ngModel" [(ngModel)]="userSiginin.email" required
+                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                 <span class="field__label-wrap">
                   <span class="field__label">Correo</span>
                 </span>
@@ -144,8 +129,8 @@
           <div class="form-group">
             <div class="page">
               <label class="field field_v3">
-                <input class="field__input" type="email" name="email" placeholder="Correo Electronico"
-                  #email="ngModel" [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                <input class="field__input" type="email" name="email" placeholder="Correo Electronico" #email="ngModel"
+                  [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
                 <span class="field__label-wrap">
                   <span class="field__label">Correo</span>
                 </span>
@@ -193,5 +178,6 @@
         </form>
       </div>
     </div>
+
   </div>
 </ng-template>

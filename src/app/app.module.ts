@@ -21,6 +21,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import { ErrorComponent } from './components/error/error.component';
     BlogmainComponent,
     HomeComponent,
     ErrorComponent,
+    EditUserComponent,
+    CategoriesComponent,
   ],
   imports: [
     CommonModule,
