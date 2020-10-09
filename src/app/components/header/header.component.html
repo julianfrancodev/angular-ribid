@@ -7,8 +7,12 @@
     <div class="col-4 pt-1" *ngIf="identity && identity.name">
       <div ngbDropdown>
         <img id="dropdownBasic1" ngbDropdownToggle
-          src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="30"
-          height="30" class="border border-secondary rounded-circle" />
+          width="35"
+          height="35" 
+          class="border border-secondary rounded-circle"  
+          src="{{url + 'user/avatar/' + identity.image}}"
+          />
+          
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <a ngbDropdownItem href="#" (click)="$event.preventDefault();"> {{identity.name}} </a>
           <div class="dropdown-divider"></div>

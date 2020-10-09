@@ -3,6 +3,9 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {User} from '../../models/user';
 import {UserService} from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import {global} from '../../services/global';
+import {Router} from '@angular/router';
+import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-header',
@@ -12,22 +15,24 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class HeaderComponent implements OnInit {
 
-  closeResult = '';
+  public closeResult:string = '';
   public user: User;
   public status: string;
   public userSiginin: User;
   public token: string;
   public identity: any;
-
+  public url: string;
 
 
   constructor(private modalService: NgbModal, 
     private _userService: UserService,
     private toastr: ToastrService,
+    private router: Router,
     ) {
     this.user = new User(1, '','','ROLE_USER','','','','');
     this.userSiginin = new User(1, '','','ROLE_USER','','','','');
     this.identity = this._userService.getIdentity();
+    this.url = global.url;
    }
 
   ngOnInit(): void {
@@ -140,6 +145,7 @@ export class HeaderComponent implements OnInit {
         localStorage.removeItem('token');
         this.identity = null;
         this.token = null;
+        this.router.navigate(['']);
   }
 
 

@@ -6,6 +6,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { AngularFileUploaderModule } from "angular-file-uploader";
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -39,6 +41,9 @@ import { CategoriesComponent } from './components/categories/categories.componen
     CategoriesComponent,
   ],
   imports: [
+    AngularFileUploaderModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
     CommonModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot({
