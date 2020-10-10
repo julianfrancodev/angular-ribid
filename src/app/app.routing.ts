@@ -4,11 +4,12 @@ import {Routes, RouterModule} from '@angular/router';
 import { ErrorComponent } from './components/error/error.component';
 import {HomeComponent} from './components/home/home.component';
 import {EditUserComponent} from './components/edit-user/edit-user.component';
+import {PostNewComponent} from './components/post-new/post-new.component';
 
 const appRoutes: Routes =[
     {path:'', component: HomeComponent},
     {path:'edit', component: EditUserComponent},
-    {path:'home', component: HomeComponent},
+    {path:'new-post', component: PostNewComponent},
     {path:'**', component: ErrorComponent}
 ];
 

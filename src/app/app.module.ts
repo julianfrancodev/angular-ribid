@@ -25,6 +25,7 @@ import { HomeComponent } from './components/home/home.component';
 import { ErrorComponent } from './components/error/error.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { PostNewComponent } from './components/post-new/post-new.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
     ErrorComponent,
     EditUserComponent,
     CategoriesComponent,
+    PostNewComponent,
   ],
   imports: [
     AngularFileUploaderModule,

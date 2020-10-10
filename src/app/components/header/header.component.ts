@@ -5,7 +5,6 @@ import {UserService} from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import {global} from '../../services/global';
 import {Router} from '@angular/router';
-import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-header',
@@ -48,6 +47,10 @@ export class HeaderComponent implements OnInit {
 
   showSuccessSignin(){
     this.toastr.success('Bienvenido');
+  }
+
+  showLogoutSuccess(){
+    this.toastr.success('Hasta la proxima!');
   }
 
   showErrorSignin(){
@@ -146,6 +149,7 @@ export class HeaderComponent implements OnInit {
         this.identity = null;
         this.token = null;
         this.router.navigate(['']);
+        this.showLogoutSuccess();
   }
 
 

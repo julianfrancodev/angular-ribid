@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
-import {global} from '../../services/global';
-import {Router} from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { global } from '../../services/global';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
@@ -21,9 +22,9 @@ export class EditUserComponent implements OnInit {
     multiple: false,
     formatsAllowed: ".jpg,.png,jpeg",
     maxSize: "50",
-    uploadAPI:  {
-      url:global.url+'user/upload',
-      method:"POST",
+    uploadAPI: {
+      url: global.url + 'user/upload',
+      method: "POST",
       headers: {
         'Authorization': this._userService.getToken()
       },
@@ -40,10 +41,14 @@ export class EditUserComponent implements OnInit {
       afterUploadMsg_error: 'Fallo al subir la imagen',
       sizeLimit: 'Size Limit'
     }
-};
+  };
 
-  constructor(private _userService: UserService, private router: Router) {
-    if(this._userService.getIdentity() == null){
+  constructor(
+    private _userService: UserService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
+    if (this._userService.getIdentity() == null) {
       this.router.navigate(['']);
     }
     this.userUpdate = new User(1, '', '', 'ROLE_USER', '', '', '', '');
@@ -67,29 +72,34 @@ export class EditUserComponent implements OnInit {
     console.log(this.userUpdate);
   }
 
+  showSuccessSignin(){
+    this.toastr.success('Usuario actualizado');
+  }
+
   onSubmitEdit(form: any) {
     this._userService.update(this.token, this.userUpdate).subscribe(
       (response: any) => {
         console.log(response);
-        if(response.changes.name){
-          this.userUpdate.name =response.changes.name;
+        if (response.changes.name) {
+          this.userUpdate.name = response.changes.name;
         }
-        if(response.changes.surname){
-          this.userUpdate.surname =response.changes.surname;
+        if (response.changes.surname) {
+          this.userUpdate.surname = response.changes.surname;
         }
-        if(response.changes.email){
-          this.userUpdate.email =response.changes.email;
+        if (response.changes.email) {
+          this.userUpdate.email = response.changes.email;
         }
-        if(response.changes.description){
-          this.userUpdate.description =response.changes.description;
+        if (response.changes.description) {
+          this.userUpdate.description = response.changes.description;
         }
 
-        if(response.changes.image){
-          this.userUpdate.image =response.changes.image;
+        if (response.changes.image) {
+          this.userUpdate.image = response.changes.image;
         }
         this.identity = this.userUpdate;
 
         localStorage.setItem('indentity', JSON.stringify(this.identity));
+        this.showSuccessSignin();
       },
       error => {
         console.log(error);
@@ -97,7 +107,7 @@ export class EditUserComponent implements OnInit {
     );
   }
 
-  avatarUpload(data: any){
+  avatarUpload(data: any) {
     this.userUpdate.image = data.body.image;
   }
 
