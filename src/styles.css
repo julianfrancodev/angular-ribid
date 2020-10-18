@@ -617,19 +617,34 @@ LEVEL 4. SETTINGS
   --fieldBorderColorActive: #0275d8;
 }
 
-/*
-=====
-DEMO
-=====
-*/
 
-body{
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Open Sans, Ubuntu, Fira Sans, Helvetica Neue, sans-serif;
-  margin: 0;
+/* Animaciones */
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
 
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.fast {
+  -webkit-animation-duration: 0.4s;
+  animation-duration: 0.4s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation-name: fadeIn;
 }
 
 .page{
@@ -637,3 +652,4 @@ body{
   width: 100%;
   display: grid;
 }
+

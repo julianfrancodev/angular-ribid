@@ -1,1 +1,65 @@
-<p>post-new works!</p>
+<div class="main-body animated fadeIn fast">
+    <div class="row gutters-sm">
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-column">
+                        <div class="row">
+                            <div class="col-sm-12 text-secondary">
+                                <div class="page">
+                                    <label class="field field_v3">
+                                        <input class="field__input" type="text" name="title" placeholder="Titulo"
+                                            required #title="ngModel" [(ngModel)]="post.title">
+                                        <span class="field__label-wrap">
+                                            <span class="field__label">Titulo del documento</span>
+                                        </span>
+                                    </label>
+                                    <span *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">El
+                                        titulo es obligatorio</span> 
+                                </div>
+                                <!-- TODO create a beautiful  select box -->
+                                <div class="page">
+                                    <label class="field field_v3">
+                                        <select class="field__input" type="text" name="category" placeholder="Category"
+                                            required #category="ngModel" [(ngModel)]="post.category_id">
+                                            <option *ngFor="let category of categories" value="{{category.id}}">
+                                                {{category.name}}
+                                            </option>
+                                        </select>
+                                    </label> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card mb-3">
+                <form #createPost='ngForm' (ngSubmit)="createPost(createPost)">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="page">
+
+                                    <textarea [froalaEditor]="options" class="field__input" type="text" name="content"
+                                        #content="ngModel" [(ngModel)]="post.content"></textarea>
+
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm"
+                                    [disabled]="createPost.invalid">Guardar</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

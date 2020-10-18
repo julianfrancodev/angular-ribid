@@ -11,6 +11,7 @@ import { AngularFileUploaderModule } from "angular-file-uploader";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -63,7 +64,7 @@ import { PostNewComponent } from './components/post-new/post-new.component';
     AppRoutingModule,
     NgbModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [
     appRoutingProviders,

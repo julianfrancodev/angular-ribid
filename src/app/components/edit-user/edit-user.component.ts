@@ -18,6 +18,10 @@ export class EditUserComponent implements OnInit {
   public token: string;
   public url: string;
 
+  public options: Object = {
+    placeholderText: 'Tu descripción puede ir aqui.'
+  }
+
   public afuConfig = {
     multiple: false,
     formatsAllowed: ".jpg,.png,jpeg",

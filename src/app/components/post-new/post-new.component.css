@@ -1,0 +1,88 @@
+.select-box {
+    position: relative;
+    display: inline-block;
+    min-height: 40px;
+    max-height: 40px;
+    width: 200px;
+    margin-right: 20px;
+    padding: 40px 0 0;
+    box-sizing: border-box;
+    border-radius: 4px;
+    outline: none;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px #9a9ca0;
+    vertical-align: top;
+    transition: .3s;
+  }
+  .select-box:after {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 40px;
+    top: 0;
+    right: 10px;
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTI0IDI0SDBWMGgyNHoiIG9wYWNpdHk9Ii44NyIvPgogICAgICAgIDxwYXRoIGZpbGw9IiNBOUFDQUYiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTE1Ljg4IDE1LjI5TDEyIDExLjQxbC0zLjg4IDMuODhhLjk5Ni45OTYgMCAxIDEtMS40MS0xLjQxbDQuNTktNC41OWEuOTk2Ljk5NiAwIDAgMSAxLjQxIDBsNC41OSA0LjU5Yy4zOS4zOS4zOSAxLjAyIDAgMS40MS0uMzkuMzgtMS4wMy4zOS0xLjQyIDB6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    cursor: pointer;
+    transform: rotate(180deg);
+  }
+  #hover-select:hover {
+    max-height: 160px;
+  }
+  #hover-select:hover:after {
+     transform: rotate(0deg);
+  }
+  .select-box > input {
+    display: none;
+  }
+  .select-box > label {
+    display: block;
+    height: 40px;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    line-height: 40px;
+    cursor: pointer;
+    transition: background-color .4s;
+  }
+  .select-box > label:hover {
+    background-color: #f4f4f4;
+  }
+  .select-box > input:checked + label {
+    position: absolute;
+    top: 0;
+  }
+  .select-box > input:checked + label:hover {
+    background-color: #fff;
+    cursor: default;
+  }
+  #select-box-input {
+    display: none;
+  }
+  #select-box-input:checked + label {
+    max-height: 160px;
+  }
+  #select-box-input:checked + label:after {
+    transform: rotate(0deg);
+    background-position-x: right;
+  }
+  #select-box-input + label:after {
+    width: 100%;
+    right: 0;
+    margin-right: 10px;
+    background-position-x: left;
+    background-position-y: center;
+  }
+  #select-box-input + label:hover {
+        box-shadow: 0 0 0 1px #b28fff;
+  }
+  #select-box-input + label > label:hover {
+    background-color: rgba(178, 143, 255, .2);
+  }
+  #select-box-input + label:hover:after {
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4KICAgIDxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPHBhdGggZD0iTTI0IDI0SDBWMGgyNHoiIG9wYWNpdHk9Ii44NyIvPgogICAgICAgIDxwYXRoIGZpbGw9IiM1NTZBRUEiIGZpbGwtcnVsZT0ibm9uemVybyIgZD0iTTE1Ljg4IDE1LjI5TDEyIDExLjQxbC0zLjg4IDMuODhhLjk5Ni45OTYgMCAxIDEtMS40MS0xLjQxbDQuNTktNC41OWEuOTk2Ljk5NiAwIDAgMSAxLjQxIDBsNC41OSA0LjU5Yy4zOS4zOS4zOSAxLjAyIDAgMS40MS0uMzkuMzgtMS4wMy4zOS0xLjQyIDB6Ii8+CiAgICA8L2c+Cjwvc3ZnPgo=);
+  }
+  #select-box-input + label:not(:focus) {
+    max-height: 40px;
+  }
