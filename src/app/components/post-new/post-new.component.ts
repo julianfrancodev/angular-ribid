@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { CategoryService } from '../../services/category.service';
 import { PostService } from '../../services/post.service';
 import { Post } from '../../models/post';
 import { Category } from '../../models/category';
 import { ToastrService } from 'ngx-toastr';
+import { global } from '../../services/global';
+
 
 
 @Component({
@@ -22,14 +24,39 @@ export class PostNewComponent implements OnInit {
   public categories: [Category];
   public options: Object = {
     placeholderText: 'Escribe o pega parte de tu documento',
-
   }
+
+  public fileConfig = {
+    multiple: false,
+    formatsAllowed: ".jpg,.png,jpeg",
+    maxSize: "50",
+    uploadAPI: {
+      url: global.url + 'post/upload',
+      method: "POST",
+      headers: {
+        'Authorization': this._userService.getToken()
+      },
+      responseType: 'json',
+    },
+    theme: "attachPin",
+    hideProgressBar: true,
+    hideResetBtn: true,
+    hideSelectBtn: true,
+    fileNameIndex: true,
+    replaceTexts: {
+      attachPinBtn: 'Seleccionar Archivo',
+      afterUploadMsg_success: 'Successfully Uploaded !',
+      afterUploadMsg_error: 'Fallo al subir el archivo',
+      sizeLimit: 'Size Limit'
+    }
+  };
 
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
     private _userService: UserService,
     private _categoryService: CategoryService,
+    private _postService: PostService,
     private toastr: ToastrService
   ) {
     if (this._userService.getIdentity() == null) {
@@ -46,11 +73,23 @@ export class PostNewComponent implements OnInit {
   }
 
   showSuccessSavedPost() {
-    this.toastr.success('Message from post!!');
+    this.toastr.success('Contenido publicado exitosamente');
   }
 
   createPost(form: any) {
-
+    console.log(this.post);
+    this._postService.create(this.token, this.post).subscribe(
+      response =>{
+        if(response.status == 'success'){
+          this.post = response.post;
+          this.showSuccessSavedPost();
+          this._router.navigate(['']);
+        }
+      },
+      error =>{
+        console.log(error);
+      }
+    )
   }
 
   getCategories(){
@@ -64,6 +103,10 @@ export class PostNewComponent implements OnInit {
           console.log(error);
       }
     )
+  }
+
+  fileUpload(data: any){
+    this.post.image = data.body.image;
   }
 
 
