@@ -28,6 +28,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { PostNewComponent } from './components/post-new/post-new.component';
+import { PostComponent } from './components/post/post.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { PostNewComponent } from './components/post-new/post-new.component';
     EditUserComponent,
     CategoriesComponent,
     PostNewComponent,
+    PostComponent,
   ],
   imports: [
     AngularFileUploaderModule,

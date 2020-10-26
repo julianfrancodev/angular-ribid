@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-                        <img *ngIf="!identity && !identity.image" src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle"
+                        <img *ngIf="!identity || !identity.image" src="https://www.flaticon.es/svg/static/icons/svg/3612/3612416.svg" alt="Admin" class="rounded-circle"
                             width="150">
 
                             <img *ngIf="identity && identity.image" src="{{url + 'user/avatar/' + identity.image}}" alt="Admin" class="rounded-circle"
