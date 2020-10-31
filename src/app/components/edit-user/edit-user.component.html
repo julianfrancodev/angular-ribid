@@ -4,18 +4,18 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex flex-column align-items-center text-center">
-                        <img *ngIf="!identity || !identity.image" src="https://www.flaticon.es/svg/static/icons/svg/3612/3612416.svg" alt="Admin" class="rounded-circle"
-                            width="150">
+                        <img *ngIf="!identity || !identity.image"
+                            src="https://www.flaticon.es/svg/static/icons/svg/3612/3612416.svg" alt="Admin"
+                            class="rounded-circle" width="150">
 
-                            <img *ngIf="identity && identity.image" src="{{url + 'user/avatar/' + identity.image}}" alt="Admin" class="rounded-circle"
-                            width="150" height="150">
-                        
+                        <img *ngIf="identity && identity.image" src="{{url + 'user/avatar/' + identity.image}}"
+                            alt="Admin" class="rounded-circle" width="150" height="150">
+
                         <div class="mt-3">
                             <h4 *ngIf="identity && identity.name">{{identity.name}}</h4>
                             <p class="text-secondary mb-1">Full Stack Developer</p>
                             <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                            <angular-file-uploader [config]="afuConfig"  (ApiResponse)="avatarUpload($event)"
-                            >
+                            <angular-file-uploader [config]="afuConfig" (ApiResponse)="avatarUpload($event)">
                             </angular-file-uploader>
                         </div>
                     </div>
@@ -27,77 +27,54 @@
                 <form #userEditForm='ngForm' (ngSubmit)="onSubmitEdit(userEditForm)">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <h5 class="mb-0">Nombre</h5>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <div class="page">
-                                    <label class="field field_v3">
-                                        <input class="field__input" type="text" name="nameu" placeholder="Nombre"
-                                            #nameu="ngModel" required pattern="[a-z A-Z]+"
-                                            [(ngModel)]="userUpdate.name">
-                                        <span class="field__label-wrap">
-                                            <span class="field__label">Nombre</span>
-                                        </span>
-                                    </label>
-                                    <small *ngIf="!nameu.valid && nameu.touched" class="invalid-feedback d-block">El
-                                        nombre no es valido</small>
-                                </div>
+                            <div class="col-sm-12 text-secondary">
+                                <mat-form-field appearance="outline" class="input-full-width">
+                                    <mat-label>Nombre</mat-label>
+                                    <input matInput type="text" name="nameu" placeholder="Nombre" #nameu="ngModel"
+                                        required pattern="[a-z A-Z]+" [(ngModel)]="userUpdate.name">
+                                    <mat-hint *ngIf="!nameu.valid && nameu.touched" class="text-danger">El nombre no es
+                                        valido</mat-hint>
+                                </mat-form-field>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
-                            <div class="col-sm-3">
-                                <h5 class="mb-0">Apellido</h5>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <div class="page">
-                                    <label class="field field_v3">
-                                        <input class="field__input" type="text" name="lastname" placeholder="Fred"
-                                            #lastname="ngModel" [(ngModel)]="userUpdate.surname" required
-                                            pattern="[a-z A-Z]+">
-                                        <span class="field__label-wrap">
-                                            <span class="field__label">Apellido</span>
-                                        </span>
-                                    </label>
-                                    <small *ngIf="!lastname.valid && lastname.touched"
-                                        class="invalid-feedback d-block">El apellido no es valido</small>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h5 class="mb-0">Correo electronico</h5>
-                            </div>
-                            <div class="col-sm-9 text-secondary">
-                                <div class="page">
-                                    <label class="field field_v3">
-                                        <input class="field__input" type="text" name="emailu" placeholder="Fred"
-                                            required #emailu="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                                            [(ngModel)]="userUpdate.email">
-                                        <span class="field__label-wrap">
-                                            <span class="field__label">Correo electronico</span>
-                                        </span>
-                                    </label>
-                                    <span *ngIf="!emailu.valid && emailu.touched" class="invalid-feedback d-block">El
-                                        correo es invalido</span>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h5 class="mb-0">Bio</h5>
-                            </div>
-                            <div class="col-sm-9">
-                                <div class="page">
 
-                                    <textarea [froalaEditor]="options" class="field__input" type="text" name="description"
-                                        #description="ngModel" [(ngModel)]="userUpdate.description"
-                                        placeholder="Bio"></textarea>
+                            <div class="col-sm-12 text-secondary">
 
-                                </div>
+                                <mat-form-field appearance="outline" class="input-full-width">
+                                    <mat-label>Apellido</mat-label>
+                                    <input matInput type="text" name="lastname" placeholder="Fred" #lastname="ngModel"
+                                        [(ngModel)]="userUpdate.surname" required pattern="[a-z A-Z]+">
+                                    <mat-hint *ngIf="!lastname.valid && lastname.touched" class="text-danger">El
+                                        apellido no es valido</mat-hint>
+                                </mat-form-field>
+
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+
+                            <div class="col-sm-12 text-secondary">
+
+                                <mat-form-field appearance="outline" class="input-full-width">
+                                    <mat-label>Apellido</mat-label>
+                                    <input matInput type="text" name="emailu" placeholder="Fred" required
+                                        #emailu="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                                        [(ngModel)]="userUpdate.email">
+                                    <mat-hint *ngIf="!emailu.valid && emailu.touched" class="text-danger">El
+                                        correo es invalido</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12">
+
+                                <textarea [froalaEditor]="options" class="field__input" type="text" name="description"
+                                    #description="ngModel" [(ngModel)]="userUpdate.description"
+                                    placeholder="Bio"></textarea>
+
                             </div>
                         </div>
                         <hr>

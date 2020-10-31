@@ -1,25 +1,18 @@
 <header class="blog-header py-3">
   <div class="row flex-nowrap justify-content-between align-items-center">
     <div class="col-4 pt-1" *ngIf="!identity">
-      <button class="btn btn-sm btn-outline-secondary" (click)="open(content)" href="#">Ingresar</button>
+      <button ngbAutofocus class="btn btn-sm btn-outline-secondary" (click)="open(content); $event.preventDefault();">Ingresar</button>
     </div>
 
     <div class="col-4 pt-1" *ngIf="identity && identity.name">
       <div ngbDropdown>
-        <img *ngIf="identity.image" id="dropdownBasic1" ngbDropdownToggle
-          width="35"
-          height="35" 
-          class="border border-secondary rounded-circle"  
-          src="{{url + 'user/avatar/' + identity.image}}"
-          />
+        <img *ngIf="identity.image" id="dropdownBasic1" ngbDropdownToggle width="35" height="35"
+          class="border border-secondary rounded-circle" src="{{url + 'user/avatar/' + identity.image}}" />
 
-          <img *ngIf="!identity.image" id="dropdownBasic1" ngbDropdownToggle
-          width="35"
-          height="35" 
-          class="border border-secondary rounded-circle"  
-          src="https://www.flaticon.es/svg/static/icons/svg/3612/3612416.svg"
-          />
-          
+        <img *ngIf="!identity.image" id="dropdownBasic1" ngbDropdownToggle width="35" height="35"
+          class="border border-secondary rounded-circle"
+          src="https://www.flaticon.es/svg/static/icons/svg/3612/3612416.svg" />
+
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <a ngbDropdownItem href="#" (click)="$event.preventDefault();"> {{identity.name}} </a>
           <div class="dropdown-divider"></div>
@@ -64,31 +57,26 @@
 
 
           <div class="form-group">
-            <div class="page">
-              <label class="field field_v3">
-                <input class="field__input" type="email" name="emails" id="emails" placeholder="Correo Electronico"
-                  #emails="ngModel" [(ngModel)]="userSiginin.email" required
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-                <span class="field__label-wrap">
-                  <span class="field__label">Correo</span>
-                </span>
-              </label>
-              <small *ngIf="!emails.valid && emails.touched" class="invalid-feedback d-block">El correo es
-                invalido</small>
-            </div>
+            <mat-form-field appearance="outline" class="input-full-width">
+              <mat-label>Correo</mat-label>
+              <input matInput type="text" type="email" name="emails"  placeholder="Correo Electronico"
+                #emails="ngModel" [(ngModel)]="userSiginin.email" required
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+              <mat-error *ngIf="!emails.valid && emails.touched" class="text-danger">El correo es
+                invalido</mat-error>
+            </mat-form-field>
           </div>
+
           <div class="form-group">
-            <div class="page">
-              <label class="field field_v3">
-                <input class="field__input" type="password" id="passwords" name="passwords"
-                  placeholder="Ingresar Contraseña" #passwords="ngModel" [(ngModel)]="userSiginin.password" required>
-                <span class="field__label-wrap">
-                  <span class="field__label">Contraseña</span>
-                </span>
-              </label>
-              <small *ngIf="!passwords.valid && passwords.touched" class="invalid-feedback d-block">La Contraseña es
-                invalida</small>
-            </div>
+
+            <mat-form-field appearance="outline" class="input-full-width">
+              <mat-label>Contraseña</mat-label>
+              <input matInput [type]="password" name="passwords" placeholder="Ingresar Contraseña"
+                #passwords="ngModel" [(ngModel)]="userSiginin.password" required/>
+              <mat-error *ngIf="!passwords.valid && passwords.touched" class="text-danger">La Contraseña es
+                invalida</mat-error>
+            </mat-form-field>
+
           </div>
           <div class="form-group">
             <p class="text-center">Al ingresar, acepta nuestros <a href="#">Terminos de uso.</a></p>

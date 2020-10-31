@@ -6,31 +6,31 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-12 text-secondary">
-                                <div class="page">
-                                    <label class="field field_v3">
-                                        <input class="field__input" type="text" name="title" placeholder="Titulo"
-                                            required #title="ngModel" [(ngModel)]="post.title">
-                                        <span class="field__label-wrap">
-                                            <span class="field__label">Ej: Historia de roma.</span>
-                                        </span>
-                                    </label>
-                                    <span *ngIf="!title.valid && title.touched" class="invalid-feedback d-block">El
-                                        titulo es necesario</span>
-                                </div>
+                                <mat-form-field appearance="outline" class="input-full-width">
+                                    <mat-label>Titulo</mat-label>
+                                    <input matInput placeholder="Ej: Historia de roma" type="text" name="title" required
+                                        #title="ngModel" [(ngModel)]="post.title">
+                                    <mat-hint *ngIf="!title.valid && title.touched" class="text-danger">Titulo es
+                                        necesario</mat-hint>
+                                </mat-form-field>
                             </div>
                         </div>
+
                         <hr />
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="form-field-group">
-                                    <mat-form-field appearance="fill">
+                                    <mat-form-field appearance="outline">
                                         <mat-label>Selecciona una categoria</mat-label>
                                         <mat-select name="category_id" #category="ngModel"
-                                            [(ngModel)]="post.category_id">
+                                            [(ngModel)]="post.category_id" required>
                                             <mat-option *ngFor="let category of categories" [value]="category.id">
                                                 {{category.name}}
                                             </mat-option>
                                         </mat-select>
+                                        <mat-hint *ngIf="!category.valid && category.touched" class="text-danger">
+                                            Categoria es necesaria</mat-hint>
+
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -50,8 +50,8 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="page text-center">
-                                    <angular-file-uploader [config]="fileConfig"
-                                    (ApiResponse)="fileUpload($event)"></angular-file-uploader>
+                                    <angular-file-uploader [config]="fileConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
                                 </div>
                             </div>
                         </div>

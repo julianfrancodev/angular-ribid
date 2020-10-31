@@ -2,6 +2,6 @@
   <div class="blog-post" *ngFor="let post of posts">
    <a [routerLink]="['/post', post.id]" class="text-dark"> <h2 class="blog-post-title">{{post.title}}</h2></a>
     <p class="blog-post-meta">{{post.created_at | date}} por <a href="#">{{post.user.name}}</a></p>
-    <p [innerHtml]="(post.content.length>700)? (post.content | slice:0:700)+'...':(post.content)" ></p>
+    <p [innerHtml]="(post.content.length>1500)? (post.content | slice:0:1500)+'...':(post.content)" ></p>
   </div>
 </div>
