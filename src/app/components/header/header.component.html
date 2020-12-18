@@ -1,7 +1,7 @@
 <header class="blog-header py-3">
   <div class="row flex-nowrap justify-content-between align-items-center">
     <div class="col-4 pt-1" *ngIf="!identity">
-      <button ngbAutofocus class="btn btn-sm btn-outline-secondary" (click)="open(content); $event.preventDefault();">Ingresar</button>
+      <button class="btn btn-sm btn-outline-secondary" (click)="openDialog();">Ingresar</button>
     </div>
 
     <div class="col-4 pt-1" *ngIf="identity && identity.name">
@@ -44,7 +44,8 @@
 
 <app-categories></app-categories>
 
-<ng-template #content let-modal>
+
+<!-- <ng-template #content let-modal>
   <div class="modal-body">
     <div id="first">
       <div class="myform form">
@@ -98,11 +99,12 @@
           </div>
         </form>
       </div>
+      
     </div>
   </div>
-</ng-template>
+</ng-template> -->
 
-<ng-template #singup let-modal>
+<!-- <ng-template #singup let-modal>
   <div class="modal-body">
     <div id="first">
       <div class="myform form">
@@ -176,7 +178,8 @@
           </div>
         </form>
       </div>
+      
     </div>
 
   </div>
-</ng-template>
+</ng-template> -->

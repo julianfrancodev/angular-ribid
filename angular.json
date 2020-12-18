@@ -132,5 +132,8 @@
       }
     }
   },
-  "defaultProject": "ribid"
+  "defaultProject": "ribid",
+  "cli": {
+    "analytics": "5412fa45-9933-43a3-8fe1-05775d60113e"
+  }
 }
