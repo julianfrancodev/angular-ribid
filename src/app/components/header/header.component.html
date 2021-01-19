@@ -16,9 +16,9 @@
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <a ngbDropdownItem href="#" (click)="event.preventDefault();"> {{identity.name}} </a>
           <div class="dropdown-divider"></div>
-          <a ngbDropdownItem href="#" [routerLink]="['/new-post']"  (click)="event.preventDefault();"> Crear </a>
+          <a ngbDropdownItem href="#" [routerLink]="['/new-post']"> Crear </a>
           <div class="dropdown-divider"></div>
-          <a ngbDropdownItem href="#" [routerLink]="['/edit']" (click)="event.preventDefault();"> Ajustes </a>
+          <a ngbDropdownItem href="#" [routerLink]="['/edit']"> Ajustes </a>
           <div class="dropdown-divider"></div>
           <a ngbDropdownItem href="#" (click)="$event.preventDefault(); logout();"> Salir </a>
         </div>
@@ -54,30 +54,25 @@
           </div>
         </div>
         <form name="signin" #signinForm='ngForm' (ngSubmit)='onSubmitSignin(signinForm)'>
-
-
           <div class="form-group">
             <div class="page">
-              <label class="field field_v3">
-                <input class="field__input" type="email" name="emails" id="emails" placeholder="Correo Electronico"
+              <label class="pure-material-textfield-outlined">
+                <input type="email" name="emails" id="emails" placeholder=" "
                   #emails="ngModel" [(ngModel)]="userSiginin.email" required
                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-                <span class="field__label-wrap">
-                  <span class="field__label">Correo</span>
-                </span>
+                  <span>Correo</span>
               </label>
               <small *ngIf="!emails.valid && emails.touched" class="invalid-feedback d-block">El correo es
                 invalido</small>
             </div>
           </div>
+       
           <div class="form-group">
             <div class="page">
-              <label class="field field_v3">
+              <label class="pure-material-textfield-outlined">
                 <input class="field__input" type="password" id="passwords" name="passwords"
-                  placeholder="Ingresar Contraseña" #passwords="ngModel" [(ngModel)]="userSiginin.password" required>
-                <span class="field__label-wrap">
-                  <span class="field__label">Contraseña</span>
-                </span>
+                  placeholder=" " #passwords="ngModel" [(ngModel)]="userSiginin.password" required>
+                  <span>Contraseña</span>
               </label>
               <small *ngIf="!passwords.valid && passwords.touched" class="invalid-feedback d-block">La Contraseña es
                 invalida</small>
@@ -119,12 +114,10 @@
         <form name="register" #registerForm='ngForm' (ngSubmit)='onSubmitRegister(registerForm)'>
           <div class="form-group">
             <div class="page">
-              <label class="field field_v3">
-                <input class="field__input" type="text" name="name" placeholder="Fred" #name="ngModel"
+              <label class="pure-material-textfield-outlined">
+                <input type="text" name="name" placeholder=" " #name="ngModel"
                   [(ngModel)]="user.name" required pattern="[a-z A-Z]+">
-                <span class="field__label-wrap">
-                  <span class="field__label">Nombre</span>
-                </span>
+                  <span>Nombre</span>
               </label>
               <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">El nombre no es valido</small>
             </div>
@@ -132,12 +125,10 @@
 
           <div class="form-group">
             <div class="page">
-              <label class="field field_v3">
-                <input class="field__input" type="email" name="email" placeholder="Correo Electronico" #email="ngModel"
+              <label class="pure-material-textfield-outlined">
+                <input type="email" name="email" placeholder=" " #email="ngModel"
                   [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-                <span class="field__label-wrap">
-                  <span class="field__label">Correo</span>
-                </span>
+                  <span>Correo</span>
               </label>
               <span *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">El correo es invalido</span>
             </div>
@@ -146,12 +137,10 @@
 
           <div class="form-group">
             <div class="page">
-              <label class="field field_v3">
-                <input class="field__input" type="password" id="password" name="password"
-                  placeholder="Ingresar Contraseña" #password="ngModel" [(ngModel)]="user.password" required required>
-                <span class="field__label-wrap">
-                  <span class="field__label">Contraseña</span>
-                </span>
+              <label class="pure-material-textfield-outlined">
+                <input type="password" id="password" name="password"
+                  placeholder=" " #password="ngModel" [(ngModel)]="user.password"  required>
+                  <span>Contraseña</span>
               </label>
               <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">La Contraseña es
                 invalida</small>
