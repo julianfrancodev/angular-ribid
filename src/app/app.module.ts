@@ -30,8 +30,6 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { PostNewComponent } from './components/post-new/post-new.component';
 import { PostComponent } from './components/post/post.component';
 import {MatDialogModule } from '@angular/material/dialog';
-import { SigninDialogComponent } from './components/signin-dialog/signin-dialog.component';
-import { SignupDialogComponent } from './components/signup-dialog/signup-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,8 +46,6 @@ import { SignupDialogComponent } from './components/signup-dialog/signup-dialog.
     CategoriesComponent,
     PostNewComponent,
     PostComponent,
-    SigninDialogComponent,
-    SignupDialogComponent,
   ],
   imports: [
     AngularFileUploaderModule,
