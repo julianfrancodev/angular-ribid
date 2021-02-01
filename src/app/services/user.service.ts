@@ -18,7 +18,7 @@ export class UserService{
     }
 
     test(){
-        return 'Hello from service';
+        return 'Hello from user service';
     }
 
      register(user: User): Observable<any>{

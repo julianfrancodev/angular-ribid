@@ -52,7 +52,6 @@ export class PostNewComponent implements OnInit {
   };
 
   constructor(
-    private _route: ActivatedRoute,
     private _router: Router,
     private _userService: UserService,
     private _categoryService: CategoryService,
@@ -68,7 +67,7 @@ export class PostNewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
-    this.post = new Post(1, this.identity.sub, 1, '', '', null, null);
+    this.post = new Post(1, this.identity.sub, 1, '', '');
     console.log(this.post);
   }
 
@@ -105,9 +104,11 @@ export class PostNewComponent implements OnInit {
     )
   }
 
-  fileUpload(data: any){
-    this.post.image = data.body.image;
-  }
+  // todo: Habilitar para el que el bibliotecario suba el archivo necesario
+
+  // fileUpload(data: any){
+  //   this.post.image = data.body.image;
+  // }
 
 
 
