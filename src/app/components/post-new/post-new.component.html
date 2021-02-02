@@ -9,9 +9,8 @@
                                 <mat-form-field appearance="outline" class="input-full-width">
                                     <mat-label>Titulo</mat-label>
                                     <input matInput placeholder="Ej: Historia de roma" type="text" name="title" required
-                                        #title="ngModel" [(ngModel)]="post.title">
-                                    <mat-hint *ngIf="!title.valid && title.touched" class="text-danger">Titulo es
-                                        necesario</mat-hint>
+                                        #title="ngModel" [(ngModel)]="post.title" minlength="50">
+                                    <mat-hint *ngIf="!title.valid && title.touched" class="text-danger">Longitud minima de 50 caracateres</mat-hint>
                                 </mat-form-field>
                             </div>
                         </div>
