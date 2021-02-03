@@ -21,18 +21,18 @@ export class PostComponent implements OnInit {
   }
 
   getPost() {
-    this._route.params.subscribe(params =>{
+    this._route.params.subscribe(params => {
       let id = params['id'];
-      
+
       this._postService.getPost(id).subscribe(
-        response=>{
-          if(response.status == 'success'){
+        response => {
+          if (response.status == 'success') {
             this.post = response.post;
           }
 
           console.log(this.post);
         },
-        error=>{
+        error => {
           console.log(error);
           this._router.navigate(['']);
         }
