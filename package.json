@@ -29,7 +29,6 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@ng-bootstrap/ng-bootstrap": "^7.0.0",
     "angular-file-uploader": "^7.0.2",
-    "angular-froala-wysiwyg": "^3.2.2",
     "bootstrap": "^4.5.0",
     "ngx-toastr": "^13.0.1",
     "rxjs": "~6.6.0",

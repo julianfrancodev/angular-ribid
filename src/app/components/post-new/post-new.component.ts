@@ -6,9 +6,6 @@ import { PostService } from '../../services/post.service';
 import { Post } from '../../models/post';
 import { Category } from '../../models/category';
 import { ToastrService } from 'ngx-toastr';
-import { global } from '../../services/global';
-
-
 
 @Component({
   selector: 'app-post-new',
@@ -22,34 +19,6 @@ export class PostNewComponent implements OnInit {
   public token: string;
   public post: Post;
   public categories: [Category];
-  public options: Object = {
-    placeholderText: 'Escribe o pega parte de tu documento',
-  }
-
-  public fileConfig = {
-    multiple: false,
-    formatsAllowed: ".jpg,.png,jpeg",
-    maxSize: "50",
-    uploadAPI: {
-      url: global.url + 'post/upload',
-      method: "POST",
-      headers: {
-        'Authorization': this._userService.getToken()
-      },
-      responseType: 'json',
-    },
-    theme: "attachPin",
-    hideProgressBar: true,
-    hideResetBtn: true,
-    hideSelectBtn: true,
-    fileNameIndex: true,
-    replaceTexts: {
-      attachPinBtn: 'Seleccionar Archivo',
-      afterUploadMsg_success: 'Successfully Uploaded !',
-      afterUploadMsg_error: 'Fallo al subir el archivo',
-      sizeLimit: 'Size Limit'
-    }
-  };
 
   constructor(
     private _router: Router,
@@ -104,11 +73,7 @@ export class PostNewComponent implements OnInit {
     )
   }
 
-  // todo: Habilitar para el que el bibliotecario suba el archivo necesario
 
-  // fileUpload(data: any){
-  //   this.post.image = data.body.image;
-  // }
 
 
 

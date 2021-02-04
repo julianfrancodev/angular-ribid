@@ -21,11 +21,9 @@
         />
         
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <a ngbDropdownItem href="#" (click)="event.preventDefault();"> {{identity.name}} </a>
+          <a ngbDropdownItem href="#" [routerLink]="['/edit']" > {{identity.name}} </a>
           <div class="dropdown-divider"></div>
           <a ngbDropdownItem href="#" [routerLink]="['/new-post']"> Crear Solicitud</a>
-          <div class="dropdown-divider"></div>
-          <a ngbDropdownItem href="#" [routerLink]="['/edit']"> Ajustes </a>
           <div class="dropdown-divider"></div>
           <a ngbDropdownItem href="#" (click)="$event.preventDefault(); logout();"> Salir </a>
         </div>

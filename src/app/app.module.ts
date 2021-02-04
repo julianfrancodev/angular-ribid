@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatSelectModule } from '@angular/material/select';
@@ -29,7 +28,7 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { PostNewComponent } from './components/post-new/post-new.component';
 import { PostComponent } from './components/post/post.component';
-import {MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -49,8 +48,6 @@ import {MatDialogModule } from '@angular/material/dialog';
   ],
   imports: [
     AngularFileUploaderModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot(),
     CommonModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot({

@@ -28,8 +28,8 @@ export class HeaderComponent implements OnInit {
     private toastr: ToastrService,
     private router: Router,
     ) {
-    this.user = new User(1, '','','ROLE_USER','','','','');
-    this.userSiginin = new User(1, '','','ROLE_USER','','','','');
+    this.user = new User(1, '','','ROLE_USER','','','');
+    this.userSiginin = new User(1, '','','ROLE_USER','','','');
     this.identity = this._userService.getIdentity();
     this.url = global.url;
    }

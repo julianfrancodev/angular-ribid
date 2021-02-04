@@ -55,7 +55,7 @@ export class EditUserComponent implements OnInit {
     if (this._userService.getIdentity() == null) {
       this.router.navigate(['']);
     }
-    this.userUpdate = new User(1, '', '', 'ROLE_USER', '', '', '', '');
+    this.userUpdate = new User(1, '', '', 'ROLE_USER', '', '', '');
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.userUpdate = this.identity ?? this.userUpdate;
@@ -67,7 +67,6 @@ export class EditUserComponent implements OnInit {
       this.identity.role,
       this.identity.email,
       '',
-      this.identity.description,
       this.identity.image
     );
   }
@@ -92,9 +91,6 @@ export class EditUserComponent implements OnInit {
         }
         if (response.changes.email) {
           this.userUpdate.email = response.changes.email;
-        }
-        if (response.changes.description) {
-          this.userUpdate.description = response.changes.description;
         }
 
         if (response.changes.image) {

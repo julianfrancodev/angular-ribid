@@ -1,10 +1,10 @@
 
 export class ResPost {
     constructor(
-        id: number,
-        file_res: string,
-        user_id_res: number,
-        post_id_res: number,
-        created_at: string
+        public id: number,
+        public file_res: string,
+        public user_id_res: number,
+        public post_id_res: number,
+        public created_at: string
     ){}
 }

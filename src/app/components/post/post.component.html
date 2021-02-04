@@ -1,17 +1,53 @@
+<div class="animated fadeIn fast">
     <section class="row tm-section tm-mb-30 mt-4" *ngIf="post">
-      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
-        <div class="tm-flex-center p-5 tm-bg-color-primary">
-          <div class="tm-max-w-400 tm-flex-center tm-flex-col">
-            <h1 class="tm-text-color-white tm-site-name">{{post.category.name}}</h1>
-          </div>
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
+            <div class="tm-flex-center p-5 tm-bg-color-primary">
+                <div class="tm-max-w-400 tm-flex-center tm-flex-col">
+                    <h1 class="tm-text-color-white tm-site-name">{{post.category.name}}</h1>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-        <div class="tm-flex-center p-5">
-          <div class="tm-flex-center tm-flex-col">
-            <q class="tm-quote tm-text-color-gray mb-4">{{post.title}}</q>
-          </div>
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <div class="tm-flex-center p-5">
+                <div class="tm-flex-center tm-flex-col">
+                    <q class="tm-quote tm-text-color-gray mb-4">{{post.title}}</q>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
     <hr />
+
+    <div *ngIf="identity">
+        <div *ngIf="identity.role === 'ROLE_ADMIN'">
+            <!-- todo: here is logic for admin -->
+
+            <form #createRespostForm='ngForm' (ngSubmit)='createRespost(createRespostForm)'>
+
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="page text-center">
+                                <angular-file-uploader [config]="fileConfig" (ApiResponse)="fileUpload($event)">
+                                </angular-file-uploader>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <button type="submit" class=" btn btn-block btn-primary tx-tfm"
+                                [disabled]="createRespostForm.invalid">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+        <h1 *ngIf="identity.role === 'ROLE_USER'">Fuck the normal user</h1>
+
+
+    </div>
+
+</div>
