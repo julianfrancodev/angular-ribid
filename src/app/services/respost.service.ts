@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http"; 
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { ResPost } from "../models/respost";
-import {global} from "./global";
+import { global } from "./global";
 
 @Injectable({
   providedIn: 'root'
@@ -14,18 +14,26 @@ export class RespostService {
 
   constructor(private _http: HttpClient) {
     this.url = global.url;
-   }
+  }
 
-   create(token: string, respost: ResPost): Observable<any>{
-     let json = JSON.stringify(respost);
+  create(token: string, respost: ResPost): Observable<any> {
+    let json = JSON.stringify(respost);
 
-     let params = "json=" + json;
+    let params = "json=" + json;
 
-     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-     .set('Authorization', token);
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('Authorization', token);
 
-     return this._http.post(this.url + 'respost', params, { headers: headers });
+    return this._http.post(this.url + 'respost', params, { headers: headers });
 
-   }
+  }
+
+  getRespostByPost(id: string): Observable<any> {
+
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+    return this._http.get(this.url + 'respost/getrespostbypost/' + id, { headers: headers });
+
+  }
 
 }

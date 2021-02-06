@@ -8,9 +8,10 @@
             </div>
         </div>
         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-            <div class="tm-flex-center p-5">
+            <div class="tm-flex-center pl-5 pr-5 pt-5">
                 <div class="tm-flex-center tm-flex-col">
                     <q class="tm-quote tm-text-color-gray mb-4">{{post.title}}</q>
+                    <p class="tm-quote tm-text-color-gray">{{post.created_at | date}}</p>
                 </div>
             </div>
         </div>
@@ -45,9 +46,18 @@
             </form>
 
         </div>
-        <h1 *ngIf="identity.role === 'ROLE_USER'">Fuck the normal user</h1>
+        <div *ngIf="identity.role === 'ROLE_USER'">
+            <pdf-viewer [src]="src" [show-borders]="true" [render-text]="false" [fit-to-page]="true"></pdf-viewer>
+        </div>
 
 
     </div>
+
+    <!-- todo: show pdf preview if the user is not auth -->
+
+    <!-- 
+    <div *ngIf="identity.role === 'ROLE_USER'">
+        <pdf-viewer [src]="src" [render-text]="false" [show-all]="false"></pdf-viewer>
+    </div> -->
 
 </div>

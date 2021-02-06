@@ -23,6 +23,7 @@ export class PostComponent implements OnInit {
   public resPost: ResPost
   public identity: any;
   public token: string;
+  public src: string = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
 
 
   public fileConfig = {
@@ -99,21 +100,24 @@ export class PostComponent implements OnInit {
     });
   }
 
-  createRespost(form: any) {
+  getRespostByPost(){
+    
+  }
 
+  createRespost(form: any) {
 
     this.resPost.post_id_res = this.post.id;
 
     console.log(this.resPost);
 
-    this._resPostService.create(this.token,this.resPost).subscribe(
-      response =>{
-        if(response.status == "success"){
+    this._resPostService.create(this.token, this.resPost).subscribe(
+      response => {
+        if (response.status == "success") {
           this.showSuccessSavedRespost();
           this._router.navigate(['']);
         }
       },
-      error =>{
+      error => {
         console.log(error);
         this.showSuccessSavedRespost();
       }

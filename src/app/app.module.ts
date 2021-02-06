@@ -29,6 +29,7 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { PostNewComponent } from './components/post-new/post-new.component';
 import { PostComponent } from './components/post/post.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PdfViewerModule } from "ng2-pdf-viewer";
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     FontAwesomeModule,
     MatSelectModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    PdfViewerModule
   ],
   providers: [
     appRoutingProviders,
