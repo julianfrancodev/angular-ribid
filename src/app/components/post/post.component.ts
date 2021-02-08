@@ -20,10 +20,12 @@ import { global } from '../../services/global';
 export class PostComponent implements OnInit {
 
   public post: Post;
-  public resPost: ResPost
+  public resPost: ResPost;
   public identity: any;
   public token: string;
-  public src: string = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
+  public url: string;
+  public showFile: boolean;
+  public src: string;
 
 
   public fileConfig = {
@@ -57,11 +59,12 @@ export class PostComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _userService: UserService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
 
   ) {
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
+    this.url = global.url;
   }
 
   ngOnInit(): void {
@@ -69,6 +72,8 @@ export class PostComponent implements OnInit {
     this.resPost = new ResPost(1, '', this.identity.sub, 1, '');
 
     console.log(this.identity);
+
+    this.getRespostByPost();
   }
 
   showSuccessSavedRespost() {
@@ -81,14 +86,13 @@ export class PostComponent implements OnInit {
 
   getPost() {
     this._route.params.subscribe(params => {
-      let id = params['id'];
+      let id = params["id"];
 
       this._postService.getPost(id).subscribe(
         response => {
           if (response.status == 'success') {
             this.post = response.post;
           }
-
           console.log(this.post);
         },
         error => {
@@ -100,8 +104,26 @@ export class PostComponent implements OnInit {
     });
   }
 
-  getRespostByPost(){
-    
+  getRespostByPost() {
+    this._route.params.subscribe(params => {
+      let id = params["id"];
+
+      this._resPostService.getRespostByPost(id).subscribe(
+        response => {
+          if (response.status == "success") {
+            this.resPost = response.respost[0];
+            if (this.resPost) {
+              this.src = this.url + "respost/file/" + this.resPost.file_res;
+            }
+          }
+
+          console.log(this.resPost);
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    })
   }
 
   createRespost(form: any) {
