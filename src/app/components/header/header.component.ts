@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from "@angular/router";
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { global } from '../../services/global';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css'],
   providers: [UserService]
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, DoCheck {
 
   public closeResult: string = '';
   public user: User;
@@ -31,10 +31,16 @@ export class HeaderComponent implements OnInit {
     this.user = new User(1, '', '', 'ROLE_USER', '', '', '');
     this.userSiginin = new User(1, '', '', 'ROLE_USER', '', '', '');
     this.identity = this._userService.getIdentity();
+    this.token = this._userService.getToken();
     this.url = global.url;
   }
 
   ngOnInit(): void {
+  }
+
+  ngDoCheck() {
+    this.identity = this._userService.getIdentity();
+    this.token = this._userService.getToken();
   }
 
   showSuccess() {
@@ -101,24 +107,36 @@ export class HeaderComponent implements OnInit {
     );
   }
 
+  // todo: REPARE THE BUG THAT SAVE THE TOKE
+
   onSubmitSignin(form: any) {
     this._userService.signin(this.userSiginin).subscribe(
+      
       response => {
-        console.log(response);
         if (response.status != 404) {
-          this.status = 'success';
+          this.status = "success";
           this.token = response;
           this.showSuccessSignin();
           this.modalService.dismissAll('Reason');
-          //User identified
+          localStorage.setItem('token', this.token);
+
+          console.log("========= Response =============");
+          console.log(response);
+          console.log("========= Response  ============");
+
+          console.log("========== Token ===============");
+          console.log(this.token);
+          console.log("========== Token ===============");
+
+          // User identified
 
           this._userService.signin(this.userSiginin, true).subscribe(
             response => {
-
               this.identity = response;
-              console.log(this.token);
-              console.log(this.identity);
-              localStorage.setItem('token', this.token);
+
+              console.log("======== second response ============");
+              console.log(response);
+              console.log("======== second response ============");
               localStorage.setItem('indentity', JSON.stringify(this.identity));
               form.reset();
 
@@ -143,11 +161,13 @@ export class HeaderComponent implements OnInit {
     )
   }
 
+
   logout() {
-    localStorage.removeItem('indentity');
-    localStorage.removeItem('token');
-    this.identity = null;
+
+    localStorage.clear();
     this.token = null;
+    this.identity = null;
+    this.userSiginin = new User(1, '', '', 'ROLE_USER', '', '', '');
     this.router.navigate(['']);
     this.showLogoutSuccess();
   }

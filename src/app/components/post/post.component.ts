@@ -21,6 +21,7 @@ export class PostComponent implements OnInit {
 
   public post: Post;
   public resPost: ResPost;
+  public resPostResponse: ResPost;
   public identity: any;
   public token: string;
   public url: string;
@@ -69,11 +70,15 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPost();
+
     this.resPost = new ResPost(1, '', this.identity.sub, 1, '');
 
     console.log(this.identity);
 
+    console.log(this.resPost);
+
     this.getRespostByPost();
+
   }
 
   showSuccessSavedRespost() {
@@ -110,14 +115,14 @@ export class PostComponent implements OnInit {
 
       this._resPostService.getRespostByPost(id).subscribe(
         response => {
-          if (response.status == "success") {
-            this.resPost = response.respost[0];
-            if (this.resPost) {
-              this.src = this.url + "respost/file/" + this.resPost.file_res;
+          if (response.status === "success") {
+            this.resPostResponse = response.respost[0];
+            if (this.resPostResponse) {
+              this.src = this.url + "respost/file/" + this.resPostResponse.file_res;
             }
           }
 
-          console.log(this.resPost);
+          console.log(this.resPostResponse);
         },
         error => {
           console.log(error);
