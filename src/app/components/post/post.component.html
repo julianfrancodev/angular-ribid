@@ -46,7 +46,7 @@
             </form>
 
         </div>
-        <div *ngIf="identity.role === 'ROLE_USER'">
+        <div class="mb-4 mt-4" *ngIf="identity.role === 'ROLE_USER'">
             <pdf-viewer *ngIf="resPostResponse" [src]="src" [show-borders]="true" [render-text]="false" [fit-to-page]="true"></pdf-viewer>
             <div *ngIf="!resPostResponse" class="text-center">
                 <h1>Pediente De Respuesta...</h1>
@@ -56,11 +56,13 @@
 
     </div>
 
-    <!-- todo: show pdf preview if the user is not auth -->
+    <div *ngIf="!identity">
+        <div>
+            <pdf-viewer [src]="src" [render-text]="false" [show-all]="false"></pdf-viewer>
+        </div>
+    
+        <h1 class="text-center mb-5 mt-0">Ingresa para ver el documento completo.</h1>
+    </div>
 
-    <!-- 
-    <div *ngIf="identity.role === 'ROLE_USER'">
-        <pdf-viewer [src]="src" [render-text]="false" [show-all]="false"></pdf-viewer>
-    </div> -->
 
 </div>

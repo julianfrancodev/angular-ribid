@@ -71,7 +71,9 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
     this.getPost();
 
-    this.resPost = new ResPost(1, '', this.identity.sub, 1, '');
+    if(this.identity){
+      this.resPost = new ResPost(1, '', this.identity.sub, 1, '');
+    }
 
     console.log(this.identity);
 
