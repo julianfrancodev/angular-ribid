@@ -1,3 +1,3 @@
 export var global = {
-    url : 'http://ribid-api.loc/'
+    url : 'https://warm-beyond-77275.herokuapp.com/'
 }
