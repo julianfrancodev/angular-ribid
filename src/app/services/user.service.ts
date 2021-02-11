@@ -27,7 +27,7 @@ export class UserService {
 
         var headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-        return this._http.post(this.url + 'user/register/', params, { headers: headers });
+        return this._http.post(this.url + 'user/register', params, { headers: headers });
 
     }
 
@@ -48,7 +48,7 @@ export class UserService {
         var params = 'json=' + json;
         var headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-        return this._http.post(this.url + 'user/login/', params, { headers: headers });
+        return this._http.post(this.url + 'user/login', params, { headers: headers });
     }
 
     update(token, user): Observable<any> {
