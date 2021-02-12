@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { AngularFileUploaderModule } from "angular-file-uploader";
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 
@@ -65,7 +64,6 @@ import { PdfViewerModule } from "ng2-pdf-viewer";
     AppRoutingModule,
     NgbModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    FontAwesomeModule,
     MatSelectModule,
     MatInputModule,
     MatDialogModule,

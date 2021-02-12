@@ -36,7 +36,7 @@ export class PostNewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
-    this.post = new Post(1, this.identity.sub, 1, '', '');
+    this.post = new Post(1, this.identity.sub, 1, '', '','');
     console.log(this.post);
   }
 
@@ -46,6 +46,7 @@ export class PostNewComponent implements OnInit {
 
   createPost(form: any) {
     console.log(this.post);
+    this.post.title = `${this.post.title} - ${this.post.author}`;
     this._postService.create(this.token, this.post).subscribe(
       response =>{
         if(response.status == 'success'){

@@ -47,8 +47,8 @@ export class HeaderComponent implements OnInit, DoCheck {
     this.toastr.success('Ya puedes ingresar a tu cuenta', 'Correcto');
   }
 
-  showError() {
-    this.toastr.error('No pudimos crear tu cuenta', 'Error');
+  showError(message: string) {
+    this.toastr.error(message, 'Lo sentimos');
   }
 
   showSuccessSignin() {
@@ -60,7 +60,7 @@ export class HeaderComponent implements OnInit, DoCheck {
   }
 
   showErrorSignin() {
-    this.toastr.error('Credenciales Invalidas');
+    this.toastr.error('Email o contraseña incorrectos',"Vaya!");
   }
 
   open(content: any) {
@@ -99,8 +99,8 @@ export class HeaderComponent implements OnInit, DoCheck {
         }
       },
       error => {
-        console.log(<any>error);
-        this.showError();
+        console.log(error);
+        this.showError(error.error.errors.email[0]);
         this.status = 'error';
 
       }
@@ -111,7 +111,7 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   onSubmitSignin(form: any) {
     this._userService.signin(this.userSiginin).subscribe(
-      
+
       response => {
         if (response.status != 404) {
           this.status = "success";
@@ -142,8 +142,8 @@ export class HeaderComponent implements OnInit, DoCheck {
 
             },
             error => {
-              this.status = 'error';
               console.log(error);
+              this.status = 'error';
               this.showErrorSignin();
             }
           )
@@ -153,8 +153,8 @@ export class HeaderComponent implements OnInit, DoCheck {
         }
       },
       error => {
-        this.status = 'error';
         console.log(error);
+        this.status = 'error';
         this.showErrorSignin();
 
       }

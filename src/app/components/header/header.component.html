@@ -132,10 +132,10 @@
             <div class="page">
               <label class="pure-material-textfield-outlined">
                 <input type="email" name="email" placeholder=" " #email="ngModel"
-                  [(ngModel)]="user.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                  [(ngModel)]="user.email" required pattern="^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(.*)\.edu\.co$">
                   <span>Correo</span>
               </label>
-              <span *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">El correo es invalido</span>
+              <span *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">Unicamente correos con dominio (.edu.co) admitidos</span>
             </div>
           </div>
 

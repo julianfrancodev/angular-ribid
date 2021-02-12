@@ -8,9 +8,23 @@
                             <div class="col-sm-12 text-secondary">
                                 <mat-form-field appearance="outline" class="input-full-width">
                                     <mat-label>Titulo</mat-label>
-                                    <input matInput placeholder="Ej: Historia de roma" type="text" name="title" required
-                                        #title="ngModel" [(ngModel)]="post.title" minlength="50">
-                                    <mat-hint *ngIf="!title.valid && title.touched" class="text-danger">Longitud minima de 50 caracateres</mat-hint>
+                                    <input matInput placeholder="Ej: Historia de Diogenes de Sinonpe" type="text"
+                                        name="title" required #title="ngModel" [(ngModel)]="post.title" minlength="20">
+                                    <mat-hint *ngIf="!title.valid && title.touched" class="text-danger">Longitud minima
+                                        de 20 caracateres</mat-hint>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <div class="col-sm-12 text-secondary">
+                                <mat-form-field appearance="outline" class="input-full-width">
+                                    <mat-label>Autor</mat-label>
+                                    <input matInput placeholder="Ej: Fabio Salazar Sarmiento" type="text" name="author"
+                                        required #author="ngModel" [(ngModel)]="post.author" minlength="10">
+                                        <mat-hint *ngIf="!author.valid && author.touched" class="text-danger">Longitud minima
+                                            de 10 caracateres</mat-hint>
                                 </mat-form-field>
                             </div>
                         </div>
