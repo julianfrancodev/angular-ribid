@@ -1,5 +1,6 @@
 <div class="nav-scroller py-1">
     <nav class="nav d-flex justify-content-between">
+      <mat-progress-bar class="mt-3" *ngIf="!categories" mode="query"></mat-progress-bar>
       <a class="p-2 text-muted" *ngFor="let category of categories" href="#">{{category.name}}</a>
     </nav>
   </div>

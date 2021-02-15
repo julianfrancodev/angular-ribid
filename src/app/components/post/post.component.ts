@@ -123,7 +123,7 @@ export class PostComponent implements OnInit {
               this.src = this.url + "respost/file/" + this.resPostResponse.file_res;
             }
           }
-
+          
           console.log(this.resPostResponse);
         },
         error => {

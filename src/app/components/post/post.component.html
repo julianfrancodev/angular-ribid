@@ -1,4 +1,9 @@
 <div class="animated fadeIn fast">
+
+    <div class="d-flex justify-content-center">
+        <mat-spinner *ngIf="!post"></mat-spinner>
+    </div>
+
     <section class="row tm-section tm-mb-30" *ngIf="post">
         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
             <div class="tm-flex-center p-5 tm-bg-color-primary">
@@ -49,7 +54,7 @@
         <div class="mb-4 mt-4" *ngIf="identity.role === 'ROLE_USER'">
             <pdf-viewer *ngIf="resPostResponse" [src]="src" [show-borders]="true" [render-text]="false" [fit-to-page]="true"></pdf-viewer>
             <div *ngIf="!resPostResponse" class="text-center">
-                <h1>Pediente De Respuesta...</h1>
+                <h1>Pediente De Respuesta.</h1>
             </div>
         </div>
 

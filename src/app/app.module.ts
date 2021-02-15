@@ -9,6 +9,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { AngularFileUploaderModule } from "angular-file-uploader";
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -67,7 +70,9 @@ import { PdfViewerModule } from "ng2-pdf-viewer";
     MatSelectModule,
     MatInputModule,
     MatDialogModule,
-    PdfViewerModule
+    PdfViewerModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule
   ],
   providers: [
     appRoutingProviders,

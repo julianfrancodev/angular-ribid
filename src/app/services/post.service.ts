@@ -30,6 +30,11 @@ export class PostService {
     return this._http.get(this.url + 'post', { headers: headers });
   }
 
+  getTwoRandomPost(): Observable<any>{
+    let headers =  new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    return this._http.get(this.url  + 'post/getrandom/posts',{headers:headers});
+  }
+
   getPost(id: string): Observable<any> {
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     return this._http.get(this.url + 'post/'+id, { headers: headers });

@@ -6,18 +6,20 @@
 
     <div class="col-4 pt-1" *ngIf="identity && identity.name">
       <div ngbDropdown>
-        <img *ngIf="identity.image" id="dropdownBasic1" ngbDropdownToggle
+        <img loading="lazy" *ngIf="identity.image" id="dropdownBasic1" ngbDropdownToggle
         width="35"
         height="35" 
         class="border border-secondary rounded-circle"  
         src="{{url + 'user/avatar/' + identity.image}}"
+        alt="User Image"
         />
 
-        <img *ngIf="!identity.image" id="dropdownBasic1" ngbDropdownToggle
+        <img loading="lazy" *ngIf="!identity.image" id="dropdownBasic1" ngbDropdownToggle
         width="35"
         height="35" 
         class="border border-secondary rounded-circle"  
         src="https://www.flaticon.es/svg/static/icons/svg/3612/3612416.svg"
+        alt="Default Image"
         />
         
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
