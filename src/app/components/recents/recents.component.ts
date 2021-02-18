@@ -24,7 +24,6 @@ export class RecentsComponent implements OnInit {
         if(response.status == 'success'){
           this.posts = response.posts;
         }
-        console.log(this.posts);
       },
 
       error =>{

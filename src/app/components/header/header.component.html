@@ -6,28 +6,31 @@
 
     <div class="col-4 pt-1" *ngIf="identity && identity.name">
       <div ngbDropdown>
-        <img loading="lazy" *ngIf="identity.image" id="dropdownBasic1" ngbDropdownToggle
-        width="35"
-        height="35" 
-        class="border border-secondary rounded-circle"  
-        src="{{url + 'user/avatar/' + identity.image}}"
-        alt="User Image"
-        />
+        <img loading="lazy" *ngIf="identity.image" id="dropdownBasic1" ngbDropdownToggle width="35" height="35"
+          class="border border-secondary rounded-circle" src="{{url + 'user/avatar/' + identity.image}}"
+          alt="User Image" />
 
-        <img loading="lazy" *ngIf="!identity.image" id="dropdownBasic1" ngbDropdownToggle
-        width="35"
-        height="35" 
-        class="border border-secondary rounded-circle"  
-        src="https://www.flaticon.es/svg/static/icons/svg/3612/3612416.svg"
-        alt="Default Image"
-        />
-        
+        <img loading="lazy" *ngIf="!identity.image" id="dropdownBasic1" ngbDropdownToggle width="35" height="35"
+          class="border border-secondary rounded-circle"
+          src="https://www.flaticon.es/svg/static/icons/svg/3612/3612416.svg" alt="Default Image" />
+
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <a ngbDropdownItem href="#" [routerLink]="['/edit']" > {{identity.name}} </a>
+          <a ngbDropdownItem [routerLink]="['/edit']"> {{identity.name}} </a>
+          <div *ngIf="identity.role === 'ROLE_USER'">
+            <div class="dropdown-divider"></div>
+            <a ngbDropdownItem [routerLink]="['/new-post']">Crear Solicitud</a>
+            <div class="dropdown-divider"></div>
+            <a ngbDropdownItem [routerLink]="['/new-post']">Mis Solicitudes</a>
+          </div>
+
+          <div *ngIf="identity.role === 'ROLE_ADMIN'">
+            <div class="dropdown-divider"></div>
+            <a ngbDropdownItem [routerLink]="['/new-post']">Solicitudes</a>
+            <div class="dropdown-divider"></div>
+            <a ngbDropdownItem [routerLink]="['/new-post']">Mis Respuestas</a>
+          </div>
           <div class="dropdown-divider"></div>
-          <a ngbDropdownItem href="#" [routerLink]="['/new-post']"> Crear Solicitud</a>
-          <div class="dropdown-divider"></div>
-          <a ngbDropdownItem href="#" (click)="$event.preventDefault(); logout();"> Salir </a>
+          <a ngbDropdownItem (click)="$event.preventDefault(); logout();"> Salir </a>
         </div>
       </div>
     </div>
@@ -64,22 +67,21 @@
           <div class="form-group">
             <div class="page">
               <label class="pure-material-textfield-outlined">
-                <input type="email" name="emails" id="emails" placeholder=" "
-                  #emails="ngModel" [(ngModel)]="userSiginin.email" required
-                  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-                  <span>Correo</span>
+                <input type="email" name="emails" id="emails" placeholder=" " #emails="ngModel"
+                  [(ngModel)]="userSiginin.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                <span>Correo</span>
               </label>
               <small *ngIf="!emails.valid && emails.touched" class="invalid-feedback d-block">El correo es
                 invalido</small>
             </div>
           </div>
-       
+
           <div class="form-group">
             <div class="page">
               <label class="pure-material-textfield-outlined">
-                <input class="field__input" type="password" id="passwords" name="passwords"
-                  placeholder=" " #passwords="ngModel" [(ngModel)]="userSiginin.password" required>
-                  <span>Contraseña</span>
+                <input class="field__input" type="password" id="passwords" name="passwords" placeholder=" "
+                  #passwords="ngModel" [(ngModel)]="userSiginin.password" required>
+                <span>Contraseña</span>
               </label>
               <small *ngIf="!passwords.valid && passwords.touched" class="invalid-feedback d-block">La Contraseña es
                 invalida</small>
@@ -122,9 +124,9 @@
           <div class="form-group">
             <div class="page">
               <label class="pure-material-textfield-outlined">
-                <input type="text" name="name" placeholder=" " #name="ngModel"
-                  [(ngModel)]="user.name" required pattern="[a-z A-Z]+">
-                  <span>Nombre</span>
+                <input type="text" name="name" placeholder=" " #name="ngModel" [(ngModel)]="user.name" required
+                  pattern="[a-z A-Z]+">
+                <span>Nombre</span>
               </label>
               <small *ngIf="!name.valid && name.touched" class="invalid-feedback d-block">El nombre no es valido</small>
             </div>
@@ -133,11 +135,12 @@
           <div class="form-group">
             <div class="page">
               <label class="pure-material-textfield-outlined">
-                <input type="email" name="email" placeholder=" " #email="ngModel"
-                  [(ngModel)]="user.email" required pattern="^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(.*)\.edu\.co$">
-                  <span>Correo</span>
+                <input type="email" name="email" placeholder=" " #email="ngModel" [(ngModel)]="user.email" required
+                  pattern="^[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(.*)\.edu\.co$">
+                <span>Correo</span>
               </label>
-              <span *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">Unicamente correos con dominio (.edu.co) admitidos</span>
+              <span *ngIf="!email.valid && email.touched" class="invalid-feedback d-block">Unicamente correos con
+                dominio (.edu.co) admitidos</span>
             </div>
           </div>
 
@@ -145,9 +148,9 @@
           <div class="form-group">
             <div class="page">
               <label class="pure-material-textfield-outlined">
-                <input type="password" id="password" name="password"
-                  placeholder=" " #password="ngModel" [(ngModel)]="user.password"  required>
-                  <span>Contraseña</span>
+                <input type="password" id="password" name="password" placeholder=" " #password="ngModel"
+                  [(ngModel)]="user.password" required>
+                <span>Contraseña</span>
               </label>
               <small *ngIf="!password.valid && password.touched" class="invalid-feedback d-block">La Contraseña es
                 invalida</small>

@@ -20,12 +20,15 @@ export class BlogpostComponent implements OnInit {
     this.getPosts();
   }
 
+  // todo: implement infinite scroll with pagination
+  // ? for a better navigation with the user.
+
   getPosts(){
     this._postService.getPosts().subscribe(
       response =>{
         if(response.status == 'success'){
           this.posts = response.posts;
-          console.log(this.posts);
+          // console.log(this.posts);
         }
       },
       error=>{

@@ -33,16 +33,9 @@ export class UserService {
 
     signin(user: any, gettoken = null): Observable<any> {
 
-
         if (gettoken != null) {
             user.gettoken = 'true';
         }
-
-        console.log("======== user from service ==========");
-        console.log(user);
-
-        console.log("======== user from service ==========");
-
 
         var json = JSON.stringify(user);
         var params = 'json=' + json;
@@ -51,7 +44,7 @@ export class UserService {
         return this._http.post(this.url + 'user/login', params, { headers: headers });
     }
 
-    update(token, user): Observable<any> {
+    update(token: string, user: User): Observable<any> {
         var json = JSON.stringify(user);
 
         var params = "json=" + json;

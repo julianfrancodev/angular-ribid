@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -71,7 +71,7 @@ export class PostComponent implements OnInit {
   ngOnInit(): void {
     this.getPost();
 
-    if(this.identity){
+    if (this.identity) {
       this.resPost = new ResPost(1, '', this.identity.sub, 1, '');
     }
 
@@ -83,12 +83,28 @@ export class PostComponent implements OnInit {
 
   }
 
+  ngDoCheck(): void {
+
+    this.identity = this._userService.getIdentity();
+    this.token = this._userService.getToken();
+    this.src;
+
+  }
+
   showSuccessSavedRespost() {
     this.toastr.success('Archivo publicado exitosamente');
   }
 
+  showSuccessSavedFile() {
+    this.toastr.success('Archivo cargado con éxito');
+  }
+
   showErrorSavedRespost() {
     this.toastr.error('Archivo publicado exitosamente');
+  }
+
+  showSuccessUpdateRespost(){
+    this.toastr.success('Archivo Actualizado con éxito');
   }
 
   getPost() {
@@ -123,7 +139,8 @@ export class PostComponent implements OnInit {
               this.src = this.url + "respost/file/" + this.resPostResponse.file_res;
             }
           }
-          
+
+          console.log(response);
           console.log(this.resPostResponse);
         },
         error => {
@@ -154,9 +171,28 @@ export class PostComponent implements OnInit {
 
   }
 
+  updateRespost(form: any) {
+
+    this.resPost.post_id_res = this.post.id;
+    console.log(this.resPost);
+
+    this._resPostService.update(this.token, this.resPost).subscribe(
+      response => {
+        console.log(response)
+        if(response.status == "success"){
+          this.src = this.url + 'respost/file/' + response.changes.file_res;
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
 
   fileUpload(data: any) {
     console.log(data);
+    this.showSuccessSavedFile();
     this.resPost.file_res = data.body.file;
   }
 

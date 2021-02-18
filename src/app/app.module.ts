@@ -11,6 +11,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -72,7 +74,8 @@ import { PdfViewerModule } from "ng2-pdf-viewer";
     MatDialogModule,
     PdfViewerModule,
     MatProgressSpinnerModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    InfiniteScrollModule
   ],
   providers: [
     appRoutingProviders,

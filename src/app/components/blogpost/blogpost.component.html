@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center mb-4">
-  <mat-spinner *ngIf="!posts"></mat-spinner>
+  <mat-spinner [diameter]="30" *ngIf="!posts"></mat-spinner>
 </div>
 <div *ngFor="let post of posts">
   <section class="row tm-section tm-mb-30 mt-4">
@@ -17,7 +17,6 @@
           <a [routerLink]="['/post',post.id]" class="btn btn-primary">Ver Mas</a>
         </div>
       </div>
-
     </div>
   </section>
   <hr />

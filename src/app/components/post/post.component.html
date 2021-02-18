@@ -1,4 +1,4 @@
-<div class="animated fadeIn fast">
+<div class="animated fadeIn fast container">
 
     <div class="d-flex justify-content-center">
         <mat-spinner *ngIf="!post"></mat-spinner>
@@ -25,48 +25,89 @@
 
     <div *ngIf="identity">
         <div *ngIf="identity.role === 'ROLE_ADMIN'">
-            <!-- todo: here is logic for admin -->
 
-            <form #createRespostForm='ngForm' (ngSubmit)='createRespost(createRespostForm)'>
+            <div *ngIf="resPostResponse">
 
-                <div class="card-body">
+                <h1 class="text-center mb-4 mt-2 tm-text-color-gray">Vista Previa Del Documento</h1>
 
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="page text-center">
-                                <angular-file-uploader [config]="fileConfig" (ApiResponse)="fileUpload($event)">
-                                </angular-file-uploader>
+
+                <div>
+                    <pdf-viewer [src]="src" [fit-to-page]="true" [render-text]="false" [show-all]="false"></pdf-viewer>
+                </div>
+
+                <form #updateRespostForm='ngForm' (ngSubmit)='updateRespost(updateRespostForm)'>
+
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="page text-center">
+                                    <angular-file-uploader [config]="fileConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <button type="submit" class=" btn btn-block btn-primary tx-tfm"
+                                    [disabled]="updateRespostForm.invalid">Actualizar</button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row mt-4">
-                        <div class="col-md-12">
-                            <button type="submit" class=" btn btn-block btn-primary tx-tfm"
-                                [disabled]="createRespostForm.invalid">Guardar</button>
+                </form>
+            </div>
+
+            <div *ngIf="!resPostResponse">
+
+                <form #createRespostForm='ngForm' (ngSubmit)='createRespost(createRespostForm)'>
+
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="page text-center">
+                                    <angular-file-uploader [config]="fileConfig" (ApiResponse)="fileUpload($event)">
+                                    </angular-file-uploader>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-md-12">
+                                <button type="submit" class=" btn btn-block btn-primary tx-tfm"
+                                    [disabled]="createRespostForm.invalid">Guardar</button>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </form>
-
-        </div>
-        <div class="mb-4 mt-4" *ngIf="identity.role === 'ROLE_USER'">
-            <pdf-viewer *ngIf="resPostResponse" [src]="src" [show-borders]="true" [render-text]="false" [fit-to-page]="true"></pdf-viewer>
-            <div *ngIf="!resPostResponse" class="text-center">
-                <h1>Pediente De Respuesta.</h1>
+                </form>
             </div>
+
+
         </div>
+
+        <!-- todo: repare this bug this the div with ng-if -->
+
+        <div class="mb-4 mt-4" *ngIf="identity.role === 'ROLE_USER'">
+            <pdf-viewer *ngIf="resPostResponse" [src]="src" [show-borders]="true" [render-text]="false"
+                [fit-to-page]="true"></pdf-viewer>
+        </div>
+
+
 
 
     </div>
-
+    <div *ngIf="!resPostResponse" class="text-center">
+        <h1 class="tm-text-color-gray">Pendiente De Respuesta</h1>
+    </div>
     <div *ngIf="!identity">
-        <div>
-            <pdf-viewer [src]="src" [render-text]="false" [show-all]="false"></pdf-viewer>
+        <div class="mb-3" *ngIf="src">
+            <pdf-viewer [src]="src" [render-text]="false" [show-all]="false" [fit-to-page]="true"></pdf-viewer>
+            <h1 class="text-center mb-5 mt-0 tm-text-color-gray">Ingresa Para Ver El Documento Completo</h1>
         </div>
-    
-        <h1 class="text-center mb-5 mt-0">Ingresa para ver el documento completo.</h1>
+
     </div>
 
 

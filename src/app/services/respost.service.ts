@@ -28,6 +28,18 @@ export class RespostService {
 
   }
 
+  
+  update(token: string, respost: ResPost): Observable<any> {
+    let json = JSON.stringify(respost);
+    let params = "json=" + json;
+
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      .set('Authorization', token);
+
+    return this._http.put(this.url + 'respost/update', params, { headers: headers });
+
+  }
+
   getRespostByPost(id: string): Observable<any> {
 
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
