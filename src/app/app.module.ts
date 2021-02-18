@@ -19,7 +19,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { RecentsComponent } from './components/recents/recents.component';
 import { MainComponent } from './components/main/main.component';
 import { BlogpostComponent } from './components/blogpost/blogpost.component';
@@ -39,7 +38,6 @@ import { PdfViewerModule } from "ng2-pdf-viewer";
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
     RecentsComponent,
     MainComponent,
     BlogpostComponent,
