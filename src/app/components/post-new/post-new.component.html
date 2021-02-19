@@ -8,7 +8,7 @@
                             <div class="col-sm-12 text-secondary">
                                 <mat-form-field appearance="outline" class="input-full-width">
                                     <mat-label>Titulo</mat-label>
-                                    <input matInput placeholder="Ej: Historia de Diogenes de Sinonpe" type="text"
+                                    <input matInput placeholder="Ej: Historia de Diogenes de Sinope" type="text"
                                         name="title" required #title="ngModel" [(ngModel)]="post.title" minlength="20">
                                     <mat-hint *ngIf="!title.valid && title.touched" class="text-danger">Longitud minima
                                         de 20 caracateres</mat-hint>

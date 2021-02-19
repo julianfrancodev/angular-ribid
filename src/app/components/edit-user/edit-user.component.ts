@@ -17,7 +17,7 @@ import { Post } from 'src/app/models/post';
 export class EditUserComponent implements OnInit {
 
   public resposts: any;
-  public posts: [Post]
+  public posts: [Post];
   public userUpdate: User;
   public identity: any;
   public token: string;
@@ -80,7 +80,7 @@ export class EditUserComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.userUpdate);
-    this.getPostsByAdminRespost();
+    this.getPostsByUser();
 
   }
 
@@ -105,7 +105,7 @@ export class EditUserComponent implements OnInit {
         if (response.changes.image) {
           this.userUpdate.image = response.changes.image;
         }
-      
+
         this.identity = this.userUpdate;
         this.identity.sub = response.user.sub;
 
@@ -122,13 +122,13 @@ export class EditUserComponent implements OnInit {
     this.userUpdate.image = data.body.image;
   }
 
-  getPostsByAdminRespost() {
+  getPostsByUser() {
 
-    if (this.identity) {
+    if (this.identity && this.identity.role == "ROLE_ADMIN") {
       this._resPostService.getPostByAdminRespost(this.identity.sub).subscribe(
         response => {
           console.log(response);
-          if(response.status == "success"){
+          if (response.status == "success") {
             this.resposts = response.respost;
           }
         },
@@ -136,12 +136,28 @@ export class EditUserComponent implements OnInit {
           console.log(error);
         }
       )
+    } else if (this.identity && this.identity.role == "ROLE_USER") {
+
+      this._postService.getPostByUser(this.identity.sub).subscribe(
+        response => {
+          if (response.status == "success") {
+            this.posts = response.posts;
+          }
+        },
+        error => {
+          console.log(error);
+        }
+
+      )
+
     } else {
       this.router.navigate(['']);
+
     }
 
 
   }
+
 
 
 }
