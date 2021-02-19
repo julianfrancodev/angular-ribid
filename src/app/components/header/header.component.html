@@ -11,23 +11,19 @@
           alt="User Image" />
 
         <img loading="lazy" *ngIf="!identity.image" id="dropdownBasic1" ngbDropdownToggle width="35" height="35"
-          class="border border-secondary rounded-circle"
+          class="border border-primary rounded-circle"
           src="https://www.flaticon.es/svg/static/icons/svg/3612/3612416.svg" alt="Default Image" />
 
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <a ngbDropdownItem [routerLink]="['/edit']"> {{identity.name}} </a>
+          <a ngbDropdownItem class="font-weight-bold" [routerLink]="['/edit']"> {{identity.name}} </a>
           <div *ngIf="identity.role === 'ROLE_USER'">
             <div class="dropdown-divider"></div>
             <a ngbDropdownItem [routerLink]="['/new-post']">Crear Solicitud</a>
-            <div class="dropdown-divider"></div>
-            <a ngbDropdownItem [routerLink]="['/new-post']">Mis Solicitudes</a>
           </div>
 
           <div *ngIf="identity.role === 'ROLE_ADMIN'">
             <div class="dropdown-divider"></div>
-            <a ngbDropdownItem [routerLink]="['/new-post']">Solicitudes</a>
-            <div class="dropdown-divider"></div>
-            <a ngbDropdownItem [routerLink]="['/new-post']">Mis Respuestas</a>
+            <a ngbDropdownItem [routerLink]="['/recent-solicitude']">Solicitudes</a>
           </div>
           <div class="dropdown-divider"></div>
           <a ngbDropdownItem (click)="$event.preventDefault(); logout();"> Salir </a>
@@ -36,7 +32,7 @@
     </div>
 
     <div class="col-4 text-center">
-      <a class="blog-header-logo text-dark" [routerLink]="['/']">Ribid</a>
+      <a class="blog-header-logo text-dark font-weight-bold" [routerLink]="['/']">Ribid</a>
     </div>
     <div class="col-4 d-flex justify-content-end align-items-center">
       <a class="text-muted" href="#" aria-label="Search">

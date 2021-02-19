@@ -28,8 +28,7 @@
 
             <div *ngIf="resPostResponse">
 
-                <h1 class="text-center mb-4 mt-2 tm-text-color-gray">Vista Previa Del Documento</h1>
-
+                <h1 class="text-center mb-4 mt-2 tm-text-color-gray font-weight-bold">Vista Previa Del Documento</h1>
 
                 <div>
                     <pdf-viewer [src]="src" [fit-to-page]="true" [render-text]="false" [show-all]="false"></pdf-viewer>
@@ -99,13 +98,13 @@
 
 
     </div>
-    <div *ngIf="!resPostResponse" class="text-center">
-        <h1 class="tm-text-color-gray">Pendiente De Respuesta</h1>
+    <div *ngIf="!resPostResponse && identity.role === 'ROLE_USER'" class="text-center">
+        <h1 class="tm-text-color-gray font-weight-bold">Pendiente De Respuesta</h1>
     </div>
     <div *ngIf="!identity">
         <div class="mb-3" *ngIf="src">
             <pdf-viewer [src]="src" [render-text]="false" [show-all]="false" [fit-to-page]="true"></pdf-viewer>
-            <h1 class="text-center mb-5 mt-0 tm-text-color-gray">Ingresa Para Ver El Documento Completo</h1>
+            <h1 class="text-center mb-5 mt-0 tm-text-color-gray font-weight-bold">Ingresa Para Ver El Documento Completo</h1>
         </div>
 
     </div>

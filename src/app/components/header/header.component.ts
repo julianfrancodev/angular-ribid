@@ -23,7 +23,8 @@ export class HeaderComponent implements OnInit, DoCheck {
   public url: string;
 
 
-  constructor(private modalService: NgbModal,
+  constructor(
+    private modalService: NgbModal,
     private _userService: UserService,
     private toastr: ToastrService,
     private router: Router,

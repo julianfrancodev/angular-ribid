@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Post} from '../../models/post';
-import {PostService} from '../../services/post.service';
+import { Post } from '../../models/post';
+import { PostService } from '../../services/post.service';
 
 
 
@@ -8,7 +8,7 @@ import {PostService} from '../../services/post.service';
   selector: 'app-blogpost',
   templateUrl: './blogpost.component.html',
   styleUrls: ['./blogpost.component.css'],
-  providers:[PostService]
+  providers: [PostService]
 })
 export class BlogpostComponent implements OnInit {
 
@@ -23,15 +23,15 @@ export class BlogpostComponent implements OnInit {
   // todo: implement infinite scroll with pagination
   // ? for a better navigation with the user.
 
-  getPosts(){
+  getPosts() {
     this._postService.getPosts().subscribe(
-      response =>{
-        if(response.status == 'success'){
+      response => {
+        if (response.status == 'success') {
           this.posts = response.posts;
           // console.log(this.posts);
         }
       },
-      error=>{
+      error => {
         console.log(error);
       }
     )

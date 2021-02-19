@@ -4,15 +4,20 @@ import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { global } from '../../services/global';
 import { Router } from '@angular/router';
+import { RespostService } from 'src/app/services/respost.service';
+import { PostService } from 'src/app/services/post.service';
+import { Post } from 'src/app/models/post';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.css'],
-  providers: [UserService]
+  providers: [UserService, RespostService, PostService]
 
 })
 export class EditUserComponent implements OnInit {
 
+  public resposts: any;
+  public posts: [Post]
   public userUpdate: User;
   public identity: any;
   public token: string;
@@ -50,7 +55,9 @@ export class EditUserComponent implements OnInit {
   constructor(
     private _userService: UserService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private _resPostService: RespostService,
+    private _postService: PostService
   ) {
     if (this._userService.getIdentity() == null) {
       this.router.navigate(['']);
@@ -73,9 +80,11 @@ export class EditUserComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.userUpdate);
+    this.getPostsByAdminRespost();
+
   }
 
-  showSuccessSignin(){
+  showSuccessSignin() {
     this.toastr.success('Usuario actualizado');
   }
 
@@ -96,7 +105,9 @@ export class EditUserComponent implements OnInit {
         if (response.changes.image) {
           this.userUpdate.image = response.changes.image;
         }
+      
         this.identity = this.userUpdate;
+        this.identity.sub = response.user.sub;
 
         localStorage.setItem('indentity', JSON.stringify(this.identity));
         this.showSuccessSignin();
@@ -110,5 +121,27 @@ export class EditUserComponent implements OnInit {
   avatarUpload(data: any) {
     this.userUpdate.image = data.body.image;
   }
+
+  getPostsByAdminRespost() {
+
+    if (this.identity) {
+      this._resPostService.getPostByAdminRespost(this.identity.sub).subscribe(
+        response => {
+          console.log(response);
+          if(response.status == "success"){
+            this.resposts = response.respost;
+          }
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    } else {
+      this.router.navigate(['']);
+    }
+
+
+  }
+
 
 }

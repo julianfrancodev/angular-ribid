@@ -28,7 +28,7 @@ export class RespostService {
 
   }
 
-  
+
   update(token: string, respost: ResPost): Observable<any> {
     let json = JSON.stringify(respost);
     let params = "json=" + json;
@@ -46,6 +46,14 @@ export class RespostService {
 
     return this._http.get(this.url + 'respost/getrespostbypost/' + id, { headers: headers });
 
+  }
+
+  getPostByAdminRespost(id: string): Observable<any> {
+
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+    return this._http.get(this.url + 'respost/getPostByAdminResPost/' + id, { headers: headers });
+    
   }
 
 }

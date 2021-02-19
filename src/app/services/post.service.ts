@@ -39,4 +39,14 @@ export class PostService {
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     return this._http.get(this.url + 'post/'+id, { headers: headers });
   }
+
+  getPendingPosts():Observable<any>{
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+    return this._http.get(this.url + 'post/user/get/pending',{headers:headers});
+  }
+
+  
+
+  
 }
