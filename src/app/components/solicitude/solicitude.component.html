@@ -4,6 +4,12 @@
 <div>
   <h1 class="text-center tm-text-color-gray font-weight-bold mt-3 mb-4">Solicitudes Recientes</h1>
 
+  <div
+  infinite-scroll
+  [infiniteScrollDistance]="scrollDistance"
+  [infiniteScrollThrottle]="throttle"
+  (scrolled)="onScrollDown()"
+>
   <div class="container animated fadeIn fast" *ngFor="let post of posts">
     <section class="row tm-section tm-mb-30">
       <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
@@ -23,6 +29,7 @@
       </div>
     </section>
     <hr />
+  </div>
   </div>
 
 </div>

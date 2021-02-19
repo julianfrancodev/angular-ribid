@@ -17,7 +17,7 @@ import { global } from '../../services/global';
   styleUrls: ['./post.component.css'],
   providers: [PostService, UserService]
 })
-export class PostComponent implements OnInit {
+export class PostComponent implements OnInit, DoCheck {
 
   public post: Post;
   public resPost: ResPost;

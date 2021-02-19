@@ -25,34 +25,34 @@ export class PostService {
 
   }
 
-  getPosts(): Observable<any> {
+  getPosts(page: number): Observable<any> {
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-    return this._http.get(this.url + 'post', { headers: headers });
+    return this._http.get(this.url + 'post?page=' + page, { headers: headers });
   }
 
-  getTwoRandomPost(): Observable<any>{
-    let headers =  new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-    return this._http.get(this.url  + 'post/getrandom/posts',{headers:headers});
+  getTwoRandomPost(): Observable<any> {
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+    return this._http.get(this.url + 'post/getrandom/posts', { headers: headers });
   }
 
   getPost(id: string): Observable<any> {
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-    return this._http.get(this.url + 'post/'+id, { headers: headers });
+    return this._http.get(this.url + 'post/' + id, { headers: headers });
   }
 
-  getPendingPosts():Observable<any>{
+  getPendingPosts(page: number): Observable<any> {
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this._http.get(this.url + 'post/user/get/pending',{headers:headers});
+    return this._http.get(this.url + 'post/user/get/pending?page=' + page, { headers: headers });
   }
 
-  getPostByUser(id:string):Observable<any>{
+  getPostByUser(id: string): Observable<any> {
 
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this._http.get(this.url + 'post/user/'+id, {headers:headers});
+    return this._http.get(this.url + 'post/user/' + id, { headers: headers });
 
   }
 
-  
+
 }

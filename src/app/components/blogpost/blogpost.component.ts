@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
+import { RespostService } from 'src/app/services/respost.service';
 import { Post } from '../../models/post';
 import { PostService } from '../../services/post.service';
 
@@ -10,32 +11,58 @@ import { PostService } from '../../services/post.service';
   styleUrls: ['./blogpost.component.css'],
   providers: [PostService]
 })
-export class BlogpostComponent implements OnInit {
+export class BlogpostComponent implements OnInit, DoCheck {
 
-  public posts: [Post];
-
+  public posts: any[] = [];
+  public throttle: number = 50;
+  public scrollDistance: number = 1;
+  public scrollUpDistance: number = 2;
+  public direction: string = "";
+  public page: number = 1;
   constructor(private _postService: PostService) { }
+
 
   ngOnInit(): void {
     this.getPosts();
   }
 
-  // todo: implement infinite scroll with pagination
-  // ? for a better navigation with the user.
+  ngDoCheck(): void {
+    this.posts;
+  }
+
 
   getPosts() {
-    this._postService.getPosts().subscribe(
+    this._postService.getPosts(this.page).subscribe(
       response => {
+        console.log(response);
         if (response.status == 'success') {
-          this.posts = response.posts;
-          // console.log(this.posts);
+
+          this.posts.push(...response.posts.data);
+
         }
+        console.log(this.posts);
       },
       error => {
         console.log(error);
       }
     )
   }
+
+
+  onScrollDown() {
+    console.log("scrolled down!!");
+
+    // add another 20 items to array
+
+    this.page++;
+
+    this.getPosts();
+
+  }
+
+
+
+
 
 
 }
