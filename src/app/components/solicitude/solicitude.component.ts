@@ -1,5 +1,4 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { Post } from 'src/app/models/post';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
@@ -30,8 +29,6 @@ export class SolicitudeComponent implements OnInit, DoCheck {
     this.posts;
   }
 
-  // todo: implement infinite scroll with pagination
-  // ? for a better navigation with the user.
 
   getPendingPost() {
     this._postService.getPendingPosts(this.page).subscribe(
@@ -49,9 +46,6 @@ export class SolicitudeComponent implements OnInit, DoCheck {
   }
 
   onScrollDown() {
-    console.log("scrolled down!!");
-
-    // add another 20 items to array
 
     this.page++;
 

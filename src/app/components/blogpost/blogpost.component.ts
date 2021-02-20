@@ -1,6 +1,4 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { RespostService } from 'src/app/services/respost.service';
-import { Post } from '../../models/post';
 import { PostService } from '../../services/post.service';
 
 

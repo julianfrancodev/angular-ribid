@@ -48,12 +48,12 @@ export class RespostService {
 
   }
 
-  getPostByAdminRespost(id: string): Observable<any> {
+  getPostByAdminRespost(id: string, page: number): Observable<any> {
 
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this._http.get(this.url + 'respost/getPostByAdminResPost/' + id, { headers: headers });
-    
+    return this._http.get(this.url + 'respost/getPostByAdminResPost/' + id + '?page='+page, { headers: headers });
+
   }
 
 }

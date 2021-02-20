@@ -6,7 +6,6 @@ import { global } from '../../services/global';
 import { Router } from '@angular/router';
 import { RespostService } from 'src/app/services/respost.service';
 import { PostService } from 'src/app/services/post.service';
-import { Post } from 'src/app/models/post';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
@@ -16,12 +15,18 @@ import { Post } from 'src/app/models/post';
 })
 export class EditUserComponent implements OnInit {
 
-  public resposts: any;
-  public posts: [Post];
+  public resposts: any[] = [];
+  public posts: any[] = [];
   public userUpdate: User;
   public identity: any;
   public token: string;
   public url: string;
+  public throttle: number = 50;
+  public scrollDistance: number = 1;
+  public scrollUpDistance: number = 2;
+  public direction: string = "";
+  public page: number = 1;
+  public lastPage: number;
 
   public options: Object = {
     placeholderText: 'Tu descripción puede ir aqui.'
@@ -125,24 +130,28 @@ export class EditUserComponent implements OnInit {
   getPostsByUser() {
 
     if (this.identity && this.identity.role == "ROLE_ADMIN") {
-      this._resPostService.getPostByAdminRespost(this.identity.sub).subscribe(
+      this._resPostService.getPostByAdminRespost(this.identity.sub, this.page).subscribe(
         response => {
           console.log(response);
           if (response.status == "success") {
-            this.resposts = response.respost;
+            this.resposts.push(...response.respost.data);
           }
+
         },
+
         error => {
           console.log(error);
         }
       )
     } else if (this.identity && this.identity.role == "ROLE_USER") {
 
-      this._postService.getPostByUser(this.identity.sub).subscribe(
+      this._postService.getPostByUser(this.identity.sub, this.page).subscribe(
         response => {
+          console.log(response);
           if (response.status == "success") {
-            this.posts = response.posts;
+            this.posts.push(...response.posts.data);
           }
+          console.log(response);
         },
         error => {
           console.log(error);
@@ -155,6 +164,16 @@ export class EditUserComponent implements OnInit {
 
     }
 
+
+  }
+
+
+  onScrollDown() {
+
+
+    this.page++;
+
+    this.getPostsByUser();
 
   }
 

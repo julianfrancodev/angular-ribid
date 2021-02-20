@@ -46,11 +46,11 @@ export class PostService {
     return this._http.get(this.url + 'post/user/get/pending?page=' + page, { headers: headers });
   }
 
-  getPostByUser(id: string): Observable<any> {
+  getPostByUser(id: string, page: number): Observable<any> {
 
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this._http.get(this.url + 'post/user/' + id, { headers: headers });
+    return this._http.get(this.url + 'post/user/' + id + '?page=' + page, { headers: headers });
 
   }
 
