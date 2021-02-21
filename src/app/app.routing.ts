@@ -7,6 +7,7 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { PostNewComponent } from './components/post-new/post-new.component';
 import { PostComponent } from './components/post/post.component';
 import { SolicitudeComponent } from './components/solicitude/solicitude.component';
+import { CategoryPostsComponent } from './components/category-posts/category-posts.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -14,6 +15,7 @@ const appRoutes: Routes = [
     { path: 'new-post', component: PostNewComponent },
     { path: 'post/:id', component: PostComponent },
     { path: 'recent-solicitude', component: SolicitudeComponent },
+    { path: 'posts-category/:id', component: CategoryPostsComponent},
     { path: '**', component: ErrorComponent }
 ];
 

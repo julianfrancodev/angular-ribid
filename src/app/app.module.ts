@@ -34,6 +34,7 @@ import { PostComponent } from './components/post/post.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PdfViewerModule } from "ng2-pdf-viewer";
 import { SolicitudeComponent } from './components/solicitude/solicitude.component';
+import { CategoryPostsComponent } from './components/category-posts/category-posts.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { SolicitudeComponent } from './components/solicitude/solicitude.componen
     PostNewComponent,
     PostComponent,
     SolicitudeComponent,
+    CategoryPostsComponent,
   ],
   imports: [
     AngularFileUploaderModule,

@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center">
+  <mat-spinner [diameter]="30" *ngIf="!posts"></mat-spinner>
+</div>
+<div>
+
+  <div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"
+    (scrolled)="onScrollDown()">
+    <div class="container animated fadeIn fast" *ngFor="let post of posts">
+      <section class="row tm-section tm-mb-30">
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
+          <div class="tm-flex-center p-5 tm-bg-color-primary">
+            <div class="tm-max-w-400 tm-flex-center tm-flex-col">
+              <h1 class="tm-text-color-white tm-site-name">{{post.category.name}}</h1>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+          <div class="tm-flex-center p-5">
+            <div class="tm-flex-center tm-flex-col">
+              <q class="tm-quote tm-text-color-gray mb-4">{{post.title}}</q>
+              <a [routerLink]="['/post',post.id]" class="btn btn-primary">Ver Mas</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr />
+    </div>
+  </div>
+
+</div>

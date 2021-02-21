@@ -61,7 +61,7 @@ export class HeaderComponent implements OnInit, DoCheck {
   }
 
   showErrorSignin() {
-    this.toastr.error('Email o contraseña incorrectos',"Vaya!");
+    this.toastr.error('Email o contraseña incorrectos', "Vaya!");
   }
 
   open(content: any) {
@@ -161,7 +161,6 @@ export class HeaderComponent implements OnInit, DoCheck {
       }
     )
   }
-
 
   logout() {
 
