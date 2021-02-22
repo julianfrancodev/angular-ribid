@@ -32,13 +32,11 @@ export class BlogpostComponent implements OnInit, DoCheck {
   getPosts() {
     this._postService.getPosts(this.page).subscribe(
       response => {
-        console.log(response);
         if (response.status == 'success') {
 
           this.posts.push(...response.posts.data);
 
         }
-        console.log(this.posts);
       },
       error => {
         console.log(error);
@@ -48,10 +46,6 @@ export class BlogpostComponent implements OnInit, DoCheck {
 
 
   onScrollDown() {
-    console.log("scrolled down!!");
-
-    // add another 20 items to array
-
     this.page++;
 
     this.getPosts();

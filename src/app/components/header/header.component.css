@@ -42,4 +42,8 @@ input:-moz-placeholder {
 input::-webkit-input-placeholder {
 	color: #999;
 }
+::ng-deep .cdk-overlay-pane {
+  /* Do you changes here */
+    min-width:230px;
+}
 

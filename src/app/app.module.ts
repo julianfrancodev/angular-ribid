@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { routing, appRoutingProviders } from './app.routing';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,8 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-
-
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -54,6 +53,7 @@ import { CategoryPostsComponent } from './components/category-posts/category-pos
     CategoryPostsComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     AngularFileUploaderModule,
     CommonModule,
     BrowserAnimationsModule, // required animations module
@@ -77,7 +77,8 @@ import { CategoryPostsComponent } from './components/category-posts/category-pos
     PdfViewerModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    MatAutocompleteModule
   ],
   providers: [
     appRoutingProviders,
