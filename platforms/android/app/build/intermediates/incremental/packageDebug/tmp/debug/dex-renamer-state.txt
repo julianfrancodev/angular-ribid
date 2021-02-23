@@ -1,7 +1,0 @@
-#Tue Feb 23 11:22:05 COT 2021
-base.0=/home/julian/ribid-angular/ribid/platforms/android/app/build/intermediates/dex/debug/mergeProjectDexDebug/classes.dex
-path.1=classes_0.dex
-renamed.1=classes2.dex
-path.0=classes.dex
-renamed.0=classes.dex
-base.1=/home/julian/ribid-angular/ribid/platforms/android/app/build/intermediates/dex/debug/mergeLibDexDebug/classes_0.dex
