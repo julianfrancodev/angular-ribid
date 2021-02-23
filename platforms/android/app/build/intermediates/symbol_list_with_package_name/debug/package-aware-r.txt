@@ -1,0 +1,8 @@
+io.ionic.starter
+drawable screen
+mipmap ic_launcher
+string activity_name
+string app_name
+string launcher_name
+xml config
+xml network_security_config
