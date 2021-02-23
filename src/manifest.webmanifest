@@ -1,8 +1,8 @@
 {
   "name": "ribid",
   "short_name": "ribid",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "theme_color": "#fff",
+  "background_color": "#fff",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

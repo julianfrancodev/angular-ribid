@@ -1,7 +1,7 @@
 <header class="blog-header py-3">
   <div class="row flex-nowrap justify-content-between align-items-center">
     <div class="col-4 pt-1" *ngIf="!identity">
-      <button class="btn btn-sm btn-outline-secondary" (click)="open(content)" href="#">Ingresar</button>
+      <button (click)="open(content)" mat-stroked-button>Ingresar</button>
     </div>
 
     <div class="col-4 pt-1" *ngIf="identity && identity.name">
@@ -37,7 +37,7 @@
     <div class="col-4 d-flex justify-content-end align-items-center">
 
       <form class="example-form">
-        <input type="search" placeholder="Search..." [formControl]="searchControl" [matAutocomplete]="auto">
+        <input type="search" placeholder="Buscar..." [formControl]="searchControl" [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngIf="isLoading" class="is-loading">
             <div class="d-flex justify-content-center">
@@ -92,7 +92,7 @@
             <p class="text-center">Al ingresar, acepta nuestros <a href="#">Terminos de uso.</a></p>
           </div>
           <div class="col-md-12 text-center ">
-            <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm"
+            <button type="submit" class=" btn btn-block btn-primary tx-tfm"
               [disabled]="signinForm.invalid">Iniciar</button>
           </div>
           <div class="col-md-12 ">

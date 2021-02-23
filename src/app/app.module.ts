@@ -13,6 +13,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -78,7 +79,8 @@ import { CategoryPostsComponent } from './components/category-posts/category-pos
     MatProgressSpinnerModule,
     MatProgressBarModule,
     InfiniteScrollModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatButtonModule,
   ],
   providers: [
     appRoutingProviders,

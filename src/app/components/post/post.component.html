@@ -98,7 +98,10 @@
 
 
     </div>
-    <div *ngIf="!resPostResponse && identity.role === 'ROLE_USER'" class="text-center">
+
+    <!-- todo: here is a bug -->
+
+    <div *ngIf="!resPostResponse" class="text-center">
         <h1 class="tm-text-color-gray font-weight-bold">Pendiente De Respuesta</h1>
     </div>
     <div *ngIf="!identity">

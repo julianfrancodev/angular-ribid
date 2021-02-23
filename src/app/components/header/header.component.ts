@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit, DoCheck {
   public identity: any;
   public url: string;
   public searchControl = new FormControl();
-  public filteredPosts: any;
+  public filteredPosts: any[] = [];
   public isLoading = false;
   public errorMsg: string;
 
