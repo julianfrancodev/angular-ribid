@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit, DoCheck {
   }
 
   showSuccess() {
-    this.toastr.info('Confirma tu cuenta en tu email para ingresar', 'Bien!', {
+    this.toastr.info('Confirme su correo electronico para ingresar', 'Bien!', {
       timeOut: 6000
     });
   }
@@ -144,8 +144,7 @@ export class HeaderComponent implements OnInit, DoCheck {
         }
       },
       error => {
-        this.showErrorSignin("Email no encontrado o no verificado");
-
+        this.showErrorSignin("Correo no registrado");
       }
     )
   }
