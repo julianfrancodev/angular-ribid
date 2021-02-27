@@ -10,13 +10,13 @@ import { SolicitudeComponent } from './components/solicitude/solicitude.componen
 import { CategoryPostsComponent } from './components/category-posts/category-posts.component';
 
 const appRoutes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'edit', component: EditUserComponent },
-    { path: 'new-post', component: PostNewComponent },
-    { path: 'post/:id', component: PostComponent },
-    { path: 'recent-solicitude', component: SolicitudeComponent },
-    { path: 'posts-category/:id', component: CategoryPostsComponent},
-    { path: '**', component: ErrorComponent }
+  { path: '', component: HomeComponent },
+  { path: 'edit', component: EditUserComponent },
+  { path: 'new-post', component: PostNewComponent },
+  { path: 'post/:id', component: PostComponent },
+  { path: 'recent-solicitude', component: SolicitudeComponent },
+  { path: 'posts-category/:id', component: CategoryPostsComponent },
+  { path: '**', component: ErrorComponent }
 ];
 
 export const appRoutingProviders: any[] = [];

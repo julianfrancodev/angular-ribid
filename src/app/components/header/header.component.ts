@@ -20,7 +20,6 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   public closeResult: string = '';
   public user: User;
-  public status: string;
   public userSiginin: User;
   public token: string;
   public identity: any;
@@ -56,7 +55,9 @@ export class HeaderComponent implements OnInit, DoCheck {
   }
 
   showSuccess() {
-    this.toastr.success('Ya puedes ingresar a tu cuenta', 'Correcto');
+    this.toastr.info('Confirma tu cuenta en tu email para ingresar', 'Bien!', {
+      timeOut: 6000
+    });
   }
 
   showError(message: string) {
@@ -71,8 +72,8 @@ export class HeaderComponent implements OnInit, DoCheck {
     this.toastr.success('Hasta la proxima!');
   }
 
-  showErrorSignin() {
-    this.toastr.error('Email o contraseña incorrectos', "Vaya!");
+  showErrorSignin(message: string) {
+    this.toastr.error(message, "Vaya!");
   }
 
   open(content: any) {
@@ -102,18 +103,14 @@ export class HeaderComponent implements OnInit, DoCheck {
     this._userService.register(this.user).subscribe(
       response => {
         if (response.status == "success") {
-          this.status = response.status;
           this.showSuccess();
           this.modalService.dismissAll('Reason');
           form.reset();
-        } else {
-          this.status = 'error';
         }
       },
       error => {
         console.log(error);
         this.showError(error.error.errors.email[0]);
-        this.status = 'error';
 
       }
     );
@@ -124,37 +121,30 @@ export class HeaderComponent implements OnInit, DoCheck {
     this._userService.signin(this.userSiginin).subscribe(
 
       response => {
-        if (response.status != 404) {
-          this.status = "success";
-          this.token = response;
+        if (response.token.status != "error") {
+          this.token = response.token;
           this.showSuccessSignin();
           this.modalService.dismissAll('Reason');
           localStorage.setItem('token', this.token);
 
-          // User identified
-
           this._userService.signin(this.userSiginin, true).subscribe(
             response => {
-              this.identity = response;
+              this.identity = response.user;
               localStorage.setItem('indentity', JSON.stringify(this.identity));
               form.reset();
 
             },
             error => {
-              console.log(error);
-              this.status = 'error';
-              this.showErrorSignin();
+              this.showErrorSignin(error.messsage);
             }
           )
 
-        } else {
-          this.showErrorSignin();
+        }else{
+          this.showErrorSignin("Contraseña incorrecta");
         }
       },
       error => {
-        console.log(error);
-        this.status = 'error';
-        this.showErrorSignin();
+        this.showErrorSignin("Email no encontrado o no verificado");
 
       }
     )
