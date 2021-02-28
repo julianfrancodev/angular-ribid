@@ -121,6 +121,7 @@ export class HeaderComponent implements OnInit, DoCheck {
     this._userService.signin(this.userSiginin).subscribe(
 
       response => {
+        console.log(response);
         if (response.token.status != "error") {
           this.token = response.token;
           this.showSuccessSignin();
@@ -144,7 +145,8 @@ export class HeaderComponent implements OnInit, DoCheck {
         }
       },
       error => {
-        this.showErrorSignin("Correo no registrado");
+        console.log(error);
+        this.showErrorSignin(error.error.message);
       }
     )
   }
