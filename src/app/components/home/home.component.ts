@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
   ) {
     this.page_title = 'Inicio'
     this.identity = this._userService.getIdentity();
-    console.log(this.identity);
   }
 
 

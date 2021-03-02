@@ -42,7 +42,6 @@ export class CategoryPostsComponent implements OnInit, DoCheck {
             this.posts.push(...response.posts.data);
           }
 
-          console.log(this.posts);
         },
         error => {
           console.log(error);

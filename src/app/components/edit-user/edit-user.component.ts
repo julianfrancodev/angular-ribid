@@ -151,7 +151,6 @@ export class EditUserComponent implements OnInit {
           if (response.status == "success") {
             this.posts.push(...response.posts.data);
           }
-          console.log(response);
         },
         error => {
           console.log(error);
