@@ -140,7 +140,7 @@ export class HeaderComponent implements OnInit, DoCheck {
             }
           )
 
-        }else{
+        } else {
           this.showErrorSignin("Contraseña incorrecta");
         }
       },
@@ -180,7 +180,6 @@ export class HeaderComponent implements OnInit, DoCheck {
   }
 
   logout() {
-
     localStorage.clear();
     this.token = null;
     this.identity = null;
@@ -188,7 +187,4 @@ export class HeaderComponent implements OnInit, DoCheck {
     this.router.navigate(['']);
     this.showLogoutSuccess();
   }
-
-
-
 }

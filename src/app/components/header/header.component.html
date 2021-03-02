@@ -11,8 +11,8 @@
           alt="User Image" />
 
         <img loading="lazy" *ngIf="!identity.image" id="dropdownBasic1" ngbDropdownToggle width="35" height="35"
-          class="border border-primary rounded-circle"
-          src="https://www.flaticon.es/svg/static/icons/svg/3612/3612416.svg" alt="Default Image" />
+          class="border rounded-circle"
+          src="https://res.cloudinary.com/dzm7agwqs/image/upload/v1614635779/user_2_jjmkzc.png" alt="Default Image" />
 
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <a ngbDropdownItem class="font-weight-bold" [routerLink]="['/edit']"> {{identity.name}} </a>

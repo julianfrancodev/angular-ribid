@@ -35,6 +35,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { PdfViewerModule } from "ng2-pdf-viewer";
 import { SolicitudeComponent } from './components/solicitude/solicitude.component';
 import { CategoryPostsComponent } from './components/category-posts/category-posts.component';
+import { PusherService } from './services/pusher.service';
+import { PostService } from './services/post.service';
+import { UserService } from './services/user.service';
+import { RespostService } from './services/respost.service';
+import { CategoryService } from './services/category.service';
 
 @NgModule({
   declarations: [
@@ -84,6 +89,11 @@ import { CategoryPostsComponent } from './components/category-posts/category-pos
   ],
   providers: [
     appRoutingProviders,
+    PusherService,
+    PostService,
+    UserService,
+    RespostService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })
