@@ -1,5 +1,5 @@
 export const global = {
-    url : 'http://ribid-api.loc/'
+    url : 'https://warm-beyond-77275.herokuapp.com/'
 }
 export const environment = {
   production: false,
