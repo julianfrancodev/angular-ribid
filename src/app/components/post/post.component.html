@@ -1,116 +1,110 @@
 <div class="animated fadeIn fast container">
 
-    <div class="d-flex justify-content-center">
-        <mat-spinner *ngIf="!post"></mat-spinner>
-    </div>
+  <div class="d-flex justify-content-center">
+    <mat-spinner [diameter]="30" *ngIf="!post"></mat-spinner>
+  </div>
 
-    <section class="row tm-section tm-mb-30" *ngIf="post">
-        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
-            <div class="tm-flex-center p-5 tm-bg-color-primary">
-                <div class="tm-max-w-400 tm-flex-center tm-flex-col">
-                    <h1 class="tm-text-color-white tm-site-name">{{post.category.name}}</h1>
+  <section class="row tm-section tm-mb-30" *ngIf="post">
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
+      <div class="tm-flex-center p-5 tm-bg-color-primary">
+        <div class="tm-max-w-400 tm-flex-center tm-flex-col">
+          <h1 class="tm-text-color-white tm-site-name">{{post.category.name}}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+      <div class="tm-flex-center pl-5 pr-5 pt-5">
+        <div class="tm-flex-center tm-flex-col">
+          <q class="tm-quote tm-text-color-gray mb-4">{{post.title}}</q>
+          <p class="tm-quote tm-text-color-gray">{{post.created_at | date}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr />
+
+  <div *ngIf="identity">
+    <div *ngIf="identity.role === 3">
+
+      <div *ngIf="resPostResponse">
+
+        <h1 class="text-center mb-4 mt-2 tm-text-color-gray font-weight-bold">Vista Previa Del Documento</h1>
+
+        <div>
+          <pdf-viewer [src]="src" [fit-to-page]="true" [render-text]="false" [show-all]="false"></pdf-viewer>
+        </div>
+
+        <form #updateRespostForm='ngForm' (ngSubmit)='updateRespost(updateRespostForm)'>
+
+          <div class="card-body">
+
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="page text-center">
+                  <angular-file-uploader [config]="fileConfig" (ApiResponse)="fileUpload($event)">
+                  </angular-file-uploader>
                 </div>
+              </div>
             </div>
-        </div>
-        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-            <div class="tm-flex-center pl-5 pr-5 pt-5">
-                <div class="tm-flex-center tm-flex-col">
-                    <q class="tm-quote tm-text-color-gray mb-4">{{post.title}}</q>
-                    <p class="tm-quote tm-text-color-gray">{{post.created_at | date}}</p>
+
+            <div class="row mt-4">
+              <div class="col-md-12">
+                <button type="submit" class=" btn btn-block btn-primary tx-tfm"
+                  [disabled]="updateRespostForm.invalid">Actualizar</button>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div *ngIf="!resPostResponse">
+
+        <form #createRespostForm='ngForm' (ngSubmit)='createRespost(createRespostForm)'>
+
+          <div class="card-body">
+
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="page text-center">
+                  <angular-file-uploader [config]="fileConfig" (ApiResponse)="fileUpload($event)">
+                  </angular-file-uploader>
                 </div>
-            </div>
-        </div>
-    </section>
-    <hr />
-
-    <div *ngIf="identity">
-        <div *ngIf="identity.role === 'ROLE_ADMIN'">
-
-            <div *ngIf="resPostResponse">
-
-                <h1 class="text-center mb-4 mt-2 tm-text-color-gray font-weight-bold">Vista Previa Del Documento</h1>
-
-                <div>
-                    <pdf-viewer [src]="src" [fit-to-page]="true" [render-text]="false" [show-all]="false"></pdf-viewer>
-                </div>
-
-                <form #updateRespostForm='ngForm' (ngSubmit)='updateRespost(updateRespostForm)'>
-
-                    <div class="card-body">
-
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="page text-center">
-                                    <angular-file-uploader [config]="fileConfig" (ApiResponse)="fileUpload($event)">
-                                    </angular-file-uploader>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-4">
-                            <div class="col-md-12">
-                                <button type="submit" class=" btn btn-block btn-primary tx-tfm"
-                                    [disabled]="updateRespostForm.invalid">Actualizar</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
+              </div>
             </div>
 
-            <div *ngIf="!resPostResponse">
-
-                <form #createRespostForm='ngForm' (ngSubmit)='createRespost(createRespostForm)'>
-
-                    <div class="card-body">
-
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="page text-center">
-                                    <angular-file-uploader [config]="fileConfig" (ApiResponse)="fileUpload($event)">
-                                    </angular-file-uploader>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row mt-4">
-                            <div class="col-md-12">
-                                <button type="submit" class=" btn btn-block btn-primary tx-tfm"
-                                    [disabled]="createRespostForm.invalid">Guardar</button>
-                            </div>
-                        </div>
-                    </div>
-
-                </form>
+            <div class="row mt-4">
+              <div class="col-md-12">
+                <button type="submit" class=" btn btn-block btn-primary tx-tfm"
+                  [disabled]="createRespostForm.invalid">Guardar</button>
+              </div>
             </div>
+          </div>
 
-
-        </div>
-
-        <!-- todo: repare this bug this the div with ng-if -->
-
-        <div class="mb-4 mt-4" *ngIf="identity.role === 'ROLE_USER'">
-            <pdf-viewer *ngIf="resPostResponse" [src]="src" [show-borders]="true" [render-text]="false"
-                [fit-to-page]="true"></pdf-viewer>
-        </div>
-
-
+        </form>
+      </div>
 
 
     </div>
 
-    <!-- todo: here is a bug -->
 
-    <div *ngIf="!resPostResponse" class="text-center">
-        <h1 class="tm-text-color-gray font-weight-bold">Pendiente De Respuesta</h1>
+    <div class="mb-4 mt-4" *ngIf="identity.role === 1">
+      <pdf-viewer *ngIf="resPostResponse" [src]="src" [show-borders]="true" [render-text]="false" [fit-to-page]="true">
+      </pdf-viewer>
     </div>
-    <div *ngIf="!identity">
-        <div class="mb-3" *ngIf="src">
-            <pdf-viewer [src]="src" [render-text]="false" [show-all]="false" [fit-to-page]="true"></pdf-viewer>
-            <h1 class="text-center mb-5 mt-0 tm-text-color-gray font-weight-bold">Ingresa Para Ver El Documento Completo</h1>
-        </div>
+  </div>
 
+
+  <div *ngIf="!resPostResponse" class="text-center">
+    <h1 class="tm-text-color-gray font-weight-bold">Pendiente De Respuesta</h1>
+  </div>
+  <div *ngIf="!identity">
+    <div class="mb-3" *ngIf="src">
+      <pdf-viewer [src]="src" [render-text]="false" [show-all]="false" [fit-to-page]="true"></pdf-viewer>
+      <h1 class="text-center mb-5 mt-0 tm-text-color-gray font-weight-bold">Ingresa Para Ver El Documento Completo</h1>
     </div>
+
+  </div>
 
 
 </div>

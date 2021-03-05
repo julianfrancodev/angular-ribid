@@ -14,6 +14,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,6 +43,8 @@ import { PostService } from './services/post.service';
 import { UserService } from './services/user.service';
 import { RespostService } from './services/respost.service';
 import { CategoryService } from './services/category.service';
+import { RoleService } from './services/role.service';
+import { DocumentTypeService } from './services/document-type.service';
 
 @NgModule({
   declarations: [
@@ -86,6 +91,8 @@ import { CategoryService } from './services/category.service';
     InfiniteScrollModule,
     MatAutocompleteModule,
     MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     appRoutingProviders,
@@ -93,7 +100,9 @@ import { CategoryService } from './services/category.service';
     PostService,
     UserService,
     RespostService,
-    CategoryService
+    CategoryService,
+    RoleService,
+    DocumentTypeService
   ],
   bootstrap: [AppComponent]
 })

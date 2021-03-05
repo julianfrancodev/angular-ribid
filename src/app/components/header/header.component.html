@@ -16,12 +16,12 @@
 
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <a ngbDropdownItem class="font-weight-bold" [routerLink]="['/edit']"> {{identity.name}} </a>
-          <div *ngIf="identity.role === 'ROLE_USER'">
+          <div *ngIf="identity.role === 1">
             <div class="dropdown-divider"></div>
             <a ngbDropdownItem [routerLink]="['/new-post']">Crear Solicitud</a>
           </div>
 
-          <div *ngIf="identity.role === 'ROLE_ADMIN'">
+          <div *ngIf="identity.role === 3">
             <div class="dropdown-divider"></div>
             <a ngbDropdownItem [routerLink]="['/recent-solicitude']">Solicitudes</a>
           </div>

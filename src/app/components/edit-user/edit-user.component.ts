@@ -6,15 +6,17 @@ import { global } from '../../services/global';
 import { Router } from '@angular/router';
 import { RespostService } from 'src/app/services/respost.service';
 import { PostService } from 'src/app/services/post.service';
+import { RoleService } from 'src/app/services/role.service';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.css'],
-  providers: [UserService, RespostService, PostService]
+  providers: [UserService, RespostService, PostService, RoleService]
 
 })
 export class EditUserComponent implements OnInit {
 
+  public roles: any[] = [];
   public resposts: any[] = [];
   public posts: any[] = [];
   public userUpdate: User;
@@ -62,12 +64,13 @@ export class EditUserComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private _resPostService: RespostService,
-    private _postService: PostService
+    private _postService: PostService,
+    private _roleService: RoleService
   ) {
     if (this._userService.getIdentity() == null) {
       this.router.navigate(['']);
     }
-    this.userUpdate = new User(1, '', '', 'ROLE_USER', '', '', '');
+    this.userUpdate = new User(1, '', '', '1', '', '', '', '', '');
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.userUpdate = this.identity ?? this.userUpdate;
@@ -79,13 +82,16 @@ export class EditUserComponent implements OnInit {
       this.identity.role,
       this.identity.email,
       '',
-      this.identity.image
+      this.identity.image,
+      '',
+      ''
     );
   }
 
   ngOnInit(): void {
     console.log(this.userUpdate);
     this.getPostsByUser();
+    this.getRoles();
 
   }
 
@@ -129,7 +135,7 @@ export class EditUserComponent implements OnInit {
 
   getPostsByUser() {
 
-    if (this.identity && this.identity.role == "ROLE_ADMIN") {
+    if (this.identity && this.identity.role == 3) {
       this._resPostService.getPostByAdminRespost(this.identity.sub, this.page).subscribe(
         response => {
           console.log(response);
@@ -143,7 +149,7 @@ export class EditUserComponent implements OnInit {
           console.log(error);
         }
       )
-    } else if (this.identity && this.identity.role == "ROLE_USER") {
+    } else if (this.identity && this.identity.role == 1) {
 
       this._postService.getPostByUser(this.identity.sub, this.page).subscribe(
         response => {
@@ -166,9 +172,21 @@ export class EditUserComponent implements OnInit {
 
   }
 
+  getRoles() {
+    this._roleService.getRoles().subscribe(
+      response=>{
+        if(response.status == "success"){
+          this.roles = response.roles;
+        }
+      },
+      error =>{
+        console.log(error);
+      }
+    )
+  }
+
 
   onScrollDown() {
-
 
     this.page++;
 

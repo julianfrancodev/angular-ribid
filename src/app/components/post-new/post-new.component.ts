@@ -6,12 +6,13 @@ import { PostService } from '../../services/post.service';
 import { Post } from '../../models/post';
 import { Category } from '../../models/category';
 import { ToastrService } from 'ngx-toastr';
+import { DocumentTypeService } from 'src/app/services/document-type.service';
 
 @Component({
   selector: 'app-post-new',
   templateUrl: './post-new.component.html',
   styleUrls: ['./post-new.component.css'],
-  providers: [UserService, CategoryService, PostService]
+  providers: [UserService, CategoryService, PostService, DocumentTypeService]
 })
 export class PostNewComponent implements OnInit {
 
@@ -19,12 +20,14 @@ export class PostNewComponent implements OnInit {
   public token: string;
   public post: Post;
   public categories: [Category];
+  public documentTypes: any[] = [];
 
   constructor(
     private _router: Router,
     private _userService: UserService,
     private _categoryService: CategoryService,
     private _postService: PostService,
+    private _documentTypesService: DocumentTypeService,
     private toastr: ToastrService
   ) {
     if (this._userService.getIdentity() == null) {
@@ -36,7 +39,8 @@ export class PostNewComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCategories();
-    this.post = new Post(1, this.identity.sub, 1, '', '','');
+    this.getDocumentTypes();
+    this.post = new Post(1, this.identity.sub, 1, '', '', '', '');
     console.log(this.post);
   }
 
@@ -48,28 +52,43 @@ export class PostNewComponent implements OnInit {
     console.log(this.post);
     this.post.title = `${this.post.title} - ${this.post.author}`;
     this._postService.create(this.token, this.post).subscribe(
-      response =>{
-        if(response.status == 'success'){
+      response => {
+        if (response.status == 'success') {
           this.post = response.post;
           this.showSuccessSavedPost();
           this._router.navigate(['']);
         }
       },
-      error =>{
+      error => {
         console.log(error);
       }
     )
   }
 
-  getCategories(){
+  getCategories() {
     this._categoryService.getCategories().subscribe(
       response => {
-        if(response.status == 'success'){
+        if (response.status == 'success') {
           this.categories = response.categories;
         }
+
       },
-      error=>{
-          console.log(error);
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  getDocumentTypes() {
+    this._documentTypesService.getDocumentTypes().subscribe(
+      response => {
+        if(response.status === "success"){
+          this.documentTypes = response.document_types;
+        }
+        console.log(this.documentTypes);
+      },
+      error => {
+        console.log(error);
       }
     )
   }

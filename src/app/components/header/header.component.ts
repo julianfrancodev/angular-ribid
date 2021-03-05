@@ -37,8 +37,8 @@ export class HeaderComponent implements OnInit, DoCheck {
     private toastr: ToastrService,
     private router: Router,
   ) {
-    this.user = new User(1, '', '', 'ROLE_USER', '', '', '');
-    this.userSiginin = new User(1, '', '', 'ROLE_USER', '', '', '');
+    this.user = new User(1, '', '', '1', '', '', '','','');
+    this.userSiginin = new User(1, '', '', '1', '', '', '','','');
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.url = global.url;
@@ -183,7 +183,7 @@ export class HeaderComponent implements OnInit, DoCheck {
     localStorage.clear();
     this.token = null;
     this.identity = null;
-    this.userSiginin = new User(1, '', '', 'ROLE_USER', '', '', '');
+    this.userSiginin = new User(1, '', '', '1', '', '', '','','');
     this.router.navigate(['']);
     this.showLogoutSuccess();
   }

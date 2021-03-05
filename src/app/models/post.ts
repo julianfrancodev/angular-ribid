@@ -5,6 +5,7 @@ export class Post{
         public category_id: number,
         public title: string,
         public author: string,
+        public document_type_id: string,
         public createdAt: any
     ){}
 }

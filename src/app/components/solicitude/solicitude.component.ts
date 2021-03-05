@@ -10,11 +10,13 @@ import { PostService } from 'src/app/services/post.service';
 export class SolicitudeComponent implements OnInit, DoCheck {
 
   public posts: any[] = [];
+  public postsComplete: any[] = [];
   public throttle: number = 50;
   public scrollDistance: number = 1;
   public scrollUpDistance: number = 2;
   public direction: string = "";
   public page: number = 1;
+  public pageComplete: number = 1;
 
   constructor(private _postService: PostService) { }
 
@@ -22,11 +24,12 @@ export class SolicitudeComponent implements OnInit, DoCheck {
   ngOnInit(): void {
 
     this.getPendingPost();
-
+    this.getCompletePost();
   }
 
   ngDoCheck(): void {
     this.posts;
+    this.postsComplete;
   }
 
 
@@ -45,12 +48,32 @@ export class SolicitudeComponent implements OnInit, DoCheck {
     )
   }
 
+  getCompletePost(){
+    this._postService.getCompletePosts(this.pageComplete).subscribe(
+      response => {
+        console.log(response);
+        if (response.status == 'success') {
+          this.postsComplete.push(...response.posts.data);
+          console.log(this.postsComplete);
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
   onScrollDown() {
 
     this.page++;
 
     this.getPendingPost();
 
+  }
+
+  onScrollDownComplete(){
+    this.pageComplete++;
+    this.getCompletePost();
   }
 
 }

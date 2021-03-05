@@ -96,3 +96,11 @@ h2 {
 .tm-max-w-400 {
   max-width: 400px;
 }
+
+.form-field-group mat-form-field {
+  width: 100%;
+}
+
+.input-full-width {
+  width: 100%;
+}
