@@ -15,8 +15,9 @@
     <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
       <div class="tm-flex-center pl-5 pr-5 pt-5">
         <div class="tm-flex-center tm-flex-col">
-          <q class="tm-quote tm-text-color-gray mb-4">{{post.title}}</q>
-          <p class="tm-quote tm-text-color-gray">{{post.created_at | date}}</p>
+          <q class="tm-quote tm-text-color-gray mb-4 font-weight-bold">{{post.title}}</q>
+          <p class="tm-quote">{{post.document_type.name}} <span *ngIf="post.section">- {{post.section}}</span></p>
+          <p class="tm-quote"><span *ngIf="post.pages">{{post.pages}} Paginas - </span>{{post.created_at | date}}</p>
         </div>
       </div>
     </div>
@@ -57,6 +58,9 @@
 
         </form>
       </div>
+      <div *ngIf="!resPostResponse" class="text-center">
+        <h1 class="tm-text-color-gray font-weight-bold">Pendiente De Respuesta</h1>
+      </div>
 
       <div *ngIf="!resPostResponse">
 
@@ -66,11 +70,52 @@
 
             <div class="row">
               <div class="col-sm-12">
+                <div class="form-field-group">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Selecciona Tu Tipo De Respuesta</mat-label>
+                    <mat-select name="item" #item="ngModel" [(ngModel)]="itemSelected" required>
+                      <mat-option [value]="1">
+                        Subir Archivo
+                      </mat-option>
+
+                      <mat-option [value]="2">
+                        Seleccionar de mis Recursos
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </div>
+
+            <hr>
+
+            <div class="row" *ngIf="showUploadFile">
+              <div class="col-sm-12">
                 <div class="page text-center">
                   <angular-file-uploader [config]="fileConfig" (ApiResponse)="fileUpload($event)">
                   </angular-file-uploader>
                 </div>
               </div>
+            </div>
+
+            <div class="row" *ngIf="showSelectDocLib">
+              <div class="col-sm-12">
+                <div class="form-field-group">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Selecciona uno de los documentos</mat-label>
+                    <mat-select name="libdoc" #libdocument="ngModel" [(ngModel)]="resPost.lib_document_id" required>
+                      <mat-option *ngFor="let libdocument of libDocuments" [value]="libdocument.id">
+                        {{libdocument.title}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="!libdocument.valid && libdocument.touched" class="text-danger">
+                      El documento es necesario</mat-error>
+
+                  </mat-form-field>
+                </div>
+              </div>
+
             </div>
 
             <div class="row mt-4">
@@ -81,6 +126,7 @@
             </div>
           </div>
 
+
         </form>
       </div>
 
@@ -88,16 +134,15 @@
     </div>
 
 
-    <div class="mb-4 mt-4" *ngIf="identity.role === 1">
+
+    <div class="mb-4 mt-4" *ngIf="this.identity.role == 1 || this.identity.role == 4 || this.identity.role == 2">
       <pdf-viewer *ngIf="resPostResponse" [src]="src" [show-borders]="true" [render-text]="false" [fit-to-page]="true">
       </pdf-viewer>
     </div>
   </div>
 
 
-  <div *ngIf="!resPostResponse" class="text-center">
-    <h1 class="tm-text-color-gray font-weight-bold">Pendiente De Respuesta</h1>
-  </div>
+
   <div *ngIf="!identity">
     <div class="mb-3" *ngIf="src">
       <pdf-viewer [src]="src" [render-text]="false" [show-all]="false" [fit-to-page]="true"></pdf-viewer>

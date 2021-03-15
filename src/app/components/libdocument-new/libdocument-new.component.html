@@ -2,14 +2,14 @@
   <div class="row gutters-sm">
     <div class="col-md-12">
       <div class="card mb-3">
-        <form #createPostForm='ngForm' (ngSubmit)='createPost(createPostForm)'>
+        <form #createLibDocumentForm='ngForm' (ngSubmit)='createLibDocument(createLibDocumentForm)'>
           <div class="card-body">
             <div class="row">
               <div class="col-sm-12 text-secondary">
                 <mat-form-field appearance="outline" class="input-full-width">
                   <mat-label>Titulo</mat-label>
-                  <input matInput placeholder="Ej: ¿Dónde está la franja amarilla?" type="text" name="title" required
-                    #title="ngModel" [(ngModel)]="post.title" minlength="20">
+                  <input matInput placeholder="Ej: Educación y democracia" type="text" name="title" required
+                    #title="ngModel" [(ngModel)]="libDocument.title" minlength="20">
                   <mat-error *ngIf="!title.valid && title.touched" class="text-danger">Longitud minima
                     de 20 caracateres</mat-error>
                 </mat-form-field>
@@ -21,8 +21,8 @@
               <div class="col-sm-12 text-secondary">
                 <mat-form-field appearance="outline" class="input-full-width">
                   <mat-label>Autor</mat-label>
-                  <input matInput placeholder="Ej: William Ospina" type="text" name="author" required
-                    #author="ngModel" [(ngModel)]="post.author" minlength="10">
+                  <input matInput placeholder="Ej: Estanislao Zuleta" type="text" name="author" required
+                    #author="ngModel" [(ngModel)]="libDocument.author" minlength="10">
                   <mat-error *ngIf="!author.valid && author.touched" class="text-danger">Longitud minima
                     de 10 caracateres</mat-error>
                 </mat-form-field>
@@ -35,7 +35,7 @@
                 <div class="form-field-group">
                   <mat-form-field appearance="outline">
                     <mat-label>Selecciona una categoria</mat-label>
-                    <mat-select name="category_id" #category="ngModel" [(ngModel)]="post.category_id" required>
+                    <mat-select name="category_id" #category="ngModel" [(ngModel)]="libDocument.category_id" required>
                       <mat-option *ngFor="let category of categories" [value]="category.id">
                         {{category.name}}
                       </mat-option>
@@ -55,12 +55,12 @@
                 <div class="form-field-group">
                   <mat-form-field appearance="outline">
                     <mat-label>Selecciona un tipo de documento</mat-label>
-                    <mat-select name="role" #documentType="ngModel" [(ngModel)]="post.document_type_id" required>
+                    <mat-select name="role" #documentType="ngModel" [(ngModel)]="libDocument.document_type_id" required>
                       <mat-option *ngFor="let documentType of documentTypes" [value]="documentType.id">
                         {{documentType.name}}
                       </mat-option>
                     </mat-select>
-                    <mat-hint>Para capitulos de libro aplica sección y paginas</mat-hint>
+                    <mat-hint>Para cada tipo de documento aplica sección y paginas</mat-hint>
                   </mat-form-field>
                 </div>
               </div>
@@ -73,7 +73,7 @@
                   <mat-form-field appearance="outline" class="input-full-width">
                     <mat-label>Sección</mat-label>
                     <input matInput placeholder="Ej: Capitulo ll" type="text" name="section" required #section="ngModel"
-                      [(ngModel)]="post.section">
+                      [(ngModel)]="libDocument.section">
                     <mat-error *ngIf="!section.valid && section.touched" class="text-danger">La seccion es obligatoria
                     </mat-error>
                   </mat-form-field>
@@ -94,11 +94,23 @@
               </div>
             </div>
 
+
+            <hr />
+            <div class="row">
+              <div class="col-sm-12 text-secondary">
+                <h5>Selcciona un archivo*</h5>
+                <div class="page text-center">
+                  <angular-file-uploader [config]="fileConfig" (ApiResponse)="fileUpload($event)">
+                  </angular-file-uploader>
+                </div>
+              </div>
+            </div>
+
             <hr />
             <div class="row">
               <div class="col-md-12">
                 <button type="submit" class=" btn btn-block mybtn btn-primary tx-tfm"
-                  [disabled]="createPostForm.invalid">Guardar</button>
+                  [disabled]="createLibDocumentForm.invalid">Guardar</button>
               </div>
             </div>
 
@@ -110,3 +122,4 @@
     </div>
   </div>
 </div>
+

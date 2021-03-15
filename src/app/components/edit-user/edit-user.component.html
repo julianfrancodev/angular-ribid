@@ -20,26 +20,24 @@
         </div>
       </div>
 
-
       <div class="card mt-3">
         <ul class="list-group list-group-flush">
           <li class="list-group-item d-flex justify-content-center align-items-center flex-wrap">
             <h3 class="mb-0 font-weight-bold">Solicitudes</h3>
           </li>
           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-            <h3 class="mb-0 font-weight-bold">Pendientes</h3>
-            <span class="badge badge-pill badge-success">20</span>
+            <h3 class="mb-0 font-weight-bold">Completas</h3>
+            <span class="badge badge-pill badge-success">{{completedPosts}}</span>
 
           </li>
 
           <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-            <h3 class="mb-0 font-weight-bold">Completas</h3>
-            <span class="badge badge-pill badge-warning">20</span>
+            <h3 class="mb-0 font-weight-bold">Pendientes</h3>
+            <span class="badge badge-pill badge-danger">{{pendingPosts}}</span>
           </li>
 
         </ul>
       </div>
-
 
     </div>
     <div class="col-md-8">
@@ -107,10 +105,10 @@
                 <div class="form-field-group">
                   <mat-form-field appearance="outline" class="input-full-width">
                     <mat-label>Telefono</mat-label>
-                    <input matInput type="tel" name="phone" placeholder="3001234567" required #phone="ngModel"
+                    <input matInput type="tel" name="phone" placeholder="Ej: 3001234567" required #phone="ngModel"
                       pattern="[0-9]{10}" [(ngModel)]="userUpdate.phone">
-                    <mat-hint *ngIf="!phone.valid && phone.touched" class="text-danger">El
-                      telefono es invalido</mat-hint>
+                    <mat-error *ngIf="!phone.valid && phone.touched" class="text-danger">El
+                      telefono es invalido</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -122,9 +120,12 @@
                 <div class="form-field-group">
                   <mat-form-field appearance="outline">
                     <mat-label>Fecha de nacimiento</mat-label>
-                    <input placeholder="dd/mm/aaaa" matInput [matDatepicker]="picker">
+                    <input required name="birthdate" #birthdate="ngModel" [(ngModel)]="userUpdate.birth_date"
+                      placeholder="Ej: dd/mm/aaaa" matInput [matDatepicker]="picker" />
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="!birthdate.valid && birthdate.touched" class="text-danger">Fecha de nacimiento
+                      obligatoria</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -149,72 +150,154 @@
   <hr />
   <div *ngIf="identity.role === 3">
 
-
-    <h1 *ngIf="reposts" class="text-center tm-text-color-gray font-weight-bold mt-4 mb-4">Mis Respuestas</h1>
+    <h1 *ngIf="resposts && resposts.length > 1" class="text-center tm-text-color-gray font-weight-bold mt-4 mb-4">Mis
+      Respuestas</h1>
     <h1 *ngIf="resposts.length < 1" class="text-center tm-text-color-gray font-weight-bold mt-4 mb-4">No Tiene
       Respuestas</h1>
 
     <div class="d-flex justify-content-center">
       <mat-spinner [diameter]="30" *ngIf="!resposts"></mat-spinner>
     </div>
-    <div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"
-      (scrolled)="onScrollDown()">
-      <div class="container animated fadeIn fast" *ngFor="let respost of resposts">
-        <section class="row tm-section tm-mb-30">
-          <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
-            <div class="tm-flex-center p-5 tm-bg-color-primary">
-              <div class="tm-max-w-400 tm-flex-center tm-flex-col">
-                <h1 class="tm-text-color-white tm-site-name">{{respost.post.category.name}}</h1>
+
+    <div>
+      <ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-center">
+        <li ngbNavItem>
+          <a ngbNavLink>Mis Respuestas</a>
+          <ng-template ngbNavContent>
+            <div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"
+              (scrolled)="onScrollDown()">
+              <div class="container animated fadeIn fast" *ngFor="let respost of resposts">
+                <section class="row tm-section tm-mb-30">
+                  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
+                    <div class="tm-flex-center p-5 tm-bg-color-primary">
+                      <div class="tm-max-w-400 tm-flex-center tm-flex-col">
+                        <h1 class="tm-text-color-white tm-site-name">{{respost.post.category.name}}</h1>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                    <div class="tm-flex-center p-5">
+                      <div class="tm-flex-center tm-flex-col">
+                        <q class="tm-quote tm-text-color-gray mb-4 font-weight-bold">{{respost.post.title}}</q>
+                        <a [routerLink]="['/post',respost.post.id]" class="btn btn-primary">Ver Mas</a>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <hr />
               </div>
             </div>
-          </div>
-          <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-            <div class="tm-flex-center p-5">
-              <div class="tm-flex-center tm-flex-col">
-                <q class="tm-quote tm-text-color-gray mb-4">{{respost.post.title}}</q>
-                <a [routerLink]="['/post',respost.post.id]" class="btn btn-primary">Ver Mas</a>
+
+          </ng-template>
+        </li>
+        <li ngbNavItem>
+          <a ngbNavLink>Mis Recursos</a>
+          <ng-template ngbNavContent>
+            <div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"
+              (scrolled)="onScrollDownLibDoc()">
+              <div class="container animated fadeIn fast mt-4" *ngFor="let libdoc of libDocPosts">
+                <section class="row tm-section tm-mb-30">
+                  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
+                    <div class="tm-flex-center p-5 tm-bg-color-primary">
+                      <div class="tm-max-w-400 tm-flex-center tm-flex-col">
+                        <h1 class="tm-text-color-white tm-site-name">{{libdoc.category.name}}</h1>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                    <div class="tm-flex-center p-5">
+                      <div class="tm-flex-center tm-flex-col">
+                        <q class="tm-quote tm-text-color-gray mb-4 font-weight-bold">{{libdoc.title}}</q>
+                        <!-- <a [routerLink]="['/post',libdoc.id]" class="btn btn-primary">Ver Mas</a> -->
+                        <a class="btn btn-primary">Ver Mas</a>
+
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <hr />
               </div>
             </div>
-          </div>
-        </section>
-        <hr />
-      </div>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav"></div>
     </div>
+
   </div>
 
-  <div *ngIf="identity.role === 1">
+  <div *ngIf="identity.role === 1 || identity.role == 4 || identity.role == 2">
 
-
-    <h1 *ngIf="posts && posts.length > 0" class="text-center tm-text-color-gray font-weight-bold mt-4 mb-4">Mis
+    <h1 *ngIf="completePosts && completePosts.length > 0"
+      class="text-center tm-text-color-gray font-weight-bold mt-4 mb-4">Mis
       Solicitudes</h1>
-    <h1 *ngIf="!posts || posts.length < 1" class="text-center tm-text-color-gray font-weight-bold mt-4 mb-4">No Tienes
+    <h1 *ngIf="!completePosts || completePosts.length < 1"
+      class="text-center tm-text-color-gray font-weight-bold mt-4 mb-4">No Tienes
       Solicitudes</h1>
 
     <div class="d-flex justify-content-center">
-      <mat-spinner [diameter]="30" *ngIf="!posts"></mat-spinner>
+      <mat-spinner [diameter]="30" *ngIf="!completePosts"></mat-spinner>
     </div>
-    <div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"
-      (scrolled)="onScrollDown()">
-      <div class="container animated fadeIn fast" *ngFor="let post of posts">
-        <section class="row tm-section tm-mb-30">
-          <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
-            <div class="tm-flex-center p-5 tm-bg-color-primary">
-              <div class="tm-max-w-400 tm-flex-center tm-flex-col">
-                <h1 class="tm-text-color-white tm-site-name">{{post.category.name}}</h1>
+    <div>
+      <ul ngbNav #nav="ngbNav" class="nav-tabs justify-content-center">
+        <li ngbNavItem>
+          <a ngbNavLink>Pendientes</a>
+          <ng-template ngbNavContent>
+            <div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"
+              (scrolled)="onScrollDown()">
+              <div class="container animated fadeIn fast mt-4" *ngFor="let post of pendPosts">
+                <section class="row tm-section tm-mb-30">
+                  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
+                    <div class="tm-flex-center p-5 tm-bg-color-primary">
+                      <div class="tm-max-w-400 tm-flex-center tm-flex-col">
+                        <h1 class="tm-text-color-white tm-site-name">{{post.category.name}}</h1>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                    <div class="tm-flex-center p-5">
+                      <div class="tm-flex-center tm-flex-col">
+                        <q class="tm-quote tm-text-color-gray mb-4 font-weight-bold">{{post.title}}</q>
+                        <a [routerLink]="['/post',post.id]" class="btn btn-primary">Ver Mas</a>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <hr />
               </div>
             </div>
-          </div>
-          <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-            <div class="tm-flex-center p-5">
-              <div class="tm-flex-center tm-flex-col">
-                <q class="tm-quote tm-text-color-gray mb-4">{{post.title}}</q>
-                <a [routerLink]="['/post', post.id]" class="btn btn-primary">Ver Mas</a>
+          </ng-template>
+        </li>
+        <li ngbNavItem>
+          <a ngbNavLink>Completadas</a>
+          <ng-template ngbNavContent>
+            <div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"
+              (scrolled)="onScrollDownCompletePending()">
+              <div class="container animated fadeIn fast mt-4" *ngFor="let post of completePosts">
+                <section class="row tm-section tm-mb-30">
+                  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
+                    <div class="tm-flex-center p-5 tm-bg-color-primary">
+                      <div class="tm-max-w-400 tm-flex-center tm-flex-col">
+                        <h1 class="tm-text-color-white tm-site-name">{{post.category.name}}</h1>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                    <div class="tm-flex-center p-5">
+                      <div class="tm-flex-center tm-flex-col">
+                        <q class="tm-quote tm-text-color-gray mb-4 font-weight-bold">{{post.title}}</q>
+                        <a [routerLink]="['/post',post.id]" class="btn btn-primary">Ver Mas</a>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <hr />
               </div>
             </div>
-          </div>
-        </section>
-        <hr />
-      </div>
+          </ng-template>
+        </li>
+      </ul>
+      <div [ngbNavOutlet]="nav"></div>
     </div>
   </div>
 

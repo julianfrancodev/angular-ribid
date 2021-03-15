@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   public page_title = 'Inicio'
   public identity: any;
 
-
   constructor(
     private _route: ActivatedRoute,
     private toastr: ToastrService,
@@ -61,7 +60,7 @@ export class HomeComponent implements OnInit {
 
   showDesktopNotification() {
 
-    if (this.identity && this.identity.role === "ROLE_ADMIN") {
+    if (this.identity && this.identity.role === 3) {
       this._pusherService.channel.bind('App\\Events\\PostPublished', data => {
         console.log(data);
         if (!('Notification' in window)) {
@@ -71,7 +70,9 @@ export class HomeComponent implements OnInit {
 
         Notification.requestPermission(permission => {
           let notification = new Notification("Tienes una nueva solicitud", {
+            tag: data.id,
             body: data.title,
+            renotify: true,
             icon: "https://res.cloudinary.com/dzm7agwqs/image/upload/v1614635309/icon_qdzrlt.png"
           });
           notification.onclick = () => {
@@ -80,7 +81,7 @@ export class HomeComponent implements OnInit {
         });
 
       });
-    }else if(this.identity && this.identity.role === "ROLE_USER"){
+    }else if(this.identity && (this.identity.role == 1 || this.identity.role == 4 || this.identity.role == 2)){
 
       this._pusherService.usersChannel.bind('App\\Events\\RespostPublished', data =>{
         console.log(data);
@@ -91,6 +92,8 @@ export class HomeComponent implements OnInit {
 
         Notification.requestPermission(permission => {
           let notification = new Notification("Han respondido a la solicitud ", {
+            tag: data.id,
+            renotify: true,
             body: data.title,
             icon: "https://res.cloudinary.com/dzm7agwqs/image/upload/v1614635309/icon_qdzrlt.png"
           });

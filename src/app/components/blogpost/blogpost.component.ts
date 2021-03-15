@@ -1,8 +1,6 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { PostService } from '../../services/post.service';
 
-
-
 @Component({
   selector: 'app-blogpost',
   templateUrl: './blogpost.component.html',

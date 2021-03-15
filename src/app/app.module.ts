@@ -15,7 +15,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -45,6 +46,8 @@ import { RespostService } from './services/respost.service';
 import { CategoryService } from './services/category.service';
 import { RoleService } from './services/role.service';
 import { DocumentTypeService } from './services/document-type.service';
+import { LibDocumentService } from './services/lib-document.service';
+import { LibdocumentNewComponent } from './components/libdocument-new/libdocument-new.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +65,7 @@ import { DocumentTypeService } from './services/document-type.service';
     PostComponent,
     SolicitudeComponent,
     CategoryPostsComponent,
+    LibdocumentNewComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -92,7 +96,8 @@ import { DocumentTypeService } from './services/document-type.service';
     MatAutocompleteModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSliderModule
   ],
   providers: [
     appRoutingProviders,
@@ -102,7 +107,8 @@ import { DocumentTypeService } from './services/document-type.service';
     RespostService,
     CategoryService,
     RoleService,
-    DocumentTypeService
+    DocumentTypeService,
+    LibDocumentService
   ],
   bootstrap: [AppComponent]
 })

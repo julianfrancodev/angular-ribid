@@ -92,3 +92,25 @@ h2 {
 .tm-max-w-400 {
     max-width: 400px;
 }
+
+.form-field-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.form-field-group .form-field-label {
+  white-space: nowrap;
+}
+
+.form-field-group .form-field-label+mat-form-field {
+  margin-left: 10px;
+}
+
+.form-field-group mat-form-field {
+  width: 100%;
+}
+
+.input-full-width {
+  width: 100%;
+}

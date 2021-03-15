@@ -61,7 +61,7 @@ export class HeaderComponent implements OnInit, DoCheck {
   }
 
   showError(message: string) {
-    this.toastr.error(message, 'Lo sentimos');
+    this.toastr.warning(message, 'Lo sentimos');
   }
 
   showSuccessSignin() {
@@ -73,7 +73,7 @@ export class HeaderComponent implements OnInit, DoCheck {
   }
 
   showErrorSignin(message: string) {
-    this.toastr.error(message, "Vaya!");
+    this.toastr.warning(message, "Vaya!");
   }
 
   open(content: any) {

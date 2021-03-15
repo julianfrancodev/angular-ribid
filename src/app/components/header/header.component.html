@@ -16,7 +16,7 @@
 
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <a ngbDropdownItem class="font-weight-bold" [routerLink]="['/edit']"> {{identity.name}} </a>
-          <div *ngIf="identity.role === 1">
+          <div *ngIf="identity.role === 1 || identity.role === 4 || identity.role === 2">
             <div class="dropdown-divider"></div>
             <a ngbDropdownItem [routerLink]="['/new-post']">Crear Solicitud</a>
           </div>
@@ -24,6 +24,8 @@
           <div *ngIf="identity.role === 3">
             <div class="dropdown-divider"></div>
             <a ngbDropdownItem [routerLink]="['/recent-solicitude']">Solicitudes</a>
+            <div class="dropdown-divider"></div>
+            <a ngbDropdownItem [routerLink]="['/new-libdocument']">Crear Recurso</a>
           </div>
           <div class="dropdown-divider"></div>
           <a ngbDropdownItem (click)="$event.preventDefault(); logout();"> Salir </a>
@@ -61,7 +63,7 @@
       <div class="myform form">
         <div class="logo mb-3">
           <div class="col-md-12 text-center">
-            <h1 class="blog-header-logo text-dark">Iniciar Sesion</h1>
+            <h1 class="blog-header-logo text-dark font-weight-bold">Iniciar Sesion</h1>
           </div>
         </div>
         <form name="signin" #signinForm='ngForm' (ngSubmit)='onSubmitSignin(signinForm)'>
@@ -118,7 +120,7 @@
       <div class="myform form">
         <div class="logo mb-3">
           <div class="col-md-12 text-center">
-            <h1 class="blog-header-logo text-dark">Registrarme</h1>
+            <h1 class="blog-header-logo text-dark font-weight-bold">Registrarme</h1>
           </div>
         </div>
         <form name="register" #registerForm='ngForm' (ngSubmit)='onSubmitRegister(registerForm)'>

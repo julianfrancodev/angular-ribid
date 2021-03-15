@@ -6,6 +6,8 @@ export class Post{
         public title: string,
         public author: string,
         public document_type_id: string,
+        public section: string,
+        public pages: string,
         public createdAt: any
     ){}
 }

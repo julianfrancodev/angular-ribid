@@ -1,24 +1,23 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-
 import { UserService } from 'src/app/services/user.service';
 import { PostService } from '../../services/post.service';
 import { RespostService } from 'src/app/services/respost.service';
-
+import { LibDocumentService } from 'src/app/services/lib-document.service';
 import { Post } from '../../models/post';
 import { ResPost } from 'src/app/models/respost';
-
 import { global } from '../../services/global';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.css'],
-  providers: [PostService, UserService]
+  providers: [PostService, UserService, LibDocumentService]
 })
 export class PostComponent implements OnInit, DoCheck {
 
+  public libDocuments: any[] = [];
   public post: Post;
   public resPost: ResPost;
   public resPostResponse: ResPost;
@@ -27,6 +26,9 @@ export class PostComponent implements OnInit, DoCheck {
   public url: string;
   public showFile: boolean;
   public src: string;
+  public itemSelected: any;
+  public showUploadFile: boolean = false;
+  public showSelectDocLib: boolean = false;
 
 
   public fileConfig = {
@@ -57,9 +59,10 @@ export class PostComponent implements OnInit, DoCheck {
   constructor(
     private _resPostService: RespostService,
     private _postService: PostService,
+    private _userService: UserService,
+    private _libDocumentService: LibDocumentService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _userService: UserService,
     private toastr: ToastrService,
 
   ) {
@@ -72,7 +75,7 @@ export class PostComponent implements OnInit, DoCheck {
     this.getPost();
 
     if (this.identity) {
-      this.resPost = new ResPost(1, '', this.identity.sub, 1, '');
+      this.resPost = new ResPost(1, '', this.identity.sub, 1, '', '');
     }
 
     console.log(this.identity);
@@ -80,6 +83,7 @@ export class PostComponent implements OnInit, DoCheck {
     console.log(this.resPost);
 
     this.getRespostByPost();
+    this.getLibDocuments();
 
   }
 
@@ -88,6 +92,20 @@ export class PostComponent implements OnInit, DoCheck {
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.src;
+
+    this.itemSelected;
+
+    if (this.itemSelected == "1") {
+      this.showUploadFile = true;
+      this.showSelectDocLib = false;
+    } else if (this.itemSelected == "2") {
+      this.showUploadFile = false;
+      this.showSelectDocLib = true;
+    } else {
+      this.showUploadFile = false;
+      this.showSelectDocLib = false;
+    }
+
 
   }
 
@@ -103,7 +121,7 @@ export class PostComponent implements OnInit, DoCheck {
     this.toastr.error('Archivo publicado exitosamente');
   }
 
-  showSuccessUpdateRespost(){
+  showSuccessUpdateRespost() {
     this.toastr.success('Archivo Actualizado con éxito');
   }
 
@@ -179,9 +197,24 @@ export class PostComponent implements OnInit, DoCheck {
     this._resPostService.update(this.token, this.resPost).subscribe(
       response => {
         console.log(response)
-        if(response.status == "success"){
+        if (response.status == "success") {
           this.src = this.url + 'respost/file/' + response.changes.file_res;
         }
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  getLibDocuments() {
+    this._libDocumentService.getLibDocuments().subscribe(
+      response => {
+        if (response.status == "success") {
+          this.libDocuments.push(...response.libdocuments);
+        }
+
+        console.log(this.libDocuments);
       },
       error => {
         console.log(error);

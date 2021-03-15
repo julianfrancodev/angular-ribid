@@ -7,18 +7,21 @@ import { Router } from '@angular/router';
 import { RespostService } from 'src/app/services/respost.service';
 import { PostService } from 'src/app/services/post.service';
 import { RoleService } from 'src/app/services/role.service';
+import { LibDocumentService } from 'src/app/services/lib-document.service';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.css'],
-  providers: [UserService, RespostService, PostService, RoleService]
+  providers: [UserService, RespostService, PostService, RoleService, LibDocumentService]
 
 })
 export class EditUserComponent implements OnInit {
 
   public roles: any[] = [];
   public resposts: any[] = [];
-  public posts: any[] = [];
+  public completePosts: any[] = [];
+  public pendPosts: any[] = [];
+  public libDocPosts: any[] = [];
   public userUpdate: User;
   public identity: any;
   public token: string;
@@ -28,11 +31,12 @@ export class EditUserComponent implements OnInit {
   public scrollUpDistance: number = 2;
   public direction: string = "";
   public page: number = 1;
+  public pendingPage: number = 1;
   public lastPage: number;
+  public completedPosts: number;
+  public pendingPosts: number;
+  public pageLibDoc: number = 1;
 
-  public options: Object = {
-    placeholderText: 'Tu descripción puede ir aqui.'
-  }
 
   public afuConfig = {
     multiple: false,
@@ -65,7 +69,8 @@ export class EditUserComponent implements OnInit {
     private toastr: ToastrService,
     private _resPostService: RespostService,
     private _postService: PostService,
-    private _roleService: RoleService
+    private _roleService: RoleService,
+    private _libDocumentService: LibDocumentService
   ) {
     if (this._userService.getIdentity() == null) {
       this.router.navigate(['']);
@@ -83,8 +88,8 @@ export class EditUserComponent implements OnInit {
       this.identity.email,
       '',
       this.identity.image,
-      '',
-      ''
+      this.identity.phone,
+      this.identity.birth_date
     );
   }
 
@@ -92,6 +97,7 @@ export class EditUserComponent implements OnInit {
     console.log(this.userUpdate);
     this.getPostsByUser();
     this.getRoles();
+    this.getPostCountByUser();
 
   }
 
@@ -148,21 +154,19 @@ export class EditUserComponent implements OnInit {
         error => {
           console.log(error);
         }
-      )
-    } else if (this.identity && this.identity.role == 1) {
+      );
 
-      this._postService.getPostByUser(this.identity.sub, this.page).subscribe(
-        response => {
-          console.log(response);
-          if (response.status == "success") {
-            this.posts.push(...response.posts.data);
-          }
-        },
-        error => {
-          console.log(error);
-        }
 
-      )
+      this.getLibDocumentsByUser();
+
+
+    } else if (this.identity && this.identity.role == 1 || this.identity.role == 4 || this.identity.role == 2) {
+
+
+      this.getCompletePostsByUser();
+
+      this.getPendingPostsByUser();
+
 
     } else {
       this.router.navigate(['']);
@@ -172,14 +176,120 @@ export class EditUserComponent implements OnInit {
 
   }
 
-  getRoles() {
-    this._roleService.getRoles().subscribe(
-      response=>{
+  getLibDocumentsByUser(){
+    this._libDocumentService.getLibDocumentsByUser(this.identity.sub, this.pageLibDoc).subscribe(
+      response =>{
+        console.log(response);
         if(response.status == "success"){
-          this.roles = response.roles;
+          this.libDocPosts.push(...response.libdocuments.data);
         }
       },
       error =>{
+        console.log(error);
+      }
+    );
+  }
+
+
+  getPostCountByUser() {
+
+    if (this.identity && this.identity.role == 3) {
+      this._resPostService.getCountCompletePostsByAdmin(this.identity.sub).subscribe(
+        response => {
+          if (response.status == "success") {
+            this.completedPosts = response.respost;
+          }
+        },
+        error => {
+          console.log(error);
+        }
+      );
+
+      this._resPostService.getCountIncompletePostsByAdmin().subscribe(
+        response => {
+          if (response.status == "success") {
+            this.pendingPosts = response.posts;
+          }
+        },
+        error => {
+          console.log(error);
+        }
+      )
+
+
+
+    } else if (this.identity && this.identity.role == 1 || this.identity.role == 4 || this.identity.role == 2) {
+
+      this._postService.getCountCompletedPostByUser(this.identity.sub).subscribe(
+        response => {
+          console.log(response);
+          if (response.status === 'success') {
+            this.completedPosts = response.posts;
+          }
+        },
+        error => {
+          console.log(error);
+        }
+
+      );
+
+      this._postService.getCountPendingPostFromUser(this.identity.sub).subscribe(
+        response => {
+          console.log(response);
+          if (response.status === 'success') {
+            this.pendingPosts = response.posts;
+          }
+        },
+        error => {
+          console.log(error);
+        }
+      )
+
+    } else {
+      this.router.navigate(['']);
+
+    }
+  }
+
+  getCompletePostsByUser() {
+    this._postService.getCompletePostByUser(this.identity.sub, this.page).subscribe(
+      response => {
+        console.log(response);
+        if (response.status == "success") {
+          this.completePosts.push(...response.posts.data);
+        }
+      },
+      error => {
+        console.log(error);
+      }
+
+    );
+  }
+
+  getPendingPostsByUser() {
+    this._postService.getPendingPostsByUser(this.identity.sub, this.pendingPage).subscribe(
+      response => {
+        console.log(response);
+        if (response.status == "success") {
+          this.pendPosts.push(...response.posts.data);
+        }
+      },
+      error => {
+        console.log(error);
+      }
+
+    );
+
+  }
+
+  getRoles() {
+    this._roleService.getRoles().subscribe(
+      response => {
+        if (response.status == "success") {
+          this.roles = response.roles;
+        }
+      },
+      error => {
         console.log(error);
       }
     )
@@ -187,11 +297,18 @@ export class EditUserComponent implements OnInit {
 
 
   onScrollDown() {
-
     this.page++;
+    this.getCompletePostsByUser();
+  }
 
-    this.getPostsByUser();
+  onScrollDownCompletePending() {
+    this.pendingPage++;
+    this.getPendingPostsByUser();
+  }
 
+  onScrollDownLibDoc(){
+    this.pageLibDoc++;
+    this.getLibDocumentsByUser();
   }
 
 

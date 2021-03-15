@@ -6,57 +6,57 @@
     <li ngbNavItem>
       <a ngbNavLink>Pendientes</a>
       <ng-template ngbNavContent>
-        <div infinite-scroll [infiniteScrollDistance]="scrollDistance"
-        [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDown()">
-        <div class="container animated fadeIn fast mt-4" *ngFor="let post of posts">
-          <section class="row tm-section tm-mb-30">
-            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
-              <div class="tm-flex-center p-5 tm-bg-color-primary">
-                <div class="tm-max-w-400 tm-flex-center tm-flex-col">
-                  <h1 class="tm-text-color-white tm-site-name">{{post.category.name}}</h1>
+        <div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"
+          (scrolled)="onScrollDown()">
+          <div class="container animated fadeIn fast mt-4" *ngFor="let post of posts">
+            <section class="row tm-section tm-mb-30">
+              <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
+                <div class="tm-flex-center p-5 tm-bg-color-primary">
+                  <div class="tm-max-w-400 tm-flex-center tm-flex-col">
+                    <h1 class="tm-text-color-white tm-site-name">{{post.category.name}}</h1>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-              <div class="tm-flex-center p-5">
-                <div class="tm-flex-center tm-flex-col">
-                  <q class="tm-quote tm-text-color-gray mb-4">{{post.title}}</q>
-                  <a [routerLink]="['/post',post.id]" class="btn btn-primary">Ver Mas</a>
+              <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <div class="tm-flex-center p-5">
+                  <div class="tm-flex-center tm-flex-col">
+                    <q class="tm-quote tm-text-color-gray mb-4 font-weight-bold">{{post.title}}</q>
+                    <a [routerLink]="['/post',post.id]" class="btn btn-primary">Ver Mas</a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
-          <hr />
+            </section>
+            <hr />
+          </div>
         </div>
-      </div>
-        </ng-template>
+      </ng-template>
     </li>
     <li ngbNavItem>
       <a ngbNavLink>Completadas</a>
       <ng-template ngbNavContent>
-        <div infinite-scroll [infiniteScrollDistance]="scrollDistance"
-        [infiniteScrollThrottle]="throttle" (scrolled)="onScrollDownComplete()">
-        <div class="container animated fadeIn fast mt-4" *ngFor="let post of postsComplete">
-          <section class="row tm-section tm-mb-30">
-            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
-              <div class="tm-flex-center p-5 tm-bg-color-primary">
-                <div class="tm-max-w-400 tm-flex-center tm-flex-col">
-                  <h1 class="tm-text-color-white tm-site-name">{{post.category.name}}</h1>
+        <div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"
+          (scrolled)="onScrollDownComplete()">
+          <div class="container animated fadeIn fast mt-4" *ngFor="let post of postsComplete">
+            <section class="row tm-section tm-mb-30">
+              <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 p-0 text-center">
+                <div class="tm-flex-center p-5 tm-bg-color-primary">
+                  <div class="tm-max-w-400 tm-flex-center tm-flex-col">
+                    <h1 class="tm-text-color-white tm-site-name">{{post.category.name}}</h1>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-              <div class="tm-flex-center p-5">
-                <div class="tm-flex-center tm-flex-col">
-                  <q class="tm-quote tm-text-color-gray mb-4">{{post.title}}</q>
-                  <a [routerLink]="['/post',post.id]" class="btn btn-primary">Ver Mas</a>
+              <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <div class="tm-flex-center p-5">
+                  <div class="tm-flex-center tm-flex-col">
+                    <q class="tm-quote tm-text-color-gray mb-4 font-weight-bold">{{post.title}}</q>
+                    <a [routerLink]="['/post',post.id]" class="btn btn-primary">Ver Mas</a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
-          <hr />
+            </section>
+            <hr />
+          </div>
         </div>
-      </div>
       </ng-template>
     </li>
   </ul>

@@ -52,7 +52,23 @@ export class RespostService {
 
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this._http.get(this.url + 'respost/getPostByAdminResPost/' + id + '?page='+page, { headers: headers });
+    return this._http.get(this.url + 'respost/getPostByAdminResPost/' + id + '?page=' + page, { headers: headers });
+
+  }
+
+  getCountCompletePostsByAdmin(id: string): Observable<any> {
+
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+    return this._http.get(this.url + 'respost/getrespost/count/' + id, { headers: headers });
+
+  }
+
+  getCountIncompletePostsByAdmin(): Observable<any> {
+
+    let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+    return this._http.get(this.url + 'post/count/all/pending', { headers: headers });
 
   }
 
