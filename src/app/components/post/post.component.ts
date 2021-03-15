@@ -20,7 +20,7 @@ export class PostComponent implements OnInit, DoCheck {
   public libDocuments: any[] = [];
   public post: Post;
   public resPost: ResPost;
-  public resPostResponse: ResPost;
+  public resPostResponse: any;
   public identity: any;
   public token: string;
   public url: string;
@@ -75,7 +75,7 @@ export class PostComponent implements OnInit, DoCheck {
     this.getPost();
 
     if (this.identity) {
-      this.resPost = new ResPost(1, '', this.identity.sub, 1, '', '');
+      this.resPost = new ResPost(1, null, this.identity.sub, 1, null, '');
     }
 
     console.log(this.identity);
@@ -154,7 +154,11 @@ export class PostComponent implements OnInit, DoCheck {
           if (response.status === "success") {
             this.resPostResponse = response.respost[0];
             if (this.resPostResponse) {
-              this.src = this.url + "respost/file/" + this.resPostResponse.file_res;
+              if(this.resPostResponse.file_res != null){
+                this.src = this.url + "respost/file/" + this.resPostResponse.file_res;
+              }else{
+                this.src = this.url + "respost/file/" + this.resPostResponse.lib_document.file_lib;
+              }
             }
           }
 

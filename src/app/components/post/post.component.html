@@ -32,7 +32,7 @@
         <h1 class="text-center mb-4 mt-2 tm-text-color-gray font-weight-bold">Vista Previa Del Documento</h1>
 
         <div>
-          <pdf-viewer [src]="src" [fit-to-page]="true" [render-text]="false" [show-all]="false"></pdf-viewer>
+          <pdf-viewer  [src]="src" [fit-to-page]="true" [render-text]="false" [show-all]="false"></pdf-viewer>
         </div>
 
         <form #updateRespostForm='ngForm' (ngSubmit)='updateRespost(updateRespostForm)'>
@@ -77,11 +77,12 @@
                       <mat-option [value]="1">
                         Subir Archivo
                       </mat-option>
-
                       <mat-option [value]="2">
-                        Seleccionar de mis Recursos
+                        Seleccionar de mis recursos
                       </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="!item.valid && item.touched" class="text-danger">
+                      El tipo de repuesta es necesario</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -129,23 +130,18 @@
 
         </form>
       </div>
-
-
     </div>
 
-
-
     <div class="mb-4 mt-4" *ngIf="this.identity.role == 1 || this.identity.role == 4 || this.identity.role == 2">
-      <pdf-viewer *ngIf="resPostResponse" [src]="src" [show-borders]="true" [render-text]="false" [fit-to-page]="true">
+      <pdf-viewer *ngIf="resPostResponse" [src]="src" [show-borders]="true" [render-text]="false" [fit-to-page]="true" [autoresize]="true">
       </pdf-viewer>
     </div>
   </div>
 
 
-
   <div *ngIf="!identity">
     <div class="mb-3" *ngIf="src">
-      <pdf-viewer [src]="src" [render-text]="false" [show-all]="false" [fit-to-page]="true"></pdf-viewer>
+      <pdf-viewer [src]="src" [render-text]="false" [show-all]="false" [fit-to-page]="true" [autoresize]="true"></pdf-viewer>
       <h1 class="text-center mb-5 mt-0 tm-text-color-gray font-weight-bold">Ingresa Para Ver El Documento Completo</h1>
     </div>
 
