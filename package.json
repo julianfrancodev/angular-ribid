@@ -31,7 +31,6 @@
     "ng2-pdf-viewer": "6.3.2",
     "ngx-infinite-scroll": "^10.0.1",
     "ngx-toastr": "^13.0.1",
-    "pdfjs-dist": "2.5.207",
     "pusher-js": "^7.0.3",
     "rxjs": "~6.6.6",
     "tslib": "^2.0.0",

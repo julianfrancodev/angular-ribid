@@ -6,6 +6,9 @@
     <li ngbNavItem>
       <a ngbNavLink>Pendientes</a>
       <ng-template ngbNavContent>
+        <h1 *ngIf="!posts || posts.length < 1"
+        class="text-center tm-text-color-gray font-weight-bold mt-4 mb-4">No Hay Nada
+        Pendiente</h1>
         <div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"
           (scrolled)="onScrollDown()">
           <div class="container animated fadeIn fast mt-4" *ngFor="let post of posts">
@@ -34,6 +37,8 @@
     <li ngbNavItem>
       <a ngbNavLink>Completadas</a>
       <ng-template ngbNavContent>
+        <h1 *ngIf="!postsComplete || postsComplete.length < 1"
+        class="text-center tm-text-color-gray font-weight-bold mt-4 mb-4">No Hay Solicitudes</h1>
         <div infinite-scroll [infiniteScrollDistance]="scrollDistance" [infiniteScrollThrottle]="throttle"
           (scrolled)="onScrollDownComplete()">
           <div class="container animated fadeIn fast mt-4" *ngFor="let post of postsComplete">
