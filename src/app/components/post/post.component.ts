@@ -202,7 +202,11 @@ export class PostComponent implements OnInit, DoCheck {
       response => {
         console.log(response)
         if (response.status == "success") {
-          this.src = this.url + 'respost/file/' + response.changes.file_res;
+          if(response.changes.file_res != null){
+            this.src = this.url + "respost/file/" + response.changes.file_res;
+          }else{
+            this.src = this.url + "respost/file/" + response.changes.lib_document.file_lib;
+          }
         }
       },
       error => {

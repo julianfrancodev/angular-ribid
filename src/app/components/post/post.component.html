@@ -31,9 +31,11 @@
 
         <h1 class="text-center mb-4 mt-2 tm-text-color-gray font-weight-bold">Vista Previa Del Documento</h1>
 
-        <div>
-          <pdf-viewer  [src]="src" [fit-to-page]="true" [render-text]="false" [show-all]="false"></pdf-viewer>
+        <div style="height: auto;">
+          <pdf-viewer [show-borders]="true" [src]="src" [fit-to-page]="true" [render-text]="false" [show-all]="false"></pdf-viewer>
         </div>
+
+        <hr>
 
         <form #updateRespostForm='ngForm' (ngSubmit)='updateRespost(updateRespostForm)'>
 
@@ -41,11 +43,51 @@
 
             <div class="row">
               <div class="col-sm-12">
+                <div class="form-field-group">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Selecciona Tu Tipo De Respuesta</mat-label>
+                    <mat-select name="item" #item="ngModel" [(ngModel)]="itemSelected" required>
+                      <mat-option [value]="1">
+                        Subir Archivo
+                      </mat-option>
+                      <mat-option [value]="2">
+                        Seleccionar de mis recursos
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="!item.valid && item.touched" class="text-danger">
+                      El tipo de repuesta es necesario</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12" *ngIf="showUploadFile">
                 <div class="page text-center">
                   <angular-file-uploader [config]="fileConfig" (ApiResponse)="fileUpload($event)">
                   </angular-file-uploader>
                 </div>
               </div>
+            </div>
+
+            <div class="row" *ngIf="showSelectDocLib">
+              <div class="col-sm-12">
+                <div class="form-field-group">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Selecciona uno de los documentos</mat-label>
+                    <mat-select name="libdoc" #libdocument="ngModel" [(ngModel)]="resPost.lib_document_id" required>
+                      <mat-option *ngFor="let libdocument of libDocuments" [value]="libdocument.id">
+                        {{libdocument.title}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="!libdocument.valid && libdocument.touched" class="text-danger">
+                      El documento es necesario</mat-error>
+
+                  </mat-form-field>
+                </div>
+              </div>
+
             </div>
 
             <div class="row mt-4">
@@ -141,7 +183,7 @@
 
   <div *ngIf="!identity">
     <div class="mb-3" *ngIf="src">
-      <pdf-viewer [src]="src" [render-text]="false" [show-all]="false" [fit-to-page]="true" [autoresize]="true"></pdf-viewer>
+      <pdf-viewer [show-borders]="true" [src]="src" [render-text]="false" [show-all]="false" [fit-to-page]="true" [autoresize]="true"></pdf-viewer>
       <h1 class="text-center mb-5 mt-0 tm-text-color-gray font-weight-bold">Ingresa Para Ver El Documento Completo</h1>
     </div>
 

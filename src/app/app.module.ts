@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -36,7 +37,6 @@ import { CategoriesComponent } from './components/categories/categories.componen
 import { PostNewComponent } from './components/post-new/post-new.component';
 import { PostComponent } from './components/post/post.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { PdfViewerModule } from "ng2-pdf-viewer";
 import { SolicitudeComponent } from './components/solicitude/solicitude.component';
 import { CategoryPostsComponent } from './components/category-posts/category-posts.component';
 import { PusherService } from './services/pusher.service';
@@ -89,7 +89,6 @@ import { LibdocumentNewComponent } from './components/libdocument-new/libdocumen
     MatSelectModule,
     MatInputModule,
     MatDialogModule,
-    PdfViewerModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
     InfiniteScrollModule,
@@ -97,7 +96,8 @@ import { LibdocumentNewComponent } from './components/libdocument-new/libdocumen
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSliderModule
+    MatSliderModule,
+    PdfViewerModule
   ],
   providers: [
     appRoutingProviders,
