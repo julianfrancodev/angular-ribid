@@ -47,3 +47,6 @@ input::-webkit-input-placeholder {
     min-width:230px;
 }
 
+img:hover {
+  cursor: pointer;
+}

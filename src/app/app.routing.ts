@@ -8,6 +8,7 @@ import { PostComponent } from './components/post/post.component';
 import { SolicitudeComponent } from './components/solicitude/solicitude.component';
 import { CategoryPostsComponent } from './components/category-posts/category-posts.component';
 import { LibdocumentNewComponent } from './components/libdocument-new/libdocument-new.component';
+import { FaqComponent } from './components/faq/faq.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,6 +18,7 @@ const appRoutes: Routes = [
   { path: 'recent-solicitude', component: SolicitudeComponent },
   { path: 'posts-category/:id', component: CategoryPostsComponent },
   { path: 'new-libdocument', component: LibdocumentNewComponent },
+  { path: 'faq', component: FaqComponent },
   { path: '**', component: HomeComponent }
 ];
 

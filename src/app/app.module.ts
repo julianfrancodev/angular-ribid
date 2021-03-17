@@ -18,7 +18,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -48,6 +49,7 @@ import { RoleService } from './services/role.service';
 import { DocumentTypeService } from './services/document-type.service';
 import { LibDocumentService } from './services/lib-document.service';
 import { LibdocumentNewComponent } from './components/libdocument-new/libdocument-new.component';
+import { FaqComponent } from './components/faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +67,7 @@ import { LibdocumentNewComponent } from './components/libdocument-new/libdocumen
     SolicitudeComponent,
     CategoryPostsComponent,
     LibdocumentNewComponent,
+    FaqComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -97,7 +100,8 @@ import { LibdocumentNewComponent } from './components/libdocument-new/libdocumen
     MatNativeDateModule,
     MatSliderModule,
     PdfViewerModule,
-    MatMenuModule
+    MatMenuModule,
+    MatExpansionModule
   ],
   providers: [
     appRoutingProviders,
