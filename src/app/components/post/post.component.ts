@@ -154,9 +154,9 @@ export class PostComponent implements OnInit, DoCheck {
           if (response.status === "success") {
             this.resPostResponse = response.respost[0];
             if (this.resPostResponse) {
-              if(this.resPostResponse.file_res != null){
+              if (this.resPostResponse.file_res != null) {
                 this.src = this.url + "respost/file/" + this.resPostResponse.file_res;
-              }else{
+              } else {
                 this.src = this.url + "respost/file/" + this.resPostResponse.lib_document.file_lib;
               }
             }
@@ -187,7 +187,7 @@ export class PostComponent implements OnInit, DoCheck {
       },
       error => {
         console.log(error);
-        this.showSuccessSavedRespost();
+        this.showErrorSavedRespost();
       }
     )
 
@@ -202,10 +202,12 @@ export class PostComponent implements OnInit, DoCheck {
       response => {
         console.log(response)
         if (response.status == "success") {
-          if(response.changes.file_res != null){
+          if (response.changes.file_res != null) {
             this.src = this.url + "respost/file/" + response.changes.file_res;
-          }else{
+            this.showSuccessUpdateRespost();
+          } else {
             this.src = this.url + "respost/file/" + response.changes.lib_document.file_lib;
+            this.showSuccessUpdateRespost();
           }
         }
       },

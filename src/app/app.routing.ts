@@ -1,7 +1,6 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ErrorComponent } from './components/error/error.component';
 import { HomeComponent } from './components/home/home.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { PostNewComponent } from './components/post-new/post-new.component';
@@ -18,7 +17,7 @@ const appRoutes: Routes = [
   { path: 'recent-solicitude', component: SolicitudeComponent },
   { path: 'posts-category/:id', component: CategoryPostsComponent },
   { path: 'new-libdocument', component: LibdocumentNewComponent },
-  { path: '**', component: ErrorComponent }
+  { path: '**', component: HomeComponent }
 ];
 
 export const appRoutingProviders: any[] = [];

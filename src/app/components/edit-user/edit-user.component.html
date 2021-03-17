@@ -48,7 +48,7 @@
               <div class="col-sm-12 text-secondary">
                 <mat-form-field appearance="outline" class="input-full-width">
                   <mat-label>Nombre</mat-label>
-                  <input matInput type="text" name="nameu" placeholder="Nombre" #nameu="ngModel" required
+                  <input matInput type="text" name="nameu" placeholder="Ej: Pedro" #nameu="ngModel" required
                     pattern="[a-z A-Z]+" [(ngModel)]="userUpdate.name">
                   <mat-hint *ngIf="!nameu.valid && nameu.touched" class="text-danger">El nombre no es
                     valido</mat-hint>
@@ -62,7 +62,7 @@
 
                 <mat-form-field appearance="outline" class="input-full-width">
                   <mat-label>Apellido</mat-label>
-                  <input matInput type="text" name="lastname" placeholder="Fred" #lastname="ngModel"
+                  <input matInput type="text" name="lastname" placeholder="Ej: Suarez" #lastname="ngModel"
                     [(ngModel)]="userUpdate.surname" required pattern="[a-z A-Z]+">
                   <mat-hint *ngIf="!lastname.valid && lastname.touched" class="text-danger">El
                     apellido no es valido</mat-hint>
@@ -77,7 +77,7 @@
 
                 <mat-form-field appearance="outline" class="input-full-width">
                   <mat-label>Email</mat-label>
-                  <input matInput type="text" name="emailu" placeholder="Fred" required #emailu="ngModel"
+                  <input matInput type="text" name="emailu" placeholder="Ej: email@usantoto.edu.co" required #emailu="ngModel"
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="userUpdate.email">
                   <mat-hint *ngIf="!emailu.valid && emailu.touched" class="text-danger">El
                     correo es invalido</mat-hint>

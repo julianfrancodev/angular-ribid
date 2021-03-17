@@ -18,6 +18,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import {MatMenuModule} from '@angular/material/menu';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -31,7 +32,6 @@ import { BlogmainComponent } from './components/blogmain/blogmain.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { HomeComponent } from './components/home/home.component';
-import { ErrorComponent } from './components/error/error.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { PostNewComponent } from './components/post-new/post-new.component';
@@ -58,7 +58,6 @@ import { LibdocumentNewComponent } from './components/libdocument-new/libdocumen
     BlogpostComponent,
     BlogmainComponent,
     HomeComponent,
-    ErrorComponent,
     EditUserComponent,
     CategoriesComponent,
     PostNewComponent,
@@ -97,7 +96,8 @@ import { LibdocumentNewComponent } from './components/libdocument-new/libdocumen
     MatDatepickerModule,
     MatNativeDateModule,
     MatSliderModule,
-    PdfViewerModule
+    PdfViewerModule,
+    MatMenuModule
   ],
   providers: [
     appRoutingProviders,
