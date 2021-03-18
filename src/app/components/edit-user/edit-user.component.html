@@ -77,8 +77,8 @@
 
                 <mat-form-field appearance="outline" class="input-full-width">
                   <mat-label>Email</mat-label>
-                  <input matInput type="text" name="emailu" placeholder="Ej: email@usantoto.edu.co" required #emailu="ngModel"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="userUpdate.email">
+                  <input matInput type="text" name="emailu" placeholder="Ej: email@usantoto.edu.co" required
+                    #emailu="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" [(ngModel)]="userUpdate.email">
                   <mat-hint *ngIf="!emailu.valid && emailu.touched" class="text-danger">El
                     correo es invalido</mat-hint>
                 </mat-form-field>
@@ -208,8 +208,10 @@
                     <div class="tm-flex-center p-5">
                       <div class="tm-flex-center tm-flex-col">
                         <q class="tm-quote tm-text-color-gray mb-4 font-weight-bold">{{libdoc.title}}</q>
-                        <p class="tm-quote">{{libdoc.document_type.name}} <span *ngIf="libdoc.section">- {{libdoc.section}}</span></p>
-                        <p class="tm-quote"><span *ngIf="libdoc.pages">{{libdoc.pages}} Paginas - </span>{{libdoc.created_at | date}}</p>
+                        <p class="tm-quote">{{libdoc.document_type.name}} <span *ngIf="libdoc.section">-
+                            {{libdoc.section}}</span></p>
+                        <p class="tm-quote"><span *ngIf="libdoc.pages">{{libdoc.pages}} Paginas -
+                          </span>{{libdoc.created_at | date}}</p>
 
                       </div>
                     </div>

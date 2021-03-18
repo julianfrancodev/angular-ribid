@@ -21,8 +21,8 @@
               <div class="col-sm-12 text-secondary">
                 <mat-form-field appearance="outline" class="input-full-width">
                   <mat-label>Autor</mat-label>
-                  <input matInput placeholder="Ej: William Ospina" type="text" name="author" required
-                    #author="ngModel" [(ngModel)]="post.author" minlength="10">
+                  <input matInput placeholder="Ej: William Ospina" type="text" name="author" required #author="ngModel"
+                    [(ngModel)]="post.author" minlength="10">
                   <mat-error *ngIf="!author.valid && author.touched" class="text-danger">Longitud minima
                     de 10 caracateres</mat-error>
                 </mat-form-field>

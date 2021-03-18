@@ -105,9 +105,4 @@ export class PostNewComponent implements OnInit, DoCheck {
   onInputChange(event: MatSliderChange) {
     this.post.pages = event.value.toString();
   }
-
-
-
-
-
 }

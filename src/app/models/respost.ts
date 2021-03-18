@@ -1,4 +1,3 @@
-
 export class ResPost {
     constructor(
         public id: number,
