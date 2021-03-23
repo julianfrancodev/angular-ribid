@@ -1,5 +1,5 @@
 export const global = {
-    url : 'http://165.22.4.122/'
+    url : 'https://warm-beyond-77275.herokuapp.com/'
 }
 export const environment = {
   production: false,
