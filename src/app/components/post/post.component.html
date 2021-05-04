@@ -32,7 +32,7 @@
         <h1 class="text-center mb-4 mt-2 tm-text-color-gray font-weight-bold">Vista Previa Del Documento</h1>
 
         <div style="height: auto;">
-          <pdf-viewer [show-borders]="true" [src]="src" [fit-to-page]="true" [render-text]="false" [show-all]="false"></pdf-viewer>
+          <pdf-viewer [show-borders]="true" [original-size]="false" [autoresize]="true" [src]="src" [fit-to-page]="true" [render-text]="false" [show-all]="false"></pdf-viewer>
         </div>
 
         <hr>
@@ -175,7 +175,7 @@
     </div>
 
     <div class="mb-4 mt-4" *ngIf="this.identity.role == 1 || this.identity.role == 4 || this.identity.role == 2">
-      <pdf-viewer *ngIf="resPostResponse" [src]="src" [show-borders]="true" [render-text]="false" [fit-to-page]="true" [autoresize]="true">
+      <pdf-viewer *ngIf="resPostResponse" [original-size]="false" [src]="src" [autoresize]="true" [show-borders]="true" [render-text]="false" [fit-to-page]="true" [autoresize]="true">
       </pdf-viewer>
     </div>
   </div>
@@ -184,7 +184,7 @@
   <div *ngIf="!identity">
     <div class="mb-3" *ngIf="src">
       <h1 class="text-center mb-3 mt-0 tm-text-color-gray font-weight-bold">Ingresa Para Ver El Documento Completo</h1>
-      <pdf-viewer [show-borders]="true" [src]="src" [render-text]="false" [show-all]="false" [fit-to-page]="true" [autoresize]="true"></pdf-viewer>
+      <pdf-viewer [show-borders]="true" [original-size]="false" [autoresize]="true" [src]="src" [render-text]="false" [show-all]="false" [fit-to-page]="true" [autoresize]="true"></pdf-viewer>
     </div>
 
   </div>
