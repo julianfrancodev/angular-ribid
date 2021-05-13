@@ -16,7 +16,7 @@
             "allowedCommonJsDependencies": [
               "ng2-pdf-viewer"
             ],
-            "outputPath": "dist/ribid",
+            "outputPath": "../ribid/public/app/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",

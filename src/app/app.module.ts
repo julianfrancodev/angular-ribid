@@ -20,6 +20,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -104,6 +105,7 @@ import { FaqComponent } from './components/faq/faq.component';
     MatExpansionModule
   ],
   providers: [
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
     appRoutingProviders,
     PusherService,
     PostService,
