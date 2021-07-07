@@ -33,8 +33,13 @@
     "ngx-toastr": "^13.0.1",
     "pusher-js": "^7.0.3",
     "rxjs": "~6.6.7",
+    "three": "^0.129.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.10.2"
+    "vanta": "^0.5.21",
+    "zone.js": "~0.10.2",
+    "@types/file-saver": "^2.0.1",
+    "file-saver": "^2.0.2",
+    "ngx-filesaver": "^11.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.11",

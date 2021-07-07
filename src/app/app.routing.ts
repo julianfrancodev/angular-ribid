@@ -9,6 +9,7 @@ import { SolicitudeComponent } from './components/solicitude/solicitude.componen
 import { CategoryPostsComponent } from './components/category-posts/category-posts.component';
 import { LibdocumentNewComponent } from './components/libdocument-new/libdocument-new.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { SolicitudeUserComponent } from './components/solicitude-user/solicitude-user.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
   { path: 'recent-solicitude', component: SolicitudeComponent },
   { path: 'posts-category/:id', component: CategoryPostsComponent },
   { path: 'new-libdocument', component: LibdocumentNewComponent },
+  { path: 'solicitude-user', component: SolicitudeUserComponent },
   { path: 'faq', component: FaqComponent },
   { path: '**', component: HomeComponent }
 ];

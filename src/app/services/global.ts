@@ -1,4 +1,5 @@
 export const global = {
+    // url : 'http://172.21.1.129/'
     url : 'http://ribid-api.loc/'
 }
 export const environment = {

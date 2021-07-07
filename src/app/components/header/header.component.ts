@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit, DoCheck {
   }
 
   showSuccess() {
-    this.toastr.info('Confirme su correo electronico para ingresar', 'Bien!', {
+    this.toastr.info('Ya puedes ingresar a tu cuenta', 'Bien!', {
       timeOut: 6000
     });
   }

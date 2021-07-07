@@ -1,5 +1,5 @@
-<div class="d-flex justify-content-center mb-4">
-  <mat-spinner [diameter]="30" *ngIf="!posts || posts.length < 1"></mat-spinner>
+<div class="d-flex justify-content-center">
+  <mat-spinner class="mb-4" [diameter]="30" *ngIf="!posts || posts.length < 1"></mat-spinner>
 </div>
 <div class="row mb-2 animated fadeIn fast" *ngIf="posts">
   <div class="col-md-6" *ngFor="let post of posts">

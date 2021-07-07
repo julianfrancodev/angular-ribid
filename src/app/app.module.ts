@@ -21,6 +21,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { FileSaverModule } from 'ngx-filesaver';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -51,6 +52,7 @@ import { DocumentTypeService } from './services/document-type.service';
 import { LibDocumentService } from './services/lib-document.service';
 import { LibdocumentNewComponent } from './components/libdocument-new/libdocument-new.component';
 import { FaqComponent } from './components/faq/faq.component';
+import { SolicitudeUserComponent } from './components/solicitude-user/solicitude-user.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,7 @@ import { FaqComponent } from './components/faq/faq.component';
     CategoryPostsComponent,
     LibdocumentNewComponent,
     FaqComponent,
+    SolicitudeUserComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -102,7 +105,8 @@ import { FaqComponent } from './components/faq/faq.component';
     MatSliderModule,
     PdfViewerModule,
     MatMenuModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FileSaverModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

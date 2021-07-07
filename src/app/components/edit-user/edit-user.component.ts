@@ -18,10 +18,6 @@ import { LibDocumentService } from 'src/app/services/lib-document.service';
 export class EditUserComponent implements OnInit {
 
   public roles: any[] = [];
-  public resposts: any[] = [];
-  public completePosts: any[] = [];
-  public pendPosts: any[] = [];
-  public libDocPosts: any[] = [];
   public userUpdate: User;
   public identity: any;
   public token: string;
@@ -35,7 +31,6 @@ export class EditUserComponent implements OnInit {
   public lastPage: number;
   public completedPosts: number;
   public pendingPosts: number;
-  public pageLibDoc: number = 1;
 
 
   public afuConfig = {
@@ -70,7 +65,6 @@ export class EditUserComponent implements OnInit {
     private _resPostService: RespostService,
     private _postService: PostService,
     private _roleService: RoleService,
-    private _libDocumentService: LibDocumentService
   ) {
     if (this._userService.getIdentity() == null) {
       this.router.navigate(['']);
@@ -95,7 +89,6 @@ export class EditUserComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.userUpdate);
-    this.getPostsByUser();
     this.getRoles();
     this.getPostCountByUser();
 
@@ -138,58 +131,6 @@ export class EditUserComponent implements OnInit {
   avatarUpload(data: any) {
     this.userUpdate.image = data.body.image;
   }
-
-  getPostsByUser() {
-
-    if (this.identity && this.identity.role == 3) {
-      this._resPostService.getPostByAdminRespost(this.identity.sub, this.page).subscribe(
-        response => {
-          console.log(response);
-          if (response.status == "success") {
-            this.resposts.push(...response.respost.data);
-          }
-
-        },
-
-        error => {
-          console.log(error);
-        }
-      );
-
-
-      this.getLibDocumentsByUser();
-
-
-    } else if (this.identity && this.identity.role == 1 || this.identity.role == 4 || this.identity.role == 2) {
-
-
-      this.getCompletePostsByUser();
-
-      this.getPendingPostsByUser();
-
-
-    } else {
-      this.router.navigate(['']);
-
-    }
-
-
-  }
-
-  getLibDocumentsByUser(){
-    this._libDocumentService.getLibDocumentsByUser(this.identity.sub, this.pageLibDoc).subscribe(
-      response =>{
-        console.log(response);
-        if(response.status == "success"){
-          this.libDocPosts.push(...response.libdocuments.data);
-        }
-      },
-      error =>{
-        console.log(error);
-      }
-    );
-  }
-
 
   getPostCountByUser() {
 
@@ -251,36 +192,9 @@ export class EditUserComponent implements OnInit {
     }
   }
 
-  getCompletePostsByUser() {
-    this._postService.getCompletePostByUser(this.identity.sub, this.page).subscribe(
-      response => {
-        console.log(response);
-        if (response.status == "success") {
-          this.completePosts.push(...response.posts.data);
-        }
-      },
-      error => {
-        console.log(error);
-      }
 
-    );
-  }
 
-  getPendingPostsByUser() {
-    this._postService.getPendingPostsByUser(this.identity.sub, this.pendingPage).subscribe(
-      response => {
-        console.log(response);
-        if (response.status == "success") {
-          this.pendPosts.push(...response.posts.data);
-        }
-      },
-      error => {
-        console.log(error);
-      }
 
-    );
-
-  }
 
   getRoles() {
     this._roleService.getRoles().subscribe(
@@ -296,20 +210,6 @@ export class EditUserComponent implements OnInit {
   }
 
 
-  onScrollDown() {
-    this.page++;
-    this.getCompletePostsByUser();
-  }
-
-  onScrollDownCompletePending() {
-    this.pendingPage++;
-    this.getPendingPostsByUser();
-  }
-
-  onScrollDownLibDoc(){
-    this.pageLibDoc++;
-    this.getLibDocumentsByUser();
-  }
 
 
 

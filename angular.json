@@ -34,7 +34,9 @@
               "./node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
-              "./node_modules/pusher-js/dist/web/pusher.min.js"
+              "./node_modules/pusher-js/dist/web/pusher.min.js",
+              "./node_modules/three/build/three.min.js",
+              "./node_modules/vanta/dist/vanta.halo.min.js"
             ]
           },
           "configurations": {
