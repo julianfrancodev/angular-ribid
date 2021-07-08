@@ -16,10 +16,11 @@ export class MainComponent implements OnInit {
       mouseControls: true,
       touchControls: true,
       gyroControls: false,
-      minHeight: 250.00,
-      minWidth: 250.00,
-      backgroundColor: 0x111234,
+      minHeight: 300.00,
+      minWidth: 300.00,
+      backgroundColor: 0x292b2c,
       size: 1.70,
+      xOffset: 0.17
     })
   }
 

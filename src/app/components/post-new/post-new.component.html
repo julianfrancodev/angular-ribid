@@ -5,6 +5,24 @@
         <form #createPostForm='ngForm' (ngSubmit)='createPost(createPostForm)'>
           <div class="card-body">
             <div class="row">
+              <div class="col-sm-12">
+                <div class="form-field-group">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Selecciona un tipo de documento</mat-label>
+                    <mat-select name="role" #documentType="ngModel" [(ngModel)]="post.document_type_id" required>
+                      <mat-option *ngFor="let documentType of documentTypes" [value]="documentType.id">
+                        {{documentType.name}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-hint>Para capitulos de libro aplica sección y paginas</mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <hr />
+
+            <div class="row">
+
               <div class="col-sm-12 text-secondary">
                 <mat-form-field appearance="outline" class="input-full-width">
                   <mat-label>Titulo</mat-label>
@@ -42,7 +60,6 @@
                     </mat-select>
                     <mat-error *ngIf="!category.valid && category.touched" class="text-danger">
                       Categoria es necesaria</mat-error>
-
                   </mat-form-field>
                 </div>
               </div>
@@ -50,21 +67,7 @@
             </div>
 
             <hr />
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="form-field-group">
-                  <mat-form-field appearance="outline">
-                    <mat-label>Selecciona un tipo de documento</mat-label>
-                    <mat-select name="role" #documentType="ngModel" [(ngModel)]="post.document_type_id" required>
-                      <mat-option *ngFor="let documentType of documentTypes" [value]="documentType.id">
-                        {{documentType.name}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-hint>Para capitulos de libro aplica sección y paginas</mat-hint>
-                  </mat-form-field>
-                </div>
-              </div>
-            </div>
+
 
             <div *ngIf="showPages">
               <hr />

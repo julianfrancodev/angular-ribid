@@ -8,16 +8,18 @@ import { RespostService } from 'src/app/services/respost.service';
 import { PostService } from 'src/app/services/post.service';
 import { RoleService } from 'src/app/services/role.service';
 import { LibDocumentService } from 'src/app/services/lib-document.service';
+import { SedeService } from 'src/app/services/sede.service';
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.css'],
-  providers: [UserService, RespostService, PostService, RoleService, LibDocumentService]
+  providers: [UserService, RespostService, PostService, RoleService, LibDocumentService, SedeService]
 
 })
 export class EditUserComponent implements OnInit {
 
   public roles: any[] = [];
+  public sedes: any[] = [];
   public userUpdate: User;
   public identity: any;
   public token: string;
@@ -65,11 +67,12 @@ export class EditUserComponent implements OnInit {
     private _resPostService: RespostService,
     private _postService: PostService,
     private _roleService: RoleService,
+    private _sedeService: SedeService
   ) {
     if (this._userService.getIdentity() == null) {
       this.router.navigate(['']);
     }
-    this.userUpdate = new User(1, '', '', '1', '', '', '', '', '');
+    this.userUpdate = new User(1, '', '', '1','', '', '', '', '', '');
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
     this.userUpdate = this.identity ?? this.userUpdate;
@@ -79,6 +82,7 @@ export class EditUserComponent implements OnInit {
       this.identity.name,
       this.identity.surname,
       this.identity.role,
+      this.identity.sede,
       this.identity.email,
       '',
       this.identity.image,
@@ -90,6 +94,7 @@ export class EditUserComponent implements OnInit {
   ngOnInit(): void {
     console.log(this.userUpdate);
     this.getRoles();
+    this.getSedes();
     this.getPostCountByUser();
 
   }
@@ -192,10 +197,6 @@ export class EditUserComponent implements OnInit {
     }
   }
 
-
-
-
-
   getRoles() {
     this._roleService.getRoles().subscribe(
       response => {
@@ -204,6 +205,20 @@ export class EditUserComponent implements OnInit {
         }
       },
       error => {
+        console.log(error);
+      }
+    )
+  }
+
+
+  getSedes(){
+    this._sedeService.getSedes().subscribe(
+      response =>{
+        if (response.status == "success") {
+          this.sedes = response.sedes;
+        }
+      },
+      error =>{
         console.log(error);
       }
     )

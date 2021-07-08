@@ -103,6 +103,21 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-field-group">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Selecciona una sede</mat-label>
+                    <mat-select name="sede" #sede="ngModel" [(ngModel)]="userUpdate.sede" required>
+                      <mat-option *ngFor="let sede of sedes" [value]="sede.id">
+                        {{sede.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-field-group">
                   <mat-form-field appearance="outline" class="input-full-width">
                     <mat-label>Telefono</mat-label>
                     <input matInput type="tel" name="phone" placeholder="Ej: 3001234567" required #phone="ngModel"
@@ -147,8 +162,5 @@
   </div>
 
   <!-- edit-user.component.html end -->
-
-
-
 
 </div>

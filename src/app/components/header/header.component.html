@@ -25,7 +25,7 @@
             <div *ngIf="identity.role === 3">
               <button mat-menu-item [routerLink]="['/recent-solicitude']">Solicitudes</button>
               <button mat-menu-item [routerLink]="['/new-libdocument']">Crear Recurso</button>
-              <button mat-menu-item [routerLink]="['/solicitude-user']">Mis Respuestas</button>
+              <button mat-menu-item [routerLink]="['/solicitude-user']">Mis Recursos</button>
             </div>
             <button mat-menu-item (click)="$event.preventDefault(); logout();">Salir</button>
           </div>
@@ -63,8 +63,8 @@
       <div class="myform form">
         <div class="logo mb-3">
           <div class="col-md-12 text-center">
-            <h1 class="blog-header-logo text-dark font-weight-bold">Universidad Santo Tomas</h1>
-            <h2 class="blog-header-logo text-dark font-weight-bold">Bienvenido</h2>
+            <h2 class="blog-header-logo text-dark font-weight-bold">Centro de Recursos para el Aprendizaje</h2>
+            <h3 class="blog-header-logo text-dark font-weight-bold">Universidad Santo Tomas</h3>
           </div>
         </div>
         <form name="signin" #signinForm='ngForm' (ngSubmit)='onSubmitSignin(signinForm)'>
@@ -122,8 +122,8 @@
       <div class="myform form">
         <div class="logo mb-3">
           <div class="col-md-12 text-center">
-            <h1 class="blog-header-logo text-dark font-weight-bold">Universidad Santo Tomas </h1>
-            <h2 class="blog-header-logo text-dark font-weight-bold">Registrarme</h2>
+            <h2 class="blog-header-logo text-dark font-weight-bold">Centro de Recursos para el Aprendizaje</h2>
+            <h3 class="blog-header-logo text-dark font-weight-bold">Universidad Santo Tomas</h3>
           </div>
         </div>
         <form name="register" #registerForm='ngForm' (ngSubmit)='onSubmitRegister(registerForm)'>
