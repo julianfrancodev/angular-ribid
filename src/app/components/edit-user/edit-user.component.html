@@ -85,21 +85,23 @@
               </div>
             </div>
             <hr />
-            <div class="row">
-              <div class="col-sm-12">
-                <div class="form-field-group">
-                  <mat-form-field appearance="outline">
-                    <mat-label>Selecciona un rol</mat-label>
-                    <mat-select name="role" #category="ngModel" [(ngModel)]="userUpdate.role" required>
-                      <mat-option *ngFor="let role of roles" [value]="role.id">
-                        {{role.name}}
-                      </mat-option>
-                    </mat-select>
-                  </mat-form-field>
+            <div *ngIf="identity.role === 1 || identity.role === 2 || identity.role === 4">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-field-group">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Selecciona un rol</mat-label>
+                      <mat-select name="role" #category="ngModel" [(ngModel)]="userUpdate.role" required>
+                        <mat-option *ngFor="let role of roles" [value]="role.id">
+                          {{role.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
                 </div>
               </div>
+              <hr />
             </div>
-            <hr />
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-field-group">
@@ -160,7 +162,5 @@
       </div>
     </div>
   </div>
-
   <!-- edit-user.component.html end -->
-
 </div>

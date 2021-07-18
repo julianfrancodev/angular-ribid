@@ -34,6 +34,7 @@ export class SolicitudeUserComponent implements OnInit {
 
   ) {
     this.identity = this._userService.getIdentity();
+
   }
 
   ngOnInit(): void {

@@ -1,14 +1,16 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-solicitude',
   templateUrl: './solicitude.component.html',
   styleUrls: ['./solicitude.component.css'],
-  providers: [PostService]
+  providers: [PostService, UserService]
 })
 export class SolicitudeComponent implements OnInit, DoCheck {
 
+  public identity: any;
   public posts: any[] = [];
   public postsComplete: any[] = [];
   public throttle: number = 50;
@@ -18,7 +20,10 @@ export class SolicitudeComponent implements OnInit, DoCheck {
   public page: number = 1;
   public pageComplete: number = 1;
 
-  constructor(private _postService: PostService) { }
+  constructor(private _postService: PostService, private _userService: UserService) {
+    this.identity = this._userService.getIdentity();
+
+  }
 
 
   ngOnInit(): void {
@@ -34,7 +39,7 @@ export class SolicitudeComponent implements OnInit, DoCheck {
 
 
   getPendingPost() {
-    this._postService.getPendingPosts(this.page).subscribe(
+    this._postService.getPendingPosts(this.identity.sub, this.page).subscribe(
       response => {
         console.log(response);
         if (response.status == 'success') {

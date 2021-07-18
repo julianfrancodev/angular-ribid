@@ -27,9 +27,9 @@
                 <mat-form-field appearance="outline" class="input-full-width">
                   <mat-label>Titulo</mat-label>
                   <input matInput placeholder="Ej: ¿Dónde está la franja amarilla?" type="text" name="title" required
-                    #title="ngModel" [(ngModel)]="post.title" minlength="20">
+                    #title="ngModel" [(ngModel)]="post.title" minlength="10">
                   <mat-error *ngIf="!title.valid && title.touched" class="text-danger">Longitud minima
-                    de 20 caracateres</mat-error>
+                    de 10 caracateres</mat-error>
                 </mat-form-field>
               </div>
             </div>

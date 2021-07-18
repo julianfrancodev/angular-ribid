@@ -40,10 +40,10 @@ export class PostService {
     return this._http.get(this.url + 'post/' + id, { headers: headers });
   }
 
-  getPendingPosts(page: number): Observable<any> {
+  getPendingPosts(id:string, page: number): Observable<any> {
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this._http.get(this.url + 'post/user/get/pending?page=' + page, { headers: headers });
+    return this._http.get(this.url + 'post/user/get/pending/'+id+'?page=' + page, { headers: headers });
   }
 
   getCompletePosts(page: number): Observable<any> {
@@ -65,6 +65,8 @@ export class PostService {
 
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
+
+
     return this._http.get(this.url + 'post/user/pending/' + id + '?page=' + page, { headers: headers });
 
   }
@@ -85,21 +87,21 @@ export class PostService {
 
   }
 
-  getCountCompletedPostByUser(id: string): Observable<any>{
+  getCountCompletedPostByUser(id: string): Observable<any> {
 
 
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this._http.get(this.url + 'post/count/complete/'+id, {headers: headers});
+    return this._http.get(this.url + 'post/count/complete/' + id, { headers: headers });
 
   }
 
 
-  getCountPendingPostFromUser(id: string): Observable<any>{
+  getCountPendingPostFromUser(id: string): Observable<any> {
 
     let headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this._http.get(this.url + 'post/count/pending/'+id, {headers: headers});
+    return this._http.get(this.url + 'post/count/pending/' + id, { headers: headers });
 
   }
 
