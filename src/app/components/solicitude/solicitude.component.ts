@@ -1,6 +1,7 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-solicitude',
@@ -20,7 +21,17 @@ export class SolicitudeComponent implements OnInit, DoCheck {
   public page: number = 1;
   public pageComplete: number = 1;
 
-  constructor(private _postService: PostService, private _userService: UserService) {
+
+  constructor(
+    private router: Router,
+    private _postService: PostService,
+    private _userService: UserService
+  ) {
+
+    if (this._userService.getIdentity() == null) {
+      this.router.navigate(['']);
+    }
+
     this.identity = this._userService.getIdentity();
 
   }
@@ -53,7 +64,7 @@ export class SolicitudeComponent implements OnInit, DoCheck {
     )
   }
 
-  getCompletePost(){
+  getCompletePost() {
     this._postService.getCompletePosts(this.pageComplete).subscribe(
       response => {
         console.log(response);
@@ -76,7 +87,7 @@ export class SolicitudeComponent implements OnInit, DoCheck {
 
   }
 
-  onScrollDownComplete(){
+  onScrollDownComplete() {
     this.pageComplete++;
     this.getCompletePost();
   }

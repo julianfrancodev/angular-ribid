@@ -33,6 +33,9 @@ export class SolicitudeUserComponent implements OnInit {
     private router: Router,
 
   ) {
+    if (this._userService.getIdentity() == null) {
+      this.router.navigate(['']);
+    }
     this.identity = this._userService.getIdentity();
 
   }

@@ -1,6 +1,7 @@
 {
   "name": "ribid",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "author": "Julian Daniel Franco",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
