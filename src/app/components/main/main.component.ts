@@ -19,7 +19,7 @@ export class MainComponent implements OnInit {
       minHeight: 300.00,
       minWidth: 300.00,
       backgroundColor: 0x292b2c,
-      size: 1.70,
+      size: 1.50,
       xOffset: 0.17
     })
   }
